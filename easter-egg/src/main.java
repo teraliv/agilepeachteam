@@ -1,6 +1,7 @@
 /**
  * Created by aterikov on 11/3/16.
  * Changed by Ahana Ghosh
+ * Changed by Sean O'Donnell 11/15/16
  */
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,7 +26,7 @@ public class main {
 		    }
 		}
 		//replace name# with your name
-		System.out.println("Agile Peach Team:\nSean O'Donnell\nName2\nName3\nName4\nName5");
+		System.out.println("Agile Peach Team:\nAhana Ghosh\nSean O'Donnell\nName3\nName4\nName5");
 	}
 
 }
