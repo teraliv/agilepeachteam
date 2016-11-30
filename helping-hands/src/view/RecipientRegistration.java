@@ -76,7 +76,7 @@ public class RecipientRegistration extends JFrame {
 		lblTellUsAbout.setBackground(Color.WHITE);
 		contentPane.add(lblTellUsAbout);
 		
-		firstNameField = new JTextField();
+		firstNameField = new JTextField();				//TODO First name field
 		firstNameField.setBounds(104, 77, 309, 20);
 		contentPane.add(firstNameField);
 		firstNameField.setColumns(10);
@@ -87,7 +87,7 @@ public class RecipientRegistration extends JFrame {
 		lblFirstName.setHorizontalAlignment(SwingConstants.TRAILING);
 		contentPane.add(lblFirstName);
 		
-		lastNameField = new JTextField();
+		lastNameField = new JTextField();				//TODO Last name field
 		lastNameField.setBounds(104, 108, 309, 20);
 		lastNameField.setColumns(10);
 		contentPane.add(lastNameField);
@@ -110,17 +110,17 @@ public class RecipientRegistration extends JFrame {
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		contentPane.add(list);
 		
-		JComboBox monthPullDown = new JComboBox();
+		JComboBox monthPullDown = new JComboBox();			//TODO month pull down
 		monthPullDown.setBounds(104, 139, 95, 20);
 		monthPullDown.setModel(new DefaultComboBoxModel(Month.values()));
 		contentPane.add(monthPullDown);
 		
-		JComboBox dayPullDown = new JComboBox();
+		JComboBox dayPullDown = new JComboBox();			//TODO day pull down
 		dayPullDown.setBounds(209, 139, 95, 20);
 		dayPullDown.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
 		contentPane.add(dayPullDown);
 		
-		JComboBox yearPullDown = new JComboBox();
+		JComboBox yearPullDown = new JComboBox();			//TODO year pull down
 		yearPullDown.setBounds(318, 139, 95, 20);
 		yearPullDown.setModel(new DefaultComboBoxModel(new String[] {"1900", "1901", "1902", "1903", "1904", "1905", "1906", "1907", "1908", "1909", "1910", "1911", "1912", "1913", "1914", "1915", "1916", "1917", "1918", "1919", "1920", "1921", "1922", "1923", "1924", "1925", "1926", "1927", "1928", "1929", "1930", "1931", "1932", "1933", "1934", "1935", "1936", "1937", "1938", "1939", "1940", "1941", "1942", "1943", "1944", "1945", "1946", "1947", "1948", "1949", "1950", "1951", "1952", "1953", "1954", "1955", "1956", "1957", "1958", "1959", "1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016"}));
 		contentPane.add(yearPullDown);
@@ -131,14 +131,14 @@ public class RecipientRegistration extends JFrame {
 		lblGender.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		contentPane.add(lblGender);
 		
-		JRadioButton maleButton = new JRadioButton("Male");
+		JRadioButton maleButton = new JRadioButton("Male");	//TODO male button
 		maleButton.setBounds(104, 163, 53, 23);
 		maleButton.setHorizontalAlignment(SwingConstants.LEFT);
 		maleOrFemale.add(maleButton);
 		maleButton.setBackground(Color.WHITE);
 		contentPane.add(maleButton);
 		
-		JRadioButton femaleButton = new JRadioButton("Female");
+		JRadioButton femaleButton = new JRadioButton("Female"); //TODO female button
 		femaleButton.setBounds(159, 163, 66, 23);
 		femaleButton.setHorizontalAlignment(SwingConstants.LEFT);
 		maleOrFemale.add(femaleButton);
@@ -151,7 +151,7 @@ public class RecipientRegistration extends JFrame {
 		lblStreet.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		contentPane.add(lblStreet);
 		
-		streetField = new JTextField();
+		streetField = new JTextField();						//TODO Street field
 		streetField.setBounds(104, 189, 309, 20);
 		streetField.setColumns(10);
 		contentPane.add(streetField);
@@ -162,7 +162,7 @@ public class RecipientRegistration extends JFrame {
 		lblCity.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		contentPane.add(lblCity);
 		
-		cityField = new JTextField();
+		cityField = new JTextField();						//TODO City field
 		cityField.setBounds(104, 220, 95, 20);
 		cityField.setColumns(10);
 		contentPane.add(cityField);
@@ -173,7 +173,7 @@ public class RecipientRegistration extends JFrame {
 		lblState.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		contentPane.add(lblState);
 		
-		JComboBox statePullDown = new JComboBox();
+		JComboBox statePullDown = new JComboBox();			//TODO state pull down
 		statePullDown.setBounds(258, 220, 46, 20);
 		statePullDown.setModel(new DefaultComboBoxModel(new String[] {"AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"}));
 		contentPane.add(statePullDown);
@@ -184,7 +184,7 @@ public class RecipientRegistration extends JFrame {
 		lblZip.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		contentPane.add(lblZip);
 		
-		zipField = new JTextField();
+		zipField = new JTextField();						//TODO zip-code field known as zipField
 		zipField.setBounds(341, 220, 72, 20);
 		zipField.setColumns(10);
 		contentPane.add(zipField);
@@ -195,7 +195,7 @@ public class RecipientRegistration extends JFrame {
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		contentPane.add(lblEmail);
 		
-		emailField = new JTextField();
+		emailField = new JTextField();						//TODO e-mail field
 		emailField.setBounds(104, 251, 309, 20);
 		emailField.setColumns(10);
 		contentPane.add(emailField);
@@ -206,7 +206,7 @@ public class RecipientRegistration extends JFrame {
 		lblUserName.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		contentPane.add(lblUserName);
 		
-		userNameField = new JTextField();
+		userNameField = new JTextField();					//TODO user name field
 		userNameField.setBounds(104, 277, 309, 20);
 		userNameField.setColumns(10);
 		contentPane.add(userNameField);
@@ -217,11 +217,12 @@ public class RecipientRegistration extends JFrame {
 		lblPassword.setBounds(10, 303, 84, 14);
 		contentPane.add(lblPassword);
 		
-		passwordField = new JPasswordField();
+															//TODO need to ensure the two pasword fields match
+		passwordField = new JPasswordField();				//TODO password Field
 		passwordField.setBounds(104, 302, 309, 20);
 		contentPane.add(passwordField);
 		
-		repeatPasswordField = new JPasswordField();
+		repeatPasswordField = new JPasswordField();			//TODO repeat password field
 		repeatPasswordField.setBounds(104, 329, 309, 20);
 		contentPane.add(repeatPasswordField);
 		
@@ -237,19 +238,32 @@ public class RecipientRegistration extends JFrame {
 		lblPassword_1.setBounds(10, 348, 84, 14);
 		contentPane.add(lblPassword_1);
 		
-		JButton continueButton = new JButton("Continue");
+		JButton continueButton = new JButton("Continue");	//TODO continue button (if useful)
 		continueButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { 
 				//continue button code here
 				//TODO verify user does not already exist, if so create new user
+				//creating new window (recipient home page)
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							RecipientHomePage frame = new RecipientHomePage();
+							frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
 				
+				//deleting current window
+				RecipientRegistration.this.dispose();
 			}
 		});
 		continueButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		continueButton.setBounds(176, 389, 132, 23);
 		contentPane.add(continueButton);
 		
-		JButton backButton = new JButton("Back");
+		JButton backButton = new JButton("Back");		//TODO back button (if useful)
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//back button code here
