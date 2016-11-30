@@ -121,7 +121,16 @@ public class RecipientOrDonor extends JFrame {
 				}
 				else //launch donor registration page
 				{
-				
+					EventQueue.invokeLater(new Runnable() {
+						public void run() {
+							try {
+								DonorRegistration frame = new DonorRegistration();
+								frame.setVisible(true);
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						}
+					});
 				}
 				RecipientOrDonor.this.dispose(); //delete current window
 			}
