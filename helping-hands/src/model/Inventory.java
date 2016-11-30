@@ -24,11 +24,15 @@ public class Inventory {
         totalCost   += (donatedItem.quantity * donatedItem.price);  // update total cost of all items
     }
 
-    /**
-     * Check if the desired item exists in the list of all available availableItems.
-     * @param itemName
-     * @return
-     */
+
+    public Item getItem(String itemName) {
+        for (Item currentItem : availableItems) {
+            if (currentItem.name == itemName)
+                return currentItem;
+        }
+        return null;
+    }
+
     public boolean isItemExist(String itemName) {
 
         for (Item currentItem : availableItems) {
@@ -36,6 +40,26 @@ public class Inventory {
                 return true;
         }
         return false;
+    }
+
+
+    public int getQuantity(String itemName) {
+
+        for (Item currentItem : availableItems) {
+            if (currentItem.name == itemName)
+                return currentItem.quantity;
+        }
+        return 0;
+    }
+
+
+    public void updateInventory(String itemName, int removed) {
+
+        Item current = getItem(itemName);
+        current.quantity -= removed;
+
+        if (current.quantity == 0)
+            availableItems.remove(current);
     }
 
 }

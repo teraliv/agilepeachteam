@@ -1,16 +1,23 @@
-import model.Inventory;
-import model.Item;
+import model.*;
 
 public class driver {
 
     public static void main(String[] args) {
 
-        Inventory   inventory = new Inventory();
-        Item shirts = new Item("Mens shirt", "Closes", 5, 19.50);
+        DonorContainer  donors      = new DonorContainer();
+        Inventory       inventory   = new Inventory();
 
-        inventory.addItem(shirts);
+        Item            pants       = new Item("pants", "Clothes", 5, 19.50);
+        Donor           safeway     = new Donor("Safeway", inventory);
+        Recipient       vasia       = new Recipient("Vasia", inventory);
 
-        System.out.println(inventory.isItemExist("Mens shirt"));
+        donors.addDonor(safeway);
+        safeway.donate(pants);
+
+
+        vasia.getDonation("pants", 5);
+        //vasia.getDonation("Mens shirt", 3);
+        //System.out.println(inventory.getQuantity("pants"));
     }
 
 }
