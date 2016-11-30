@@ -356,6 +356,25 @@ public class RecipientHomePage extends JFrame {
 		contentPane.add(toiletriesButton);
 		
 		JButton continueButton = new JButton("Continue");
+		continueButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//continue button code here
+				
+				//creating next window (ticket)
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							Ticket frame = new Ticket();
+							frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				//deleting current window
+				RecipientHomePage.this.dispose();
+			}
+		});
 		continueButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		continueButton.setBounds(165, 427, 132, 23);
 		contentPane.add(continueButton);
