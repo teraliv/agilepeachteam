@@ -37,11 +37,9 @@ public class Dropoff extends JFrame {
 				try {
 					Dropoff frame = new Dropoff();
 					frame.setVisible(true);
-					
 					//screen center
 					final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 					frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
-					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -92,6 +90,9 @@ public class Dropoff extends JFrame {
 						try {
 							DonorHomePage frame = new DonorHomePage();
 							frame.setVisible(true);
+							//screen center
+							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+							frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -167,6 +168,9 @@ public class Dropoff extends JFrame {
 						try {
 							DonorHomePage frame = new DonorHomePage();
 							frame.setVisible(true);
+							//screen center
+							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+							frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
