@@ -5,8 +5,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Toolkit;
+
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
@@ -43,6 +47,9 @@ public class DonorHomePage extends JFrame {
 				try {
 					DonorHomePage frame = new DonorHomePage();
 					frame.setVisible(true);
+					//screen center
+					final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+					frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -87,6 +94,9 @@ public class DonorHomePage extends JFrame {
 						try {
 							Pickup frame = new Pickup();
 							frame.setVisible(true);
+							//screen center
+							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+							frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -112,6 +122,9 @@ public class DonorHomePage extends JFrame {
 						try {
 							TaxForms frame = new TaxForms();
 							frame.setVisible(true);
+							//screen center
+							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+							frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -243,6 +256,9 @@ public class DonorHomePage extends JFrame {
 						try {
 							LogIn frame = new LogIn();
 							frame.setVisible(true);
+							//screen center
+							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+							frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -268,6 +284,9 @@ public class DonorHomePage extends JFrame {
 						try {
 							Dropoff frame = new Dropoff();
 							frame.setVisible(true);
+							//screen center
+							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+							frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
