@@ -52,12 +52,10 @@ public class RecipientRegistration extends JFrame {
 			public void run() {
 				try {
 					RecipientRegistration frame = new RecipientRegistration();
-					frame.setVisible(true);
-					
+					frame.setVisible(true);	
 					//screen center
 					final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 					frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
-					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -259,6 +257,9 @@ public class RecipientRegistration extends JFrame {
 						try {
 							RecipientHomePage frame = new RecipientHomePage();
 							frame.setVisible(true);
+							//screen center
+							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+							frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -284,6 +285,9 @@ public class RecipientRegistration extends JFrame {
 						try {
 							RecipientOrDonor frame = new RecipientOrDonor();
 							frame.setVisible(true);
+							//screen center
+							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+							frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
