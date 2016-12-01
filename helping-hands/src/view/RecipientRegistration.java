@@ -189,6 +189,7 @@ public class RecipientRegistration extends JFrame {
 		contentPane.add(lblState);
 		
 		JComboBox statePullDown = new JComboBox();			//TODO state pull down
+		statePullDown.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		statePullDown.setBounds(258, 220, 46, 20);
 		statePullDown.setModel(new DefaultComboBoxModel(new String[] {"AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"}));
 		contentPane.add(statePullDown);
