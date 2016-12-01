@@ -91,16 +91,17 @@ public class WelcomePage extends JFrame {
 							try {
 								LogIn frame = new LogIn();
 								frame.setVisible(true);
+								//screen center
+								final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+								frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
 						}
 					});
-					
-					
-					
+					WelcomePage.this.dispose();// deleting old window
 				}
-				else//new account (recipient or donor)
+				else if (noButton.isSelected())//new account (recipient or donor)
 				{
 					//creating RecipientOrDonor page
 					EventQueue.invokeLater(new Runnable() {
@@ -108,14 +109,17 @@ public class WelcomePage extends JFrame {
 							try {
 								RecipientOrDonor frame = new RecipientOrDonor();
 								frame.setVisible(true);
+								//screen center
+								final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+								frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
 						}
 					});
-					
+					WelcomePage.this.dispose();// deleting old window
 				}
-				WelcomePage.this.dispose();// deleting old window
+				
 			}
 		});
 		continueButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
