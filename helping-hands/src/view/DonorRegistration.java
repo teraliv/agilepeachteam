@@ -1,8 +1,6 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -11,7 +9,6 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -24,6 +21,8 @@ import javax.swing.ButtonGroup;
 
 public class DonorRegistration extends JFrame {
 
+
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField firstNameField;
 	private JTextField lastNameField;
@@ -35,7 +34,7 @@ public class DonorRegistration extends JFrame {
 	private JPasswordField passwordField;
 	private JPasswordField repeatPasswordField;
 	private final ButtonGroup maleOrFemale = new ButtonGroup();
-	private JTextField buisnessNameField;
+	private JTextField businessNameField;
 	private final ButtonGroup yesOrNo = new ButtonGroup();
 
 	/**
@@ -73,7 +72,7 @@ public class DonorRegistration extends JFrame {
 		lblDonorRegistration.setBounds(10, 0, 464, 37);
 		contentPane.add(lblDonorRegistration);
 		
-		firstNameField = new JTextField();
+		firstNameField = new JTextField();						//TODO first name field
 		firstNameField.setColumns(10);
 		firstNameField.setBounds(114, 48, 309, 20);
 		contentPane.add(firstNameField);
@@ -90,7 +89,7 @@ public class DonorRegistration extends JFrame {
 		label_2.setBounds(28, 80, 76, 14);
 		contentPane.add(label_2);
 		
-		lastNameField = new JTextField();
+		lastNameField = new JTextField();						//TODO last name field
 		lastNameField.setColumns(10);
 		lastNameField.setBounds(114, 79, 309, 20);
 		contentPane.add(lastNameField);
@@ -101,17 +100,17 @@ public class DonorRegistration extends JFrame {
 		label_3.setBounds(28, 111, 76, 19);
 		contentPane.add(label_3);
 		
-		JComboBox monthPullDown = new JComboBox();
+		JComboBox<Object> monthPullDown = new JComboBox<Object>();		//TODO month pull down
 		monthPullDown.setModel(new DefaultComboBoxModel(Month.values()));
 		monthPullDown.setBounds(114, 110, 95, 20);
 		contentPane.add(monthPullDown);
 		
-		JComboBox dayPullDown = new JComboBox();
+		JComboBox dayPullDown = new JComboBox();						//TODO day pull down
 		dayPullDown.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
 		dayPullDown.setBounds(219, 110, 95, 20);
 		contentPane.add(dayPullDown);
 		
-		JComboBox yearPullDown = new JComboBox();
+		JComboBox yearPullDown = new JComboBox();						//TODO year pull down
 		yearPullDown.setModel(new DefaultComboBoxModel(new String[] {"1900", "1901", "1902", "1903", "1904", "1905", "1906", "1907", "1908", "1909", "1910", "1911", "1912", "1913", "1914", "1915", "1916", "1917", "1918", "1919", "1920", "1921", "1922", "1923", "1924", "1925", "1926", "1927", "1928", "1929", "1930", "1931", "1932", "1933", "1934", "1935", "1936", "1937", "1938", "1939", "1940", "1941", "1942", "1943", "1944", "1945", "1946", "1947", "1948", "1949", "1950", "1951", "1952", "1953", "1954", "1955", "1956", "1957", "1958", "1959", "1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016"}));
 		yearPullDown.setBounds(328, 110, 95, 20);
 		contentPane.add(yearPullDown);
@@ -122,21 +121,21 @@ public class DonorRegistration extends JFrame {
 		label_4.setBounds(28, 136, 76, 14);
 		contentPane.add(label_4);
 		
-		JRadioButton maleButton = new JRadioButton("Male");
+		JRadioButton maleButton = new JRadioButton("Male");				//TODO male button
 		maleOrFemale.add(maleButton);
 		maleButton.setHorizontalAlignment(SwingConstants.LEFT);
 		maleButton.setBackground(Color.WHITE);
 		maleButton.setBounds(114, 134, 53, 23);
 		contentPane.add(maleButton);
 		
-		JRadioButton femaleButton = new JRadioButton("Female");
+		JRadioButton femaleButton = new JRadioButton("Female");			//TODO female button
 		maleOrFemale.add(femaleButton);
 		femaleButton.setHorizontalAlignment(SwingConstants.LEFT);
 		femaleButton.setBackground(Color.WHITE);
 		femaleButton.setBounds(169, 134, 66, 23);
 		contentPane.add(femaleButton);
 		
-		streetField = new JTextField();
+		streetField = new JTextField();									//TODO street field
 		streetField.setColumns(10);
 		streetField.setBounds(114, 160, 309, 20);
 		contentPane.add(streetField);
@@ -153,7 +152,7 @@ public class DonorRegistration extends JFrame {
 		label_6.setBounds(28, 189, 76, 20);
 		contentPane.add(label_6);
 		
-		cityField = new JTextField();
+		cityField = new JTextField();									//TODO cityField
 		cityField.setColumns(10);
 		cityField.setBounds(114, 191, 95, 20);
 		contentPane.add(cityField);
@@ -164,12 +163,12 @@ public class DonorRegistration extends JFrame {
 		label_7.setBounds(219, 191, 39, 20);
 		contentPane.add(label_7);
 		
-		JComboBox statePullDown = new JComboBox();
+		JComboBox statePullDown = new JComboBox();						//TODO state pull down
 		statePullDown.setModel(new DefaultComboBoxModel(new String[] {"AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"}));
 		statePullDown.setBounds(268, 191, 46, 20);
 		contentPane.add(statePullDown);
 		
-		zipField = new JTextField();
+		zipField = new JTextField();									//TODO zipcode field
 		zipField.setColumns(10);
 		zipField.setBounds(351, 191, 72, 20);
 		contentPane.add(zipField);
@@ -180,7 +179,7 @@ public class DonorRegistration extends JFrame {
 		label_8.setBounds(324, 189, 23, 20);
 		contentPane.add(label_8);
 		
-		emailField = new JTextField();
+		emailField = new JTextField();									//TODO e-mail field
 		emailField.setColumns(10);
 		emailField.setBounds(114, 222, 309, 20);
 		contentPane.add(emailField);
@@ -197,7 +196,7 @@ public class DonorRegistration extends JFrame {
 		label_10.setBounds(20, 249, 84, 14);
 		contentPane.add(label_10);
 		
-		userNameField = new JTextField();
+		userNameField = new JTextField();								//TODO username field
 		userNameField.setColumns(10);
 		userNameField.setBounds(114, 248, 309, 20);
 		contentPane.add(userNameField);
@@ -208,7 +207,7 @@ public class DonorRegistration extends JFrame {
 		label_11.setBounds(20, 274, 84, 14);
 		contentPane.add(label_11);
 		
-		passwordField = new JPasswordField();
+		passwordField = new JPasswordField();							//TODO password field (verify this matches the repeat password field below before accepting the password)
 		passwordField.setBounds(114, 273, 309, 20);
 		contentPane.add(passwordField);
 		
@@ -224,11 +223,11 @@ public class DonorRegistration extends JFrame {
 		label_13.setBounds(20, 319, 84, 14);
 		contentPane.add(label_13);
 		
-		repeatPasswordField = new JPasswordField();
+		repeatPasswordField = new JPasswordField();						//TODO repeat password field
 		repeatPasswordField.setBounds(114, 300, 309, 20);
 		contentPane.add(repeatPasswordField);
 		
-		JButton continueButton = new JButton("Continue");
+		JButton continueButton = new JButton("Continue");				//TODO continue button location, should grab all fields and create a new donor at this point
 		continueButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//continue button code here
@@ -285,15 +284,15 @@ public class DonorRegistration extends JFrame {
 		lblAreYouA.setBounds(137, 328, 189, 20);
 		contentPane.add(lblAreYouA);
 		
-		buisnessNameField = new JTextField();
-		buisnessNameField.setBounds(114, 385, 309, 20);
-		contentPane.add(buisnessNameField);
+		businessNameField = new JTextField();						//TODO business name field
+		businessNameField.setBounds(114, 385, 309, 20);
+		contentPane.add(businessNameField);
 		
-		JLabel lblBuisnessName = new JLabel("Buisness:");
-		lblBuisnessName.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblBuisnessName.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblBuisnessName.setBounds(10, 386, 94, 14);
-		contentPane.add(lblBuisnessName);
+		JLabel lblBusinessName = new JLabel("Business:");
+		lblBusinessName.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblBusinessName.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblBusinessName.setBounds(10, 386, 94, 14);
+		contentPane.add(lblBusinessName);
 		
 		JLabel lblName = new JLabel("Name");
 		lblName.setHorizontalAlignment(SwingConstants.TRAILING);
@@ -303,18 +302,18 @@ public class DonorRegistration extends JFrame {
 		
 		//starting these elements hidden
 		lblName.setVisible(false);
-		lblBuisnessName.setVisible(false);
-		buisnessNameField.setVisible(false);
+		lblBusinessName.setVisible(false);
+		businessNameField.setVisible(false);
 		
-		JRadioButton yesButton = new JRadioButton("Yes");
+		JRadioButton yesButton = new JRadioButton("Yes");				//TODO if this is selected add buisness name from buisness name field above
 		yesOrNo.add(yesButton);
 		yesButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			//yes button button code here
 			boolean selected=yesButton.isSelected();
 			lblName.setVisible(selected);
-			lblBuisnessName.setVisible(selected);
-			buisnessNameField.setVisible(selected);
+			lblBusinessName.setVisible(selected);
+			businessNameField.setVisible(selected);
 			}
 		});
 		yesButton.setHorizontalAlignment(SwingConstants.CENTER);
@@ -332,8 +331,8 @@ public class DonorRegistration extends JFrame {
 			//no button button code here
 			boolean selected=!noButton.isSelected();
 			lblName.setVisible(selected);
-			lblBuisnessName.setVisible(selected);
-			buisnessNameField.setVisible(selected);
+			lblBusinessName.setVisible(selected);
+			businessNameField.setVisible(selected);
 			}
 		});
 		noButton.setHorizontalAlignment(SwingConstants.CENTER);
