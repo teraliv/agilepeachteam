@@ -1,8 +1,6 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -18,6 +16,7 @@ import java.awt.event.ActionEvent;
 
 public class DonorHomePage extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField item1NameField;
 	private JTextField item2NameField;
@@ -33,6 +32,7 @@ public class DonorHomePage extends JFrame {
 	private JTextField item6DateField;
 	private JTextPane txtpnThankYouFor;
 	private JButton backButton;
+	private JButton dropoffButton;
 
 	/**
 	 * Launch the application.
@@ -98,7 +98,7 @@ public class DonorHomePage extends JFrame {
 			}
 		});
 		pickupButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		pickupButton.setBounds(289, 123, 185, 57);
+		pickupButton.setBounds(278, 96, 196, 57);
 		contentPane.add(pickupButton);
 		
 		JButton taxFormsButton = new JButton("Tax Forms");
@@ -124,22 +124,22 @@ public class DonorHomePage extends JFrame {
 			}
 		});
 		taxFormsButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		taxFormsButton.setBounds(289, 219, 185, 57);
+		taxFormsButton.setBounds(278, 284, 196, 57);
 		contentPane.add(taxFormsButton);
 		
 		JTextPane dropOffLocationText = new JTextPane();
 		dropOffLocationText.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		dropOffLocationText.setText("Drop off location:\r\n3719, 64th Ave E.\r\nTacoma, WA 98444");
-		dropOffLocationText.setBounds(289, 304, 175, 64);
+		dropOffLocationText.setBounds(289, 352, 175, 64);
 		contentPane.add(dropOffLocationText);
 		
 		JLabel lblNewLabel = new JLabel("A List of Your Recent Donations:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel.setBounds(10, 104, 240, 20);
+		lblNewLabel.setBounds(10, 77, 240, 20);
 		contentPane.add(lblNewLabel);
 		
 		JPanel pastDonationsPanel = new JPanel();
-		pastDonationsPanel.setBounds(10, 123, 240, 245);
+		pastDonationsPanel.setBounds(10, 96, 240, 245);
 		contentPane.add(pastDonationsPanel);
 		pastDonationsPanel.setLayout(null);
 		
@@ -229,7 +229,7 @@ public class DonorHomePage extends JFrame {
 		txtpnThankYouFor = new JTextPane();
 		txtpnThankYouFor.setText(" Thank You For\r\nYour Donations!");
 		txtpnThankYouFor.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		txtpnThankYouFor.setBounds(57, 379, 156, 64);
+		txtpnThankYouFor.setBounds(58, 364, 156, 49);
 		contentPane.add(txtpnThankYouFor);
 		
 		backButton = new JButton("Back");    				//TODO back button (if useful)
@@ -256,5 +256,30 @@ public class DonorHomePage extends JFrame {
 		backButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		backButton.setBounds(385, 427, 89, 23);
 		contentPane.add(backButton);
+		
+		dropoffButton = new JButton("Drop-off A Donation");
+		dropoffButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//drop-off button code here
+				
+				//creating new window (drop off)
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							Dropoff frame = new Dropoff();
+							frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				
+				//deleting current window
+				DonorHomePage.this.dispose();
+			}
+		});
+		dropoffButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		dropoffButton.setBounds(278, 188, 196, 57);
+		contentPane.add(dropoffButton);
 	}
 }
