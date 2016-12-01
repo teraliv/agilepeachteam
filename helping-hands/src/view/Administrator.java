@@ -134,7 +134,7 @@ public class Administrator extends JFrame {
 		backButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		contentPane.add(backButton);
 		
-		JLabel fraudLabel = new JLabel("FRAUD");
+		JLabel fraudLabel = new JLabel("FRAUD");					//TODO magic fraud detector here
 		fraudLabel.setBounds(50, 302, 87, 24);
 		fraudLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		fraudLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
