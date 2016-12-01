@@ -1,7 +1,3 @@
-/**
- * Author: Sean O'Donnell
- */
-
 package view;
 
 import java.awt.EventQueue;
@@ -9,6 +5,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
@@ -19,6 +17,8 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
+
 import javax.swing.border.MatteBorder;
 
 public class Dropoff extends JFrame {
@@ -37,6 +37,11 @@ public class Dropoff extends JFrame {
 				try {
 					Dropoff frame = new Dropoff();
 					frame.setVisible(true);
+					
+					//screen center
+					final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+					frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -48,6 +53,7 @@ public class Dropoff extends JFrame {
 	 * Create the frame.
 	 */
 	public Dropoff() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
 		contentPane = new JPanel();

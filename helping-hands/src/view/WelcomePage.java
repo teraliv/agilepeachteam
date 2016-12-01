@@ -1,7 +1,3 @@
-/**
- * Author: Sean O'Donnell
- */
-
 package view;
 
 import java.awt.EventQueue;
@@ -9,6 +5,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JRadioButton;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -37,6 +35,11 @@ public class WelcomePage extends JFrame {
 				try {
 					WelcomePage frame = new WelcomePage();
 					frame.setVisible(true);
+					
+					//screen center
+					final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+					frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -48,6 +51,7 @@ public class WelcomePage extends JFrame {
 	 * Create the frame.
 	 */
 	public WelcomePage() {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("\\\\itfiles3.insttech.washington.edu\\_profile\\sean3740\\Desktop\\TCSS 360\\peach.jpg"));
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

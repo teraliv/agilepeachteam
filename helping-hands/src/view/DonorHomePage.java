@@ -1,7 +1,3 @@
-/**
- * Author: Sean O'Donnell
- */
-
 package view;
 
 import java.awt.EventQueue;

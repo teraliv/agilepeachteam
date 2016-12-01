@@ -1,7 +1,3 @@
-/**
- * Author: Sean O'Donnell
- */
-
 package view;
 
 import java.awt.EventQueue;
@@ -9,8 +5,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Toolkit;
+
 import javax.swing.SwingConstants;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -35,6 +35,11 @@ public class TaxForms extends JFrame {
 				try {
 					TaxForms frame = new TaxForms();
 					frame.setVisible(true);
+					
+					//screen center
+					final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+					frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -46,6 +51,7 @@ public class TaxForms extends JFrame {
 	 * Create the frame.
 	 */
 	public TaxForms() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
 		contentPane = new JPanel();

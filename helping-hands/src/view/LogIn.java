@@ -1,7 +1,3 @@
-/**
- * Author: Sean O'Donnell
- */
-
 package view;
 
 import java.awt.EventQueue;
@@ -9,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -38,6 +35,11 @@ public class LogIn extends JFrame {
 				try {
 					LogIn frame = new LogIn();
 					frame.setVisible(true);
+					
+					//screen center
+					final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+					frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -49,6 +51,7 @@ public class LogIn extends JFrame {
 	 * Create the LogIn frame.
 	 */
 	public LogIn() {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("\\\\itfiles3.insttech.washington.edu\\_profile\\sean3740\\Desktop\\TCSS 360\\peach.jpg"));
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
