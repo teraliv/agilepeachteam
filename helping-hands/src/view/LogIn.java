@@ -34,12 +34,10 @@ public class LogIn extends JFrame {
 			public void run() {
 				try {
 					LogIn frame = new LogIn();
-					frame.setVisible(true);
-					
+					frame.setVisible(true);		
 					//screen center
 					final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 					frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
-					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -76,6 +74,9 @@ public class LogIn extends JFrame {
 							try {
 								RecipientHomePage frame = new RecipientHomePage();
 								frame.setVisible(true);
+								//screen center
+								final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+								frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
@@ -90,6 +91,9 @@ public class LogIn extends JFrame {
 							try {
 								RecipientHomePage frame = new DonorHomePage();
 								frame.setVisible(true);
+								//screen center
+								final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+								frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
@@ -104,6 +108,9 @@ public class LogIn extends JFrame {
 							try {
 								RecipientHomePage frame = new AdministratorHomePage();
 								frame.setVisible(true);
+								//screen center
+								final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+								frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
@@ -117,6 +124,9 @@ public class LogIn extends JFrame {
 						try {
 							RecipientHomePage frame = new RecipientHomePage();
 							frame.setVisible(true);
+							//screen center
+							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+							frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -174,6 +184,9 @@ public class LogIn extends JFrame {
 						try {
 							WelcomePage frame = new WelcomePage();
 							frame.setVisible(true);
+							//screen center
+							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+							frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
