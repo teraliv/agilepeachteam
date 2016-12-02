@@ -23,7 +23,7 @@ import javax.swing.JTextPane;
 public class ForgotPassword extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField nameField;
+	private JTextField userNameField;
 	private JTextField addressField;
 
 	/**
@@ -139,16 +139,16 @@ public class ForgotPassword extends JFrame {
 		lblNewLabel_1.setBounds(10, 61, 464, 25);
 		contentPane.add(lblNewLabel_1);
 		
-		JLabel lblName = new JLabel("Name:");
+		JLabel lblName = new JLabel("User Name:");
 		lblName.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblName.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblName.setBounds(37, 167, 69, 25);
+		lblName.setBounds(22, 167, 84, 25);
 		contentPane.add(lblName);
 		
-		nameField = new JTextField();								//TODO name field
-		nameField.setBounds(116, 167, 264, 25);
-		contentPane.add(nameField);
-		nameField.setColumns(10);
+		userNameField = new JTextField();								//TODO name field
+		userNameField.setBounds(116, 167, 264, 25);
+		contentPane.add(userNameField);
+		userNameField.setColumns(10);
 		
 		JLabel lblAddress = new JLabel("Address:");
 		lblAddress.setHorizontalAlignment(SwingConstants.TRAILING);
@@ -166,7 +166,7 @@ public class ForgotPassword extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				//continue button code here
 				continueButton.setVisible(false); //setting the main continue button temporarily invisible as to not bleed through the overlapping panel 
-				nameField.setText(""); //emptying the fields
+				userNameField.setText(""); //emptying the fields
 				addressField.setText("");
 				//if(valid)
 				{
