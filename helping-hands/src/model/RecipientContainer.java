@@ -17,7 +17,7 @@ public class RecipientContainer {
 
 
     public void addRecipient(Recipient recipient) {
-        recipients.put(recipient.name, recipient);
+        recipients.put(recipient.firstName, recipient);
         totalRecipients++;
     }
 

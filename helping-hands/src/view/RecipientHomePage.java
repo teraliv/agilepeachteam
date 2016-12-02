@@ -76,7 +76,7 @@ public class RecipientHomePage extends JFrame {
 		lblWelcome.setBounds(90, 11, 137, 37);
 		contentPane.add(lblWelcome);
 		
-		JLabel recipientNameLabel = new JLabel("Recipient");	//TODO this field needs to be dynamically populated with the recipients name
+		JLabel recipientNameLabel = new JLabel("Recipient");	//TODO this field needs to be dynamically populated with the recipients firstName
 		
 		recipientNameLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		recipientNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));

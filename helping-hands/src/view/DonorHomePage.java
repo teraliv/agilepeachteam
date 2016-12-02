@@ -80,7 +80,7 @@ public class DonorHomePage extends JFrame {
 		welcomeLabel.setBounds(113, 11, 137, 37);
 		contentPane.add(welcomeLabel);
 		
-		JLabel donorNameLabel = new JLabel("Donor"); //TODO this label needs to be dynamically filled with the donor's name
+		JLabel donorNameLabel = new JLabel("Donor"); //TODO this label needs to be dynamically filled with the donor's firstName
 		donorNameLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		donorNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		donorNameLabel.setBackground(Color.WHITE);
@@ -171,37 +171,37 @@ public class DonorHomePage extends JFrame {
 		pastDonationsPanel.add(lblDate);
 		
 		//TODO The 6 most recent donations need to be populated into the 12 fields below, 6 for the names and 6 for the dates
-		item1NameField = new JTextField(); //TODO item 1 name field
+		item1NameField = new JTextField(); //TODO item 1 firstName field
 		item1NameField.setEditable(false);
 		item1NameField.setBounds(10, 36, 86, 20);
 		pastDonationsPanel.add(item1NameField);
 		item1NameField.setColumns(10);
 		
-		item2NameField = new JTextField(); //TODO item 2 name field
+		item2NameField = new JTextField(); //TODO item 2 firstName field
 		item2NameField.setEditable(false);
 		item2NameField.setColumns(10);
 		item2NameField.setBounds(10, 64, 86, 20);
 		pastDonationsPanel.add(item2NameField);
 		
-		item3NameField = new JTextField(); //TODO item 3 name field
+		item3NameField = new JTextField(); //TODO item 3 firstName field
 		item3NameField.setEditable(false);
 		item3NameField.setColumns(10);
 		item3NameField.setBounds(10, 95, 86, 20);
 		pastDonationsPanel.add(item3NameField);
 		
-		item4NameField = new JTextField(); //TODO item 4 name field
+		item4NameField = new JTextField(); //TODO item 4 firstName field
 		item4NameField.setEditable(false);
 		item4NameField.setColumns(10);
 		item4NameField.setBounds(10, 126, 86, 20);
 		pastDonationsPanel.add(item4NameField);
 		
-		item5NameField = new JTextField(); //TODO item 5 name field
+		item5NameField = new JTextField(); //TODO item 5 firstName field
 		item5NameField.setEditable(false);
 		item5NameField.setColumns(10);
 		item5NameField.setBounds(10, 157, 86, 20);
 		pastDonationsPanel.add(item5NameField);
 		
-		item6NameField = new JTextField(); //TODO item 6 name field
+		item6NameField = new JTextField(); //TODO item 6 firstName field
 		item6NameField.setEditable(false);
 		item6NameField.setColumns(10);
 		item6NameField.setBounds(10, 188, 86, 20);

@@ -6,13 +6,13 @@ import java.util.List;
 public class Donor {
 
 
-    public final String       name;           // Donor's name. It could be personal or business name.
+    public final String       name;           // Donor's firstName. It could be personal or business firstName.
     public final List<Item>   donatedItems;   // List of donated availableItems by this donor.
     public final Inventory    inventory;
 
     /**
      * Creates new Donor.
-     * @param name - donor's name.
+     * @param name - donor's firstName.
      */
     public Donor(String name, Inventory inventory) {
         this.name           = name;

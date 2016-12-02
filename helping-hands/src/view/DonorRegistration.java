@@ -82,7 +82,7 @@ public class DonorRegistration extends JFrame {
 		lblDonorRegistration.setBounds(10, 0, 464, 37);
 		contentPane.add(lblDonorRegistration);
 		
-		firstNameField = new JTextField();						//TODO first name field
+		firstNameField = new JTextField();						//TODO first firstName field
 		firstNameField.setColumns(10);
 		firstNameField.setBounds(114, 48, 309, 20);
 		contentPane.add(firstNameField);
@@ -99,7 +99,7 @@ public class DonorRegistration extends JFrame {
 		label_2.setBounds(28, 80, 76, 14);
 		contentPane.add(label_2);
 		
-		lastNameField = new JTextField();						//TODO last name field
+		lastNameField = new JTextField();						//TODO last firstName field
 		lastNameField.setColumns(10);
 		lastNameField.setBounds(114, 79, 309, 20);
 		contentPane.add(lastNameField);
@@ -304,7 +304,7 @@ public class DonorRegistration extends JFrame {
 		lblAreYouA.setBounds(137, 328, 189, 20);
 		contentPane.add(lblAreYouA);
 		
-		businessNameField = new JTextField();						//TODO business name field
+		businessNameField = new JTextField();						//TODO business firstName field
 		businessNameField.setBounds(114, 385, 309, 20);
 		contentPane.add(businessNameField);
 		
@@ -325,7 +325,7 @@ public class DonorRegistration extends JFrame {
 		lblBusinessName.setVisible(false);
 		businessNameField.setVisible(false);
 		
-		JRadioButton yesButton = new JRadioButton("Yes");				//TODO if this is selected add buisness name from buisness name field above
+		JRadioButton yesButton = new JRadioButton("Yes");				//TODO if this is selected add buisness firstName from buisness firstName field above
 		yesOrNo.add(yesButton);
 		yesButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
