@@ -151,12 +151,14 @@ public class Dropoff extends JFrame {
 		contentPane.add(lblCost);
 		
 		quantityField = new JTextField();				//TODO this field will contain the quantity of the donated item
+		quantityField.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		quantityField.setToolTipText("Please enter the amount in a whole number");
 		quantityField.setBounds(131, 239, 208, 29);
 		contentPane.add(quantityField);
 		quantityField.setColumns(10);
 		
 		costField = new JTextField();					//TODO this field will contain the cost of the donated item
+		costField.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		costField.setToolTipText("Please omit the $ sign, and use numbers   EG)  5.53");
 		costField.setColumns(10);
 		costField.setBounds(131, 279, 208, 29);
@@ -209,6 +211,7 @@ public class Dropoff extends JFrame {
 		contentPane.add(lblItemName);
 		
 		itemNameField = new JTextField();						//TODO item name field
+		itemNameField.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		itemNameField.setToolTipText("Please enter the amount in a whole number");
 		itemNameField.setColumns(10);
 		itemNameField.setBounds(131, 199, 208, 29);
