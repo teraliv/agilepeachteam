@@ -172,6 +172,8 @@ public class ForgotPassword extends JFrame {
 				continueButton.setVisible(false); //setting the main continue button temporarily invisible as to not bleed through the overlapping panel 
 				userNameField.setText(""); //emptying the fields
 				addressField.setText("");
+				userNameField.setVisible(false); //setting the fields to be invisible to avoid bleed through on either of the overlapping panels
+				addressField.setVisible(false);
 				//if(valid)
 				{
 					//passwordPanel.setVisible(true);
@@ -222,7 +224,8 @@ public class ForgotPassword extends JFrame {
 				//error button code here
 				errorPanel.setVisible(false); //hiding the error pane pop up
 				continueButton.setVisible(true);
-				
+				userNameField.setVisible(true); //making re-visible the fields which would have bled through the panel
+				addressField.setVisible(true);
 			}
 		});
 		errorContinueButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
