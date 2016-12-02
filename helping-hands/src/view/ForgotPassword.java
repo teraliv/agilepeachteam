@@ -147,7 +147,7 @@ public class ForgotPassword extends JFrame {
 		lblName.setBounds(22, 167, 84, 25);
 		contentPane.add(lblName);
 		
-		userNameField = new JTextField();								//TODO name field
+		userNameField = new JTextField();								//TODO user name field
 		userNameField.setBounds(116, 167, 264, 25);
 		contentPane.add(userNameField);
 		userNameField.setColumns(10);
