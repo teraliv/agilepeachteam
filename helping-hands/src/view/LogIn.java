@@ -142,7 +142,7 @@ public class LogIn extends JFrame {
 			}
 		});
 		continueButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		continueButton.setBounds(162, 361, 132, 23);
+		continueButton.setBounds(177, 263, 132, 23);
 		contentPane.add(continueButton);
 		
 		JLabel enterAccountText = new JLabel("Please Enter Your Account Information");
@@ -156,23 +156,23 @@ public class LogIn extends JFrame {
 		userNameText.setBackground(Color.WHITE);
 		userNameText.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		userNameText.setHorizontalAlignment(SwingConstants.RIGHT);
-		userNameText.setBounds(50, 194, 105, 37);
+		userNameText.setBounds(49, 130, 105, 37);
 		contentPane.add(userNameText);
 		
 		JLabel passwordText = new JLabel("Password:");
 		passwordText.setHorizontalAlignment(SwingConstants.RIGHT);
 		passwordText.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		passwordText.setBackground(Color.WHITE);
-		passwordText.setBounds(50, 254, 105, 37);
+		passwordText.setBounds(49, 190, 105, 37);
 		contentPane.add(passwordText);
 		
 		userNameField = new JTextField();
-		userNameField.setBounds(165, 206, 157, 20);
+		userNameField.setBounds(164, 142, 157, 20);
 		contentPane.add(userNameField);
 		userNameField.setColumns(10);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(165, 266, 157, 20);
+		passwordField.setBounds(164, 202, 157, 20);
 		contentPane.add(passwordField);
 		
 		/**back button hides the login screen and makes visible the welcome screen*/
@@ -203,5 +203,79 @@ public class LogIn extends JFrame {
 		backButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		backButton.setBounds(385, 427, 89, 23);
 		contentPane.add(backButton);
+		
+		JButton forgotPasswordButton = new JButton("Forgot Password?");
+		forgotPasswordButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//forgot password button code here
+				
+				//creating new window (forgot password)
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							ForgotPassword frame = new ForgotPassword();
+							frame.setVisible(true);
+							//screen center
+							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+							frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				
+				//deleting current window
+				LogIn.this.dispose();
+			}
+		});
+		forgotPasswordButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		forgotPasswordButton.setBounds(10, 427, 175, 23);
+		contentPane.add(forgotPasswordButton);
+		
+		forgotPasswordButton.setVisible(false); //starting forgot-password button to invisible
+		
+		JButton forgotUserNameButton = new JButton("Forgot User Name?");
+		forgotUserNameButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//forgot password button code here
+				
+				//creating new window (forgot user name)
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							ForgotUserName frame = new ForgotUserName();
+							frame.setVisible(true);
+							//screen center
+							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+							frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				
+				//deleting current window
+				LogIn.this.dispose();
+			}
+		});
+		forgotUserNameButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		forgotUserNameButton.setBounds(10, 393, 175, 23);
+		contentPane.add(forgotUserNameButton);
+		
+		forgotUserNameButton.setVisible(false); //starting forgot-user-name button to invisible
+		
+		JButton helpButton = new JButton("HELP");
+		helpButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//help button code here
+				helpButton.setVisible(false); //hiding itself
+				forgotUserNameButton.setVisible(true); //revealing forgot user name button
+				forgotPasswordButton.setVisible(true); //revealing forgot password button
+			}
+		});
+		helpButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		helpButton.setBounds(10, 427, 77, 23);
+		contentPane.add(helpButton);
+		
 	}
 }
