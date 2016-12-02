@@ -208,7 +208,7 @@ public class Dropoff extends JFrame {
 		lblItemName.setBounds(12, 199, 112, 29);
 		contentPane.add(lblItemName);
 		
-		itemNameField = new JTextField();
+		itemNameField = new JTextField();						//TODO item name field
 		itemNameField.setToolTipText("Please enter the amount in a whole number");
 		itemNameField.setColumns(10);
 		itemNameField.setBounds(131, 199, 208, 29);
