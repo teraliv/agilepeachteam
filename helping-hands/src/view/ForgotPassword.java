@@ -22,6 +22,8 @@ import javax.swing.JTextPane;
 
 public class ForgotPassword extends JFrame {
 
+
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField userNameField;
 	private JTextField addressField;
@@ -72,11 +74,11 @@ public class ForgotPassword extends JFrame {
 		lblNewLabel_2.setBounds(10, 11, 281, 37);
 		passwordPanel.add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("[Password]");							//TODO this needs to be populated with plain text of a user's password if they verified their information
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_3.setBounds(10, 103, 281, 43);
-		passwordPanel.add(lblNewLabel_3);
+		JLabel passwordText = new JLabel("[Password]");							//TODO this needs to be populated with plain text of a user's password if they verified their information
+		passwordText.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		passwordText.setHorizontalAlignment(SwingConstants.CENTER);
+		passwordText.setBounds(10, 103, 281, 43);
+		passwordPanel.add(passwordText);
 		
 		JButton passwordContinue = new JButton("Continue");
 		passwordContinue.addActionListener(new ActionListener() {
