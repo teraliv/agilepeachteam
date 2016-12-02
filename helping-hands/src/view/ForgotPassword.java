@@ -125,6 +125,7 @@ public class ForgotPassword extends JFrame {
 		errorPanel.add(lblOops);
 		
 		JTextPane errorTextPane = new JTextPane();
+		errorTextPane.setEditable(false);
 		errorTextPane.setText("The information you entered doesn't \r\n seem to match an existing account.");
 		errorTextPane.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		errorTextPane.setBounds(10, 63, 281, 114);
