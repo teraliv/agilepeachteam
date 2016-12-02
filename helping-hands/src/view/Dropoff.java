@@ -31,6 +31,7 @@ public class Dropoff extends JFrame {
 	private JPanel contentPane;
 	private JTextField quantityField;
 	private JTextField costField;
+	private JTextField itemNameField;
 
 	/**
 	 * Launch the application.
@@ -67,7 +68,7 @@ public class Dropoff extends JFrame {
 		JPanel thankYouPanel = new JPanel();
 		thankYouPanel.setBorder(new MatteBorder(1, 1, 3, 3, (Color) new Color(0, 0, 0)));
 		thankYouPanel.setBackground(SystemColor.textHighlightText);
-		thankYouPanel.setBounds(81, 86, 300, 290);
+		thankYouPanel.setBounds(81, 102, 300, 290);
 		contentPane.add(thankYouPanel);
 		thankYouPanel.setLayout(null);
 		
@@ -140,25 +141,25 @@ public class Dropoff extends JFrame {
 		JLabel lblQuantity = new JLabel("Quantity:");
 		lblQuantity.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblQuantity.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblQuantity.setBounds(12, 199, 112, 29);
+		lblQuantity.setBounds(12, 239, 112, 29);
 		contentPane.add(lblQuantity);
 		
 		JLabel lblCost = new JLabel("Cost:");
 		lblCost.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblCost.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblCost.setBounds(12, 239, 112, 29);
+		lblCost.setBounds(12, 279, 112, 29);
 		contentPane.add(lblCost);
 		
 		quantityField = new JTextField();				//TODO this field will contain the quantity of the donated item
 		quantityField.setToolTipText("Please enter the amount in a whole number");
-		quantityField.setBounds(131, 199, 208, 29);
+		quantityField.setBounds(131, 239, 208, 29);
 		contentPane.add(quantityField);
 		quantityField.setColumns(10);
 		
 		costField = new JTextField();					//TODO this field will contain the cost of the donated item
 		costField.setToolTipText("Please omit the $ sign, and use numbers   EG)  5.53");
 		costField.setColumns(10);
-		costField.setBounds(131, 239, 208, 29);
+		costField.setBounds(131, 279, 208, 29);
 		contentPane.add(costField);
 		
 		JButton backButton = new JButton("Back");
@@ -200,5 +201,17 @@ public class Dropoff extends JFrame {
 		continueButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		continueButton.setBounds(169, 340, 132, 23);
 		contentPane.add(continueButton);
+		
+		JLabel lblItemName = new JLabel("Item Name:");
+		lblItemName.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblItemName.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblItemName.setBounds(12, 199, 112, 29);
+		contentPane.add(lblItemName);
+		
+		itemNameField = new JTextField();
+		itemNameField.setToolTipText("Please enter the amount in a whole number");
+		itemNameField.setColumns(10);
+		itemNameField.setBounds(131, 199, 208, 29);
+		contentPane.add(itemNameField);
 	}
 }
