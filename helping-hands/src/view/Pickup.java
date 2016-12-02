@@ -4,15 +4,12 @@
 
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Dimension;
-
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.Font;
@@ -29,12 +26,14 @@ import javax.swing.JTextPane;
 
 public class Pickup extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField streetField;
 	private JTextField cityField;
 	private JTextField zipField;
 	private JTextField quantityField;
 	private JTextField costField;
+	private JTextField itemNameField;
 
 	/**
 	 * Launch the application.
@@ -71,7 +70,7 @@ public class Pickup extends JFrame {
 		JPanel confirmationPanel = new JPanel();
 		confirmationPanel.setBorder(new MatteBorder(1, 1, 3, 3, (Color) new Color(0, 0, 0)));
 		confirmationPanel.setBackground(Color.WHITE);
-		confirmationPanel.setBounds(95, 76, 293, 350);
+		confirmationPanel.setBounds(69, 110, 293, 350);
 		contentPane.add(confirmationPanel);
 		confirmationPanel.setLayout(null);
 		
@@ -175,99 +174,99 @@ public class Pickup extends JFrame {
 		JLabel lblPickupAddress = new JLabel("Pickup Address");
 		lblPickupAddress.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPickupAddress.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblPickupAddress.setBounds(56, 150, 249, 28);
+		lblPickupAddress.setBounds(54, 142, 249, 28);
 		contentPane.add(lblPickupAddress);
 		
 		JLabel label = new JLabel("Street:");
 		label.setHorizontalAlignment(SwingConstants.TRAILING);
 		label.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		label.setBounds(49, 188, 56, 14);
+		label.setBounds(47, 180, 56, 14);
 		contentPane.add(label);
 		
 		streetField = new JTextField();													//TODO street field
 		streetField.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		streetField.setColumns(10);
-		streetField.setBounds(115, 187, 309, 20);
+		streetField.setBounds(113, 179, 309, 20);
 		contentPane.add(streetField);
 		
 		cityField = new JTextField();													//TODO city field
 		cityField.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		cityField.setColumns(10);
-		cityField.setBounds(115, 218, 95, 20);
+		cityField.setBounds(113, 210, 95, 20);
 		contentPane.add(cityField);
 		
 		JLabel label_1 = new JLabel("City:");
 		label_1.setHorizontalAlignment(SwingConstants.TRAILING);
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		label_1.setBounds(69, 216, 36, 20);
+		label_1.setBounds(67, 208, 36, 20);
 		contentPane.add(label_1);
 		
 		JLabel label_2 = new JLabel("State:");
 		label_2.setHorizontalAlignment(SwingConstants.TRAILING);
 		label_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		label_2.setBounds(220, 218, 39, 20);
+		label_2.setBounds(218, 210, 39, 20);
 		contentPane.add(label_2);
 		
 		JComboBox statePullDown = new JComboBox();										//TODO state pull down
 		statePullDown.setModel(new DefaultComboBoxModel(new String[] {"AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"}));
 		statePullDown.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		statePullDown.setBounds(269, 218, 46, 20);
+		statePullDown.setBounds(267, 210, 46, 20);
 		contentPane.add(statePullDown);
 		
 		zipField = new JTextField();													//TODO zip field
 		zipField.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		zipField.setColumns(10);
-		zipField.setBounds(352, 218, 72, 20);
+		zipField.setBounds(350, 210, 72, 20);
 		contentPane.add(zipField);
 		
 		JLabel label_3 = new JLabel("Zip:");
 		label_3.setHorizontalAlignment(SwingConstants.TRAILING);
 		label_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		label_3.setBounds(325, 216, 23, 20);
+		label_3.setBounds(323, 208, 23, 20);
 		contentPane.add(label_3);
 		
 		JLabel lblWhatAreYou = new JLabel("What are you donating?");
 		lblWhatAreYou.setHorizontalAlignment(SwingConstants.CENTER);
 		lblWhatAreYou.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblWhatAreYou.setBounds(99, 260, 249, 28);
+		lblWhatAreYou.setBounds(97, 241, 249, 28);
 		contentPane.add(lblWhatAreYou);
 		
 		JComboBox<Object> categoryPullDown = new JComboBox<Object>();					//TODO fill this pull down with the categories of the inventory
 		categoryPullDown.setModel(new DefaultComboBoxModel(new String[] {"Inventory categories here", "<category>", "<category>"}));
 		categoryPullDown.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		categoryPullDown.setBounds(119, 299, 208, 20);
+		categoryPullDown.setBounds(113, 280, 208, 20);
 		contentPane.add(categoryPullDown);
 		
 		JLabel label_4 = new JLabel("Category:");
 		label_4.setHorizontalAlignment(SwingConstants.TRAILING);
 		label_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		label_4.setBounds(0, 292, 112, 29);
+		label_4.setBounds(33, 276, 72, 29);
 		contentPane.add(label_4);
 		
 		JLabel label_5 = new JLabel("Quantity:");
 		label_5.setHorizontalAlignment(SwingConstants.TRAILING);
 		label_5.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		label_5.setBounds(0, 332, 112, 29);
+		label_5.setBounds(33, 346, 72, 29);
 		contentPane.add(label_5);
 		
 		JLabel label_6 = new JLabel("Cost:");
 		label_6.setHorizontalAlignment(SwingConstants.TRAILING);
 		label_6.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		label_6.setBounds(0, 372, 112, 29);
+		label_6.setBounds(59, 381, 46, 29);
 		contentPane.add(label_6);
 		
 		quantityField = new JTextField();												//TODO Quantity field, verify is a number
 		quantityField.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		quantityField.setToolTipText("Please enter the amount in a whole number");
 		quantityField.setColumns(10);
-		quantityField.setBounds(119, 332, 208, 20);
+		quantityField.setBounds(113, 350, 208, 20);
 		contentPane.add(quantityField);
 		
 		costField = new JTextField();													//TODO cost field, verify is a number
 		costField.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		costField.setToolTipText("Please omit the $ sign, and use numbers   EG)  5.53");
 		costField.setColumns(10);
-		costField.setBounds(119, 372, 208, 20);
+		costField.setBounds(113, 385, 208, 20);
 		contentPane.add(costField);
 		
 		JButton backButton = new JButton("Back");
@@ -308,8 +307,21 @@ public class Pickup extends JFrame {
 			}
 		});
 		continueButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		continueButton.setBounds(163, 403, 132, 23);
+		continueButton.setBounds(149, 437, 132, 23);
 		contentPane.add(continueButton);
+		
+		itemNameField = new JTextField();												//TODO item name field
+		itemNameField.setToolTipText("Please enter the amount in a whole number");
+		itemNameField.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		itemNameField.setColumns(10);
+		itemNameField.setBounds(113, 315, 208, 20);
+		contentPane.add(itemNameField);
+		
+		JLabel lblItemName = new JLabel("Item Name:");
+		lblItemName.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblItemName.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblItemName.setBounds(10, 311, 95, 29);
+		contentPane.add(lblItemName);
 	}
 
 }
