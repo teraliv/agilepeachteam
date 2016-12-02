@@ -148,6 +148,7 @@ public class ForgotPassword extends JFrame {
 		contentPane.add(lblName);
 		
 		userNameField = new JTextField();								//TODO user name field
+		userNameField.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		userNameField.setBounds(116, 167, 264, 25);
 		contentPane.add(userNameField);
 		userNameField.setColumns(10);
@@ -159,6 +160,7 @@ public class ForgotPassword extends JFrame {
 		contentPane.add(lblAddress);
 		
 		addressField = new JTextField();							//TODO address field
+		addressField.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		addressField.setColumns(10);
 		addressField.setBounds(116, 203, 264, 25);
 		contentPane.add(addressField);
