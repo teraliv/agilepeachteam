@@ -1,5 +1,5 @@
 /**
- * Author: Sean O'Donnell
+ * Author: Sean O'Donnell, Ahana Ghosh
  */
 
 package view;
@@ -59,7 +59,7 @@ public class RecipientHomePage extends JFrame {
 	 * Create the frame.
 	 */
 	public RecipientHomePage() {
-		setResizable(false);
+		setResizable(true);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("\\\\itfiles3.insttech.washington.edu\\_profile\\sean3740\\Desktop\\TCSS 360\\peach.jpg"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);

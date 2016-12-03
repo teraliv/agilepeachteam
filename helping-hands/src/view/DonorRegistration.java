@@ -1,5 +1,5 @@
 /**
- * Author: Sean O'Donnell
+ * Author: Sean O'Donnell, Ahana Ghosh
  */
 
 package view;
@@ -9,6 +9,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import model.Donor;
+import model.DonorContainer;
+import model.Recipient;
 import model.RecipientContainer;
 
 import java.awt.Color;
@@ -45,6 +48,22 @@ public class DonorRegistration extends JFrame {
 	private final ButtonGroup maleOrFemale = new ButtonGroup();
 	private JTextField businessNameField;
 	private final ButtonGroup yesOrNo = new ButtonGroup();
+	
+	 private String    firstName;
+    private String     lastName;
+    private String     DOBMonth;
+    private String     DOBDay;
+    private String     DOBYear;
+    private String     gender;
+    private String     street;
+    private String     city;
+    private String     state;
+    private String     zip;
+    private String     email;
+    private String     username;
+    private String     password;
+
+
 
 	/**
 	 * Launch the application.
@@ -69,7 +88,7 @@ public class DonorRegistration extends JFrame {
 	 * Create the frame.
 	 */
 	public DonorRegistration() {
-		setResizable(false);
+		setResizable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
 		contentPane = new JPanel();
@@ -247,13 +266,38 @@ public class DonorRegistration extends JFrame {
 		JButton continueButton = new JButton("Continue");				//TODO continue button location, should grab all fields and create a new donor at this point
 		continueButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//continue button code here
-				
+				//continue button code her
+				firstName   = firstNameField.getText();
+                lastName    = lastNameField.getText();
+                DOBMonth    = monthPullDown.getSelectedItem().toString();
+                DOBDay      = dayPullDown.getSelectedItem().toString();
+                DOBYear     = yearPullDown.getSelectedItem().toString();
+                gender      = "U";
+                street      = streetField.getText();
+                city        = cityField.getText();
+                state       = statePullDown.getSelectedItem().toString();
+                zip         = zipField.getText();
+                email       = emailField.getText();
+                username    = userNameField.getText();
+                password    = String.valueOf(passwordField.getPassword());
+                
+                Donor donor = new Donor(
+                        firstName, lastName, DOBMonth, DOBDay, DOBYear, gender, street,
+                        city, state, zip, email, username, password);
+                
+                DonorContainer donorInstance = DonorContainer.GetInstance();
+                if(donorInstance.isDonor(username)){
+                	// TODO: navigate to a user already exists page.
+                	return;
+                }
+                
+                donorInstance.addDonor(donor);
+
 				//creating next window (donor home page)
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							DonorHomePage frame = new DonorHomePage();
+							DonorHomePage frame = new DonorHomePage(donor);
 							frame.setVisible(true);
 							//screen center
 							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();

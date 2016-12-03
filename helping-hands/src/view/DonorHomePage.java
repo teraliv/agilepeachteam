@@ -1,5 +1,5 @@
 /**
- * Author: Sean O'Donnell
+ * Author: Sean O'Donnell, Ahana Ghosh
  */
 
 package view;
@@ -8,6 +8,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import model.Donor;
+import model.Item;
+
 import java.awt.Color;
 import java.awt.Dimension;
 
@@ -31,17 +35,17 @@ public class DonorHomePage extends JFrame {
 	private JTextField item3NameField;
 	private JTextField item4NameField;
 	private JTextField item5NameField;
-	private JTextField item1DateField;
-	private JTextField item2DateField;
-	private JTextField item3DateField;
-	private JTextField item4DateField;
-	private JTextField item5DateField;
 	private JTextField item6NameField;
-	private JTextField item6DateField;
+	private JTextField item1QuantityField;
+	private JTextField item2QuantityField;
+	private JTextField item3QuantityField;
+	private JTextField item4QuantityField;
+	private JTextField item5QuantityField;
+	private JTextField item6QuantityField;
 	private JTextPane txtpnThankYouFor;
 	private JButton backButton;
 	private JButton dropoffButton;
-
+	private Donor myDonor;
 	/**
 	 * Launch the application.
 	 */
@@ -49,7 +53,8 @@ public class DonorHomePage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DonorHomePage frame = new DonorHomePage();
+					Donor d = new Donor("a","a","a","a","a","a","a","a","a","a","a","a","a");
+					DonorHomePage frame = new DonorHomePage(d);
 					frame.setVisible(true);
 					//screen center
 					final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -64,7 +69,9 @@ public class DonorHomePage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public DonorHomePage() {
+	public DonorHomePage(Donor d) {
+		myDonor = d;
+		
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
@@ -97,7 +104,7 @@ public class DonorHomePage extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Pickup frame = new Pickup();
+							Pickup frame = new Pickup(myDonor);
 							frame.setVisible(true);
 							//screen center
 							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -125,7 +132,7 @@ public class DonorHomePage extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							TaxForms frame = new TaxForms();
+							TaxForms frame = new TaxForms(myDonor);
 							frame.setVisible(true);
 							//screen center
 							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -166,10 +173,10 @@ public class DonorHomePage extends JFrame {
 		lblNewLabel_1.setBounds(10, 11, 46, 14);
 		pastDonationsPanel.add(lblNewLabel_1);
 		
-		JLabel lblDate = new JLabel("Date:");
-		lblDate.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblDate.setBounds(138, 11, 46, 14);
-		pastDonationsPanel.add(lblDate);
+		JLabel lblQuantity = new JLabel("Quantity:");
+		lblQuantity.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblQuantity.setBounds(138, 11, 46, 14);
+		pastDonationsPanel.add(lblQuantity);
 		
 		//TODO The 6 most recent donations need to be populated into the 12 fields below, 6 for the names and 6 for the dates
 		item1NameField = new JTextField(); //TODO item 1 firstName field
@@ -178,11 +185,37 @@ public class DonorHomePage extends JFrame {
 		pastDonationsPanel.add(item1NameField);
 		item1NameField.setColumns(10);
 		
+		item1QuantityField = new JTextField(); //TODO item 1 date field
+		item1QuantityField.setEditable(false);
+		item1QuantityField.setColumns(10);
+		item1QuantityField.setBounds(138, 36, 86, 20);
+		pastDonationsPanel.add(item1QuantityField);
+		
+		Item i = myDonor.getDonatedItem(0);
+		if(i != null)
+		{
+			item1NameField.setText(i.name);
+			item1QuantityField.setText(String.valueOf(i.quantity));
+		}
+		
 		item2NameField = new JTextField(); //TODO item 2 firstName field
 		item2NameField.setEditable(false);
 		item2NameField.setColumns(10);
 		item2NameField.setBounds(10, 64, 86, 20);
 		pastDonationsPanel.add(item2NameField);
+		
+		item2QuantityField = new JTextField(); //TODO item 2 date field
+		item2QuantityField.setEditable(false);
+		item2QuantityField.setColumns(10);
+		item2QuantityField.setBounds(138, 64, 86, 20);
+		pastDonationsPanel.add(item2QuantityField);
+		
+		i = myDonor.getDonatedItem(1);
+		if(i != null)
+		{
+			item2NameField.setText(i.name);
+			item2QuantityField.setText(String.valueOf(i.quantity));
+		}
 		
 		item3NameField = new JTextField(); //TODO item 3 firstName field
 		item3NameField.setEditable(false);
@@ -190,11 +223,35 @@ public class DonorHomePage extends JFrame {
 		item3NameField.setBounds(10, 95, 86, 20);
 		pastDonationsPanel.add(item3NameField);
 		
+		item3QuantityField = new JTextField(); //TODO item 3 date field
+		item3QuantityField.setEditable(false);
+		item3QuantityField.setColumns(10);
+		item3QuantityField.setBounds(138, 95, 86, 20);
+		pastDonationsPanel.add(item3QuantityField);
+		i = myDonor.getDonatedItem(2);
+		if(i != null)
+		{
+			item3NameField.setText(i.name);
+			item3QuantityField.setText(String.valueOf(i.quantity));
+		}
+		
 		item4NameField = new JTextField(); //TODO item 4 firstName field
 		item4NameField.setEditable(false);
 		item4NameField.setColumns(10);
 		item4NameField.setBounds(10, 126, 86, 20);
 		pastDonationsPanel.add(item4NameField);
+		
+		item4QuantityField = new JTextField(); //TODO item 4 date field
+		item4QuantityField.setEditable(false);
+		item4QuantityField.setColumns(10);
+		item4QuantityField.setBounds(138, 126, 86, 20);
+		pastDonationsPanel.add(item4QuantityField);
+		i = myDonor.getDonatedItem(3);
+		if(i != null)
+		{
+			item3NameField.setText(i.name);
+			item3QuantityField.setText(String.valueOf(i.quantity));
+		}
 		
 		item5NameField = new JTextField(); //TODO item 5 firstName field
 		item5NameField.setEditable(false);
@@ -202,47 +259,35 @@ public class DonorHomePage extends JFrame {
 		item5NameField.setBounds(10, 157, 86, 20);
 		pastDonationsPanel.add(item5NameField);
 		
+		item5QuantityField = new JTextField(); //TODO item 5 date field
+		item5QuantityField.setEditable(false);
+		item5QuantityField.setColumns(10);
+		item5QuantityField.setBounds(138, 157, 86, 20);
+		pastDonationsPanel.add(item5QuantityField);
+		i = myDonor.getDonatedItem(4);
+		if(i != null)
+		{
+			item4NameField.setText(i.name);
+			item4QuantityField.setText(String.valueOf(i.quantity));
+		}
+		
 		item6NameField = new JTextField(); //TODO item 6 firstName field
 		item6NameField.setEditable(false);
 		item6NameField.setColumns(10);
 		item6NameField.setBounds(10, 188, 86, 20);
 		pastDonationsPanel.add(item6NameField);
-		
-		item1DateField = new JTextField(); //TODO item 1 date field
-		item1DateField.setEditable(false);
-		item1DateField.setColumns(10);
-		item1DateField.setBounds(138, 36, 86, 20);
-		pastDonationsPanel.add(item1DateField);
-		
-		item2DateField = new JTextField(); //TODO item 2 date field
-		item2DateField.setEditable(false);
-		item2DateField.setColumns(10);
-		item2DateField.setBounds(138, 64, 86, 20);
-		pastDonationsPanel.add(item2DateField);
-		
-		item3DateField = new JTextField(); //TODO item 3 date field
-		item3DateField.setEditable(false);
-		item3DateField.setColumns(10);
-		item3DateField.setBounds(138, 95, 86, 20);
-		pastDonationsPanel.add(item3DateField);
-		
-		item4DateField = new JTextField(); //TODO item 4 date field
-		item4DateField.setEditable(false);
-		item4DateField.setColumns(10);
-		item4DateField.setBounds(138, 126, 86, 20);
-		pastDonationsPanel.add(item4DateField);
-		
-		item5DateField = new JTextField(); //TODO item 5 date field
-		item5DateField.setEditable(false);
-		item5DateField.setColumns(10);
-		item5DateField.setBounds(138, 157, 86, 20);
-		pastDonationsPanel.add(item5DateField);
-		
-		item6DateField = new JTextField(); //TODO item 6 date field
-		item6DateField.setEditable(false);
-		item6DateField.setColumns(10);
-		item6DateField.setBounds(138, 188, 86, 20);
-		pastDonationsPanel.add(item6DateField);
+
+		item6QuantityField = new JTextField(); //TODO item 6 date field
+		item6QuantityField.setEditable(false);
+		item6QuantityField.setColumns(10);
+		item6QuantityField.setBounds(138, 188, 86, 20);
+		pastDonationsPanel.add(item6QuantityField);
+		i = myDonor.getDonatedItem(5);
+		if(i != null)
+		{
+			item5NameField.setText(i.name);
+			item5QuantityField.setText(String.valueOf(i.quantity));
+		}
 		
 		txtpnThankYouFor = new JTextPane();
 		txtpnThankYouFor.setText(" Thank You For\r\nYour Donations!");
@@ -287,7 +332,7 @@ public class DonorHomePage extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Dropoff frame = new Dropoff();
+							Dropoff frame = new Dropoff(myDonor);
 							frame.setVisible(true);
 							//screen center
 							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();

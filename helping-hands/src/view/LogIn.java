@@ -1,5 +1,5 @@
 /**
- * Author: Sean O'Donnell
+ * Author: Sean O'Donnell, Ahana Ghosh
  */
 
 package view;
@@ -41,6 +41,9 @@ public class LogIn extends JFrame {
 			public void run() {
 				try {
 					LogIn frame = new LogIn();
+					//frame.pack();
+				    //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					//frame.setLocationRelativeTo(null);
 					frame.setVisible(true);		
 					//screen center
 					final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -56,7 +59,7 @@ public class LogIn extends JFrame {
 	 * Create the LogIn frame.
 	 */
 	public LogIn() {
-		setResizable(false);
+		setResizable(true);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("\\\\itfiles3.insttech.washington.edu\\_profile\\sean3740\\Desktop\\TCSS 360\\peach.jpg"));
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -234,7 +237,7 @@ public class LogIn extends JFrame {
 					EventQueue.invokeLater(new Runnable() {
 						public void run() {
 							try {
-								DonorHomePage frame = new DonorHomePage();
+								DonorHomePage frame = new DonorHomePage(dc.getDonor(userNameText1));
 								frame.setVisible(true);
 								//screen center
 								final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();

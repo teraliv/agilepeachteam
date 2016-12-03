@@ -1,5 +1,5 @@
 /**
- * Author: Sean O'Donnell
+ * Author: Sean O'Donnell, Ahana Ghosh
  */
 
 package view;
@@ -22,6 +22,11 @@ import javax.swing.DefaultComboBoxModel;
 import java.time.Month;
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
+
+import model.Donor;
+import model.Inventory;
+import model.Item;
+
 import javax.swing.JTextPane;
 
 public class Pickup extends JFrame {
@@ -34,6 +39,7 @@ public class Pickup extends JFrame {
 	private JTextField quantityField;
 	private JTextField costField;
 	private JTextField itemNameField;
+	private Donor myDonor;
 
 	/**
 	 * Launch the application.
@@ -42,7 +48,8 @@ public class Pickup extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Pickup frame = new Pickup();
+					Donor d = new Donor("a","a","a","a","a","a","a","a","a","a","a","a","a");
+					Pickup frame = new Pickup(d);
 					frame.setVisible(true);
 					//screen center
 					final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -57,7 +64,8 @@ public class Pickup extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Pickup() {
+	public Pickup(Donor d) {
+		myDonor = d;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
@@ -75,17 +83,30 @@ public class Pickup extends JFrame {
 		confirmationPanel.setLayout(null);
 		
 		confirmationPanel.setVisible(false); //starting the confirmation panel hidden
+		// Early declaration
+		JComboBox<Object> categoryPullDown = new JComboBox<Object>();					//TODO fill this pull down with the categories of the inventory
 		
 		JButton verificationContinue = new JButton("Continue");
 		verificationContinue.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//verification continue button code here
+				String itemName = itemNameField.getText();
+				String categoryName = categoryPullDown.getSelectedItem().toString();
+				int quantity = Integer.parseInt(quantityField.getText());
+				double cost = Double.parseDouble(costField.getText());
+				
+				Item localItem = new Item(itemName, categoryName, quantity, cost);
+				
+				Inventory inv = Inventory.GetInstance();
+				inv.addItem(localItem);
+				
+				if(myDonor != null) myDonor.addDonatedItem(localItem);
 				
 				//creating previous window (donor home page)
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							DonorHomePage frame = new DonorHomePage();
+							DonorHomePage frame = new DonorHomePage(myDonor);
 							frame.setVisible(true);
 							//screen center
 							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -231,7 +252,6 @@ public class Pickup extends JFrame {
 		lblWhatAreYou.setBounds(97, 241, 249, 28);
 		contentPane.add(lblWhatAreYou);
 		
-		JComboBox<Object> categoryPullDown = new JComboBox<Object>();					//TODO fill this pull down with the categories of the inventory
 		categoryPullDown.setModel(new DefaultComboBoxModel(new String[] {"Inventory categories here", "<category>", "<category>"}));
 		categoryPullDown.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		categoryPullDown.setBounds(113, 280, 208, 20);
@@ -278,7 +298,7 @@ public class Pickup extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							DonorHomePage frame = new DonorHomePage();
+							DonorHomePage frame = new DonorHomePage(myDonor);
 							frame.setVisible(true);
 							//screen center
 							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();

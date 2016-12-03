@@ -1,5 +1,5 @@
 /**
- * Author: Sean O'Donnell
+ * Author: Sean O'Donnell, Ahana Ghosh
  */
 
 package view;
@@ -18,6 +18,9 @@ import java.awt.Toolkit;
 import javax.swing.SwingConstants;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import model.Donor;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -29,6 +32,7 @@ public class TaxForms extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable taxTable;
+	private Donor myDonor;
 
 	/**
 	 * Launch the application.
@@ -37,7 +41,8 @@ public class TaxForms extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TaxForms frame = new TaxForms();
+					Donor d = new Donor("a","a","a","a","a","a","a","a","a","a","a","a","a");
+					TaxForms frame = new TaxForms(d);
 					frame.setVisible(true);	
 					//screen center
 					final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -52,7 +57,8 @@ public class TaxForms extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TaxForms() {
+	public TaxForms(Donor d) {
+		d = myDonor;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
@@ -167,7 +173,7 @@ public class TaxForms extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							DonorHomePage frame = new DonorHomePage();
+							DonorHomePage frame = new DonorHomePage(myDonor);
 							frame.setVisible(true);
 							//screen center
 							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();

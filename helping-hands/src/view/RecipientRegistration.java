@@ -1,5 +1,5 @@
 /**
- * Author: Sean O'Donnell
+ * Author: Sean O'Donnell, Ahana Ghosh
  * Contributor: Alex Terikov
  */
 
@@ -311,7 +311,7 @@ public class RecipientRegistration extends JFrame {
                 zip         = zipField.getText();
                 email       = emailField.getText();
                 username    = userNameField.getText();
-                password    = passwordField.getPassword().toString();
+                password    = String.valueOf(passwordField.getPassword());
 
                 Recipient recipient = new Recipient(
                         firstName, lastName, DOBMonth, DOBDay, DOBYear, gender, street,

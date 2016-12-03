@@ -23,7 +23,7 @@ public class DonorContainer {
     }
 
     public void addDonor(Donor donor) {
-        donors.put(donor.userName, donor);
+        donors.put(donor.username, donor);
         totalDonors++;
     }
     

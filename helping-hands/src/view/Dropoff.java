@@ -1,5 +1,5 @@
 /**
- * Author: Sean O'Donnell
+ * Author: Sean O'Donnell, Ahana Ghosh
  */
 
 package view;
@@ -25,6 +25,10 @@ import java.awt.Toolkit;
 
 import javax.swing.border.MatteBorder;
 
+import model.Donor;
+import model.Inventory;
+import model.Item;
+
 public class Dropoff extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -32,6 +36,7 @@ public class Dropoff extends JFrame {
 	private JTextField quantityField;
 	private JTextField costField;
 	private JTextField itemNameField;
+	private Donor myDonor;
 
 	/**
 	 * Launch the application.
@@ -40,7 +45,8 @@ public class Dropoff extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Dropoff frame = new Dropoff();
+					Donor d = new Donor("a","a","a","a","a","a","a","a","a","a","a","a","a");
+					Dropoff frame = new Dropoff(d);
 					frame.setVisible(true);
 					//screen center
 					final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -55,7 +61,8 @@ public class Dropoff extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Dropoff() {
+	public Dropoff(Donor d) {
+		myDonor = d;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
@@ -84,28 +91,29 @@ public class Dropoff extends JFrame {
 		lblYourDonation.setBounds(46, 51, 208, 29);
 		thankYouPanel.add(lblYourDonation);
 		
+		// Declare early
+		JComboBox<Object> categoryPullDown = new JComboBox<Object>();							//TODO this pull down needs to be populated with the categories of the inventory
+		JButton submitButton = new JButton("Submit");		//TODO when the continue button is pressed, the item described in the fields should be added to the inventory
+		
 		JButton thankYouContinueButton = new JButton("Continue");
 		thankYouContinueButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//thank you continue button code here 
+				String itemName = itemNameField.getText();
+				String categoryName = categoryPullDown.getSelectedItem().toString();
+				int quantity = Integer.parseInt(quantityField.getText());
+				double cost = Double.parseDouble(costField.getText());
 				
-				//creating previous window (the donor home page)
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							DonorHomePage frame = new DonorHomePage();
-							frame.setVisible(true);
-							//screen center
-							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-							frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-
-				//deleting current window)
-				Dropoff.this.dispose();
+				Item localItem = new Item(itemName, categoryName, quantity, cost);
+				
+				Inventory inv = Inventory.GetInstance();
+				inv.addItem(localItem);
+				
+				if(myDonor != null) myDonor.addDonatedItem(localItem);
+				
+				// Set the thankYou Panel to false.
+				thankYouPanel.setVisible(false);
+				submitButton.setVisible(true); 
 			}
 		});
 		thankYouContinueButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -121,7 +129,6 @@ public class Dropoff extends JFrame {
 		lblDonationDropoff.setBounds(131, 11, 208, 29);
 		contentPane.add(lblDonationDropoff);
 		
-		JComboBox<Object> categoryPullDown = new JComboBox<Object>();							//TODO this pull down needs to be populated with the categories of the inventory
 		categoryPullDown.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		categoryPullDown.setModel(new DefaultComboBoxModel<Object>(new String[] {"Insert categories here", "<inventory category types>"}));
 		categoryPullDown.setBounds(131, 159, 208, 29);
@@ -173,7 +180,7 @@ public class Dropoff extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							DonorHomePage frame = new DonorHomePage();
+							DonorHomePage frame = new DonorHomePage(myDonor);
 							frame.setVisible(true);
 							//screen center
 							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -192,17 +199,16 @@ public class Dropoff extends JFrame {
 		backButton.setBounds(385, 427, 89, 23);
 		contentPane.add(backButton);
 		
-		JButton continueButton = new JButton("Continue");		//TODO when the continue button is pressed, the item described in the fields should be added to the inventory
-		continueButton.addActionListener(new ActionListener() {
+		submitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//continue button code here
 				thankYouPanel.setVisible(true);
-				continueButton.setVisible(false); //hiding the first continue button because otherwise it bleeds through the overlapping panel which says thank you
+				submitButton.setVisible(false); //hiding the first continue button because otherwise it bleeds through the overlapping panel which says thank you
 			}
 		});
-		continueButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		continueButton.setBounds(169, 340, 132, 23);
-		contentPane.add(continueButton);
+		submitButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		submitButton.setBounds(169, 340, 132, 23);
+		contentPane.add(submitButton);
 		
 		JLabel lblItemName = new JLabel("Item Name:");
 		lblItemName.setHorizontalAlignment(SwingConstants.TRAILING);
