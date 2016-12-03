@@ -20,6 +20,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import java.awt.Toolkit;
 import model.RecipientContainer;
+import model.Donor;
 import model.DonorContainer;
 import model.Recipient;
 
@@ -71,84 +72,7 @@ public class LogIn extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton continueButton = new JButton("Continue");
-		/*continueButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) 
-			{//continue button code here
-				//TODO if account valid use account type to load the appropriate home page
-				
-				//creating new window based upon log-in account type
-				
-				
-				if(isRecipient(String userName) )
-				{
-					EventQueue.invokeLater(new Runnable() {
-						public void run() {
-							try {
-								RecipientHomePage frame = new RecipientHomePage();
-								frame.setVisible(true);
-								//screen center
-								final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-								frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-						}
-					});
-				}
-				
-				if(Donor)
-				{
-					EventQueue.invokeLater(new Runnable() {
-						public void run() {
-							try {
-								RecipientHomePage frame = new DonorHomePage();
-								frame.setVisible(true);
-								//screen center
-								final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-								frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-						}
-					});
-				}*/
-				
-				/*if(Administrator)
-				{
-					EventQueue.invokeLater(new Runnable() {
-						public void run() {
-							try {
-								RecipientHomePage frame = new AdministratorHomePage();
-								frame.setVisible(true);
-								//screen center
-								final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-								frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-						}
-					});
-				}
-				
-				//temp code for demonstration
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							RecipientHomePage frame = new RecipientHomePage();
-							frame.setVisible(true);
-							//screen center
-							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-							frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-				
-				//deleting current window
-				LogIn.this.dispose();
-			}
-		});*/
+		
 		continueButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		continueButton.setBounds(177, 263, 132, 23);
 		contentPane.add(continueButton);
@@ -234,38 +158,42 @@ public class LogIn extends JFrame {
 				}
 				else if(dc.isDonor(userNameText1))
 				{
-					EventQueue.invokeLater(new Runnable() {
-						public void run() {
-							try {
-								DonorHomePage frame = new DonorHomePage(dc.getDonor(userNameText1));
-								frame.setVisible(true);
-								//screen center
-								final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-								frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
-							} catch (Exception e) {
-								e.printStackTrace();
+					Donor d = dc.getDonor(userNameText1);
+
+					if(!d.password.equals(passwordText))
+					{
+						// TODO: Navigate to password mismatch error page.
+						EventQueue.invokeLater(new Runnable() {
+							public void run() {
+								try {
+									WelcomePage frame = new WelcomePage();
+									frame.setVisible(true);
+									//screen center
+									final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+									frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
 							}
-						}
-					});
-			    }
-				else{
-					// TODO: Show a user name does not exist error.
-					// Temporarily navigage to welcome page.
-					EventQueue.invokeLater(new Runnable() {
-						public void run() {
-							try {
-								WelcomePage frame = new WelcomePage();
-								frame.setVisible(true);
-								//screen center
-								final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-								frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
-							} catch (Exception e) {
-								e.printStackTrace();
+						});
+					}
+					else
+					{
+						EventQueue.invokeLater(new Runnable() {
+							public void run() {
+								try {
+									DonorHomePage frame = new DonorHomePage(d);
+									frame.setVisible(true);
+									//screen center
+									final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+									frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
 							}
-						}
-					});
+						});
+					}					
 				}
-				    
 				//deleting current window
 				LogIn.this.dispose();
 			}
