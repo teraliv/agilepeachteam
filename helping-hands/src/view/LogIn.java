@@ -19,6 +19,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import java.awt.Toolkit;
+import model.RecipientContainer;
+import model.DonorContainer;
+import model.Recipient;
 
 public class LogIn extends JFrame {
 
@@ -65,13 +68,15 @@ public class LogIn extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton continueButton = new JButton("Continue");
-		continueButton.addActionListener(new ActionListener() {
+		/*continueButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{//continue button code here
 				//TODO if account valid use account type to load the appropriate home page
 				
 				//creating new window based upon log-in account type
-				/*if(Recipient)
+				
+				
+				if(isRecipient(String userName) )
 				{
 					EventQueue.invokeLater(new Runnable() {
 						public void run() {
@@ -86,9 +91,9 @@ public class LogIn extends JFrame {
 							}
 						}
 					});
-				}*/
+				}
 				
-				/*if(Donor)
+				if(Donor)
 				{
 					EventQueue.invokeLater(new Runnable() {
 						public void run() {
@@ -120,7 +125,7 @@ public class LogIn extends JFrame {
 							}
 						}
 					});
-				}*/
+				}
 				
 				//temp code for demonstration
 				EventQueue.invokeLater(new Runnable() {
@@ -140,7 +145,7 @@ public class LogIn extends JFrame {
 				//deleting current window
 				LogIn.this.dispose();
 			}
-		});
+		});*/
 		continueButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		continueButton.setBounds(177, 263, 132, 23);
 		contentPane.add(continueButton);
@@ -169,11 +174,99 @@ public class LogIn extends JFrame {
 		userNameField = new JTextField();
 		userNameField.setBounds(164, 142, 157, 20);
 		contentPane.add(userNameField);
+		//
 		userNameField.setColumns(10);
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(164, 202, 157, 20);
 		contentPane.add(passwordField);
+		
+		RecipientContainer rc = RecipientContainer.GetInstance();
+        DonorContainer dc = DonorContainer.GetInstance();
+        
+		continueButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {//continue button code here
+				//TODO if account valid use account type to load the appropriate home page
+				String userNameText1 = userNameField.getText();
+				String passwordText = String.valueOf(passwordField.getPassword());
+				
+				//creating new window based upon log-in account type
+				if(rc.isRecipient(userNameText1))
+				{
+					Recipient r = rc.getRecipient(userNameText1);
+					
+					if(!r.password.equals(passwordText))
+					{
+						// TODO: Navigate to password mismatch error page.
+						EventQueue.invokeLater(new Runnable() {
+							public void run() {
+								try {
+									WelcomePage frame = new WelcomePage();
+									frame.setVisible(true);
+									//screen center
+									final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+									frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+						});
+					}
+					else
+					{
+						EventQueue.invokeLater(new Runnable() {
+							public void run() {
+								try {
+									RecipientHomePage frame = new RecipientHomePage();
+									frame.setVisible(true);
+									//screen center
+									final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+									frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+						});
+					}					
+				}
+				else if(dc.isDonor(userNameText1))
+				{
+					EventQueue.invokeLater(new Runnable() {
+						public void run() {
+							try {
+								DonorHomePage frame = new DonorHomePage();
+								frame.setVisible(true);
+								//screen center
+								final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+								frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						}
+					});
+			    }
+				else{
+					// TODO: Show a user name does not exist error.
+					// Temporarily navigage to welcome page.
+					EventQueue.invokeLater(new Runnable() {
+						public void run() {
+							try {
+								WelcomePage frame = new WelcomePage();
+								frame.setVisible(true);
+								//screen center
+								final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+								frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						}
+					});
+				}
+				    
+				//deleting current window
+				LogIn.this.dispose();
+			}
+		});
 		
 		/**back button hides the login screen and makes visible the welcome screen*/
 		JButton backButton = new JButton("Back");
@@ -195,9 +288,7 @@ public class LogIn extends JFrame {
 							e.printStackTrace();
 						}
 					}
-				});
-				
-				
+				});	
 			}
 		});
 		backButton.setFont(new Font("Tahoma", Font.PLAIN, 20));

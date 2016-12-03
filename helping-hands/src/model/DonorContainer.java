@@ -5,20 +5,33 @@ import java.util.Map;
 
 public class DonorContainer {
 
+	private static DonorContainer instance = null;
     public final    Map<String, Donor> donors;
     public int      totalDonors;
 
-    public DonorContainer() {
+    static public DonorContainer GetInstance()
+    {
+    	if(instance == null) {
+            instance = new DonorContainer();
+         }
+         return instance;
+    }
+    
+    protected DonorContainer() {
         this.donors         = new HashMap<>();
         this.totalDonors    = 0;
     }
 
     public void addDonor(Donor donor) {
-        donors.put(donor.name, donor);
+        donors.put(donor.userName, donor);
         totalDonors++;
     }
+    
+    public Donor getDonor(String userName) {
+    	return donors.get(userName);
+    }
 
-    public boolean isDonor(String name) {
-        return donors.containsKey(name);
+    public boolean isDonor(String username) {
+        return donors.containsKey(username);
     }
 }

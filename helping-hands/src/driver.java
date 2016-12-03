@@ -4,12 +4,12 @@ public class driver {
 
     public static void main(String[] args) {
 
-        DonorContainer      donors      = new DonorContainer();
-        RecipientContainer  recipients  = new RecipientContainer();
+        DonorContainer      donors      = DonorContainer.GetInstance();
+        RecipientContainer  recipients  = RecipientContainer.GetInstance();
         Inventory           inventory   = new Inventory();
 
         Item            pants       = new Item("pants", "Clothes", 5, 19.50);
-        Donor           safeway     = new Donor("Safeway", inventory);
+        Donor           safeway     = new Donor("Safeway", inventory, "Test");
         //Recipient       vasia       = new Recipient("Vasia", inventory);
 
         donors.addDonor(safeway);

@@ -6,6 +6,7 @@
 package view;
 
 import model.Recipient;
+import model.RecipientContainer;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -316,8 +317,15 @@ public class RecipientRegistration extends JFrame {
                         firstName, lastName, DOBMonth, DOBDay, DOBYear, gender, street,
                         city, state, zip, email, username, password);
 
-
-				//TODO verify user does not already exist, if so create new user
+                RecipientContainer recInstance = RecipientContainer.GetInstance();
+                if(recInstance.isRecipient(username)){
+                	// TODO: navigate to a user already exists page.
+                	return;
+                }
+                
+                recInstance.addRecipient(recipient);
+                
+                // If we are here, then it's guaranteed that this user does not exist.
 				//creating new window (recipient home page)
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
