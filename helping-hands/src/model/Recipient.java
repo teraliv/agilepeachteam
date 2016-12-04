@@ -18,6 +18,7 @@ public class Recipient {
     public final String     email;
     public final String     username;
     public final String     password;
+    public boolean          activeUser;
 
 
     public final List<Item> received;
@@ -41,12 +42,14 @@ public class Recipient {
         this.username   = username;
         this.password   = password;
         this.received   = new ArrayList<>();
+        this.activeUser = false;
         //this.inventory  = inventory;
     }
 
 
     public boolean getDonation(String yourNeed, int desiredQuantity, Inventory inventory) {
         if (inventory.isItemExist(yourNeed) && inventory.getQuantity(yourNeed) >= desiredQuantity) {
+
             String  category    = inventory.getItem(yourNeed).category;
             int     quantity    = inventory.getItem(yourNeed).quantity;
             double  price       = inventory.getItem(yourNeed).price;

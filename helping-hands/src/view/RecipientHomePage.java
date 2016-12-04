@@ -1,5 +1,7 @@
 /**
- * Author: Sean O'Donnell, Ahana Ghosh
+ * @author Sean O'Donnell
+ * @author Ahana Ghosh
+ * @author Alex Terikov (teraliv@uw.edu)
  */
 
 package view;
