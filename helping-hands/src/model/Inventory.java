@@ -12,21 +12,22 @@ public class Inventory {
     public double       totalCost;      // Total cost of all availableItems.
 
 
-    public static Inventory GetInstance()
-    {
-    	if(instance == null)
-    	{
-    		instance = new Inventory();
-    	}
-    	
-    	return instance;
-    }
     protected Inventory() {
         this.availableItems = new ArrayList<>();
         this.donatedItems   = new ArrayList<>();
         this.totalItems     = 0;
         this.totalCost      = 0.00;
     }
+
+
+    public static Inventory getInstance() {
+        if(instance == null) {
+            instance = new Inventory();
+        }
+
+        return instance;
+    }
+
 
     public void addItem(Item donatedItem) {
         availableItems.add(donatedItem);        // add item to the list

@@ -106,7 +106,7 @@ public class Dropoff extends JFrame {
 				
 				Item localItem = new Item(itemName, categoryName, quantity, cost);
 				
-				Inventory inv = Inventory.GetInstance();
+				Inventory inv = Inventory.getInstance();
 				inv.addItem(localItem);
 				
 				if(myDonor != null) myDonor.addDonatedItem(localItem);
