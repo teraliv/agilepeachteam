@@ -22,6 +22,7 @@ public class Recipient {
 
 
     public final List<Item> received;
+    public List<Item>       lastRecieved;
     //public final Inventory  inventory;
 
 
@@ -43,25 +44,30 @@ public class Recipient {
         this.password   = password;
         this.received   = new ArrayList<>();
         this.activeUser = false;
+        this.lastRecieved = null;
         //this.inventory  = inventory;
     }
 
 
-    public boolean getDonation(String yourNeed, int desiredQuantity, Inventory inventory) {
-        if (inventory.isItemExist(yourNeed) && inventory.getQuantity(yourNeed) >= desiredQuantity) {
-
-            String  category    = inventory.getItem(yourNeed).category;
-            int     quantity    = inventory.getItem(yourNeed).quantity;
-            double  price       = inventory.getItem(yourNeed).price;
-
-            Item donation = new Item(yourNeed, category, quantity, price);
-
-            received.add(donation);
-            inventory.updateInventory(yourNeed, desiredQuantity);
-
-            return true;
-        }
-        return false;
+    public void getDonation(Item donation) {
+        received.add(donation);
     }
+
+    //public boolean getDonation(String yourNeed, int desiredQuantity, Inventory inventory) {
+    //    if (inventory.isItemExist(yourNeed) && inventory.getQuantity(yourNeed) >= desiredQuantity) {
+    //
+    //        String  category    = inventory.getItem(yourNeed).category;
+    //        int     quantity    = inventory.getItem(yourNeed).quantity;
+    //        double  price       = inventory.getItem(yourNeed).price;
+    //
+    //        Item donation = new Item(yourNeed, category, quantity, price);
+    //
+    //        received.add(donation);
+    //        inventory.updateInventory(yourNeed, desiredQuantity);
+    //
+    //        return true;
+    //    }
+    //    return false;
+    //}
 
 }

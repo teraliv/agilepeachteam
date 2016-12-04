@@ -38,7 +38,7 @@ public class RecipientContainer {
         return recipients.containsKey(userName);
     }
 
-    public Recipient activeRecipient() {
+    public Recipient getActiveRecipient() {
 
         for (Recipient current : recipients.values()) {
             if (current.activeUser) {
