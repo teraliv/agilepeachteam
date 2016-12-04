@@ -1,6 +1,7 @@
 /**
- * Author: Sean O'Donnell, Ahana Ghosh
- * Contributor: Alex Terikov
+ * @author Sean O'Donnell
+ * @author Ahana Ghosh
+ * @author Alex Terikov (teraliv@uw.edu)
  */
 
 package view;
@@ -313,11 +314,17 @@ public class RecipientRegistration extends JFrame {
                 username    = userNameField.getText();
                 password    = String.valueOf(passwordField.getPassword());
 
+                // create new recipient
                 Recipient recipient = new Recipient(
                         firstName, lastName, DOBMonth, DOBDay, DOBYear, gender, street,
                         city, state, zip, email, username, password);
 
+                // make recipient active
+                recipient.activeUser = true;
+
+                // add recipient to the list of all recipients
                 RecipientContainer recInstance = RecipientContainer.GetInstance();
+
                 if(recInstance.isRecipient(username)){
                 	// TODO: navigate to a user already exists page.
                 	return;
