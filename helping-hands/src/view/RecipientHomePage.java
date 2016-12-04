@@ -6,6 +6,11 @@
 
 package view;
 
+import model.Inventory;
+import model.Item;
+import model.Recipient;
+import model.RecipientContainer;
+
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -28,6 +33,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextPane;
 import java.awt.Toolkit;
+import java.util.List;
 
 public class RecipientHomePage extends JFrame {
 
@@ -37,6 +43,12 @@ public class RecipientHomePage extends JFrame {
 	private final ButtonGroup regularOrVegetarian = new ButtonGroup();
 	private final ButtonGroup yesOrNo = new ButtonGroup();
 	private JTextField otherAllergiesField;
+
+    private RecipientContainer  rc;
+    private Recipient           recipient;
+    private Inventory           inventory;
+    private List<Item>          donations;
+
 
 	/**
 	 * Launch the application.
@@ -61,6 +73,13 @@ public class RecipientHomePage extends JFrame {
 	 * Create the frame.
 	 */
 	public RecipientHomePage() {
+
+        rc          = RecipientContainer.GetInstance();
+        recipient   = rc.getActiveRecipient();
+        inventory   = Inventory.getInstance();
+
+
+
 		setResizable(true);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("\\\\itfiles3.insttech.washington.edu\\_profile\\sean3740\\Desktop\\TCSS 360\\peach.jpg"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -250,6 +269,9 @@ public class RecipientHomePage extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				//food toggle button code here
 				boolean selected = foodButton.isSelected();
+
+                // get donation from current category
+				receivedItemFromInventory("Food");
 				
 				regularCheckBox.setEnabled(selected);
 				vegetarianCheckBox.setEnabled(selected);
@@ -308,6 +330,9 @@ public class RecipientHomePage extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				//food toggle button code here
 				boolean selected = clothesButton.isSelected();
+
+                // get donation from current category
+                receivedItemFromInventory("Clothes");
 				
 				shirtsCheckBox.setEnabled(selected);
 				pantsCheckBox.setEnabled(selected);
@@ -357,6 +382,9 @@ public class RecipientHomePage extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				//toiletries toggle button code here
 				boolean selected = toiletriesButton.isSelected();
+
+                // get donation from current category
+				receivedItemFromInventory("Toiletries");
 				
 				soapCheckBox.setEnabled(selected);
 				toothCheckBox.setEnabled(selected);
@@ -373,8 +401,12 @@ public class RecipientHomePage extends JFrame {
 		continueButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//continue button code here
-				
-				//creating next window (ticket)
+
+
+                // update latest donations to active recipient
+                recipient.lastRecieved = donations;
+
+                //creating next window (ticket)
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
@@ -443,6 +475,22 @@ public class RecipientHomePage extends JFrame {
 		vehicleButton.setBounds(325, 262, 137, 23);
 		contentPane.add(vehicleButton);
 
-		
 	}
+
+	private void receivedItemFromInventory(String cathegory) {
+
+	    // add one instance of every available item from current category
+        // add it to active recipient
+        // update inventory
+        for (Item current : inventory.availableItems) {
+            if (current.category == "Toiletries") {
+
+                Item newItem = new Item(current.name, "Toiletries", 1, current.price);
+
+                recipient.getDonation(newItem);
+                donations.add(newItem);
+                inventory.updateInventory(current.name, 1);
+            }
+        }
+    }
 }
