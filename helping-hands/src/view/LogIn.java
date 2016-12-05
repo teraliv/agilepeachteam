@@ -126,9 +126,9 @@ public class LogIn extends JFrame {
 				if(rc.isRecipient(userNameText1)) {
 
 					Recipient r = rc.getRecipient(userNameText1);
-                    System.out.println(r.firstName);
-                    System.out.println(r.lastName);
+					r.activeUser = true;
 
+                    //if (r.username.equals(userNameText1) && r.password.equals(passwordText)) {
 					if(!r.password.equals(passwordText)) {
 
 						// TODO: Navigate to password mismatch error page.
@@ -166,6 +166,7 @@ public class LogIn extends JFrame {
 				else if(dc.isDonor(userNameText1)) {
 
 					Donor d = dc.getDonor(userNameText1);
+					d.activeUser = true;
 
 					if(!d.password.equals(passwordText)) {
 

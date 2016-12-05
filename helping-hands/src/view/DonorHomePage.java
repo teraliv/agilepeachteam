@@ -28,6 +28,7 @@ import javax.swing.JTextPane;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.List;
 
 public class DonorHomePage extends JFrame {
 
@@ -79,8 +80,8 @@ public class DonorHomePage extends JFrame {
         DonorContainer dc = DonorContainer.getInstance();
 
         myDonor = dc.getActiveDonor();
-        Item item = new Item("pants", "clothes", 5, 10.99);
-        myDonor.donate(item);
+        //Item item = new Item("pants", "clothes", 5, 10.99);
+        //myDonor.donate(item);
 
 
         setResizable(false);
@@ -207,6 +208,12 @@ public class DonorHomePage extends JFrame {
 		pastDonationsPanel.add(item1QuantityField);
 		
 		Item i = myDonor.getDonatedItem(0);
+
+        List<Item> donated = myDonor.donatedItems;
+
+        System.out.println(donated.size());
+        //if (donated.size() )
+
 		if(i != null)
 		{
 			item1NameField.setText(i.name);

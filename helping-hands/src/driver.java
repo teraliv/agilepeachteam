@@ -7,13 +7,15 @@ public class driver {
         FileReader fr = new FileReader();
         fr.readDonorsFile();
         fr.readRecipientsFile();
+        fr.readDonatedItemsFile();
 
         DonorContainer dc = DonorContainer.getInstance();
-        RecipientContainer rc = RecipientContainer.getInstance();
+        Donor donor = dc.getDonorByLogin("jevans0");
 
-        for (Recipient current : rc.recipients.values()) {
-            System.out.println(current.firstName);
-        }
+        //for (Item current : donor.donatedItems) {
+        //    System.out.println(current.name);
+        //}
+
     }
 
 }

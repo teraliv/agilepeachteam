@@ -9,18 +9,20 @@ public class DonorContainer {
     public final    Map<String, Donor> donors;
     public int      totalDonors;
 
-    static public DonorContainer getInstance()
-    {
-    	if(instance == null) {
-            instance = new DonorContainer();
-         }
-         return instance;
-    }
-    
+
     protected DonorContainer() {
         this.donors         = new HashMap<>();
         this.totalDonors    = 0;
     }
+
+
+    static public DonorContainer getInstance() {
+        if(instance == null) {
+            instance = new DonorContainer();
+        }
+        return instance;
+    }
+
 
     public void addDonor(Donor donor) {
         donors.put(donor.username, donor);
@@ -29,6 +31,15 @@ public class DonorContainer {
     
     public Donor getDonor(String userName) {
     	return donors.get(userName);
+    }
+
+    public Donor getDonorByLogin(String login) {
+
+        for (Donor current : donors.values()) {
+            if (current.username.equals(login)) return current;
+        }
+
+        return null;
     }
 
     public boolean isDonor(String username) {
