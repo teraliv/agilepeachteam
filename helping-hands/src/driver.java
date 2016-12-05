@@ -4,10 +4,16 @@ public class driver {
 
     public static void main(String[] args) {
 
-        DonorContainer      donors      = DonorContainer.GetInstance();
-        RecipientContainer  recipients  = RecipientContainer.GetInstance();
-        Inventory           inventory   = Inventory.getInstance();
-        Item            pants       = new Item("pants", "Clothes", 5, 19.50);
+        FileReader fr = new FileReader();
+        fr.readDonorsFile();
+        fr.readRecipientsFile();
+
+        DonorContainer dc = DonorContainer.getInstance();
+        RecipientContainer rc = RecipientContainer.getInstance();
+
+        for (Recipient current : rc.recipients.values()) {
+            System.out.println(current.firstName);
+        }
     }
 
 }
