@@ -10,6 +10,9 @@ import java.util.Scanner;
 
 public class FileReader {
 
+    private DonorContainer      dc;
+    private RecipientContainer  rc;
+
     private String firstName;
     private String lastName;
     private String month ;
@@ -25,6 +28,11 @@ public class FileReader {
     private String username;
     private String password;
 
+    private String itemName;
+    private String itemCategory;
+    private int    itemQuantity;
+    private Double itemPrice;
+
     public FileReader() {
         // empty constructor
     }
@@ -35,7 +43,7 @@ public class FileReader {
     public void readDonorsFile() {
 
         Scanner fileScanner = null;
-        DonorContainer dc = DonorContainer.getInstance();
+        dc = DonorContainer.getInstance();
 
         try {
             fileScanner = new Scanner(new FileInputStream("./src/files/donors-data.csv"));
@@ -61,7 +69,8 @@ public class FileReader {
                 username        = split[12];
                 password        = split[13];
 
-                Donor donor = new Donor(firstName,lastName,month,day,year,gender,street,city,state,zip,email,businessName,username,password);
+                Donor donor = new Donor(firstName, lastName, month, day, year, gender, street, city, state, zip,
+                                        email, businessName, username, password);
                 dc.addDonor(donor);
             }
         }
@@ -82,7 +91,7 @@ public class FileReader {
     public void readRecipientsFile() {
 
         Scanner fileScanner = null;
-        RecipientContainer rc = RecipientContainer.getInstance();
+        rc = RecipientContainer.getInstance();
 
         try {
             fileScanner = new Scanner(new FileInputStream("./src/files/recipients-data.csv"));
@@ -105,8 +114,50 @@ public class FileReader {
                 username        = split[11];
                 password        = split[12];
 
-                Recipient recipient = new Recipient(firstName,lastName,month,day,year,gender,street,city,state,zip,email,username,password);
+                Recipient recipient = new Recipient(firstName, lastName, month, day, year, gender, street,
+                                                    city, state, zip, email, username, password);
                 rc.addRecipient(recipient);
+
+            }
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("Error reading file: " + e.getMessage());
+        }
+        finally {
+            if (fileScanner != null) {
+                fileScanner.close();
+            }
+        }
+    }
+
+
+    public void readDonatedItemsFile() {
+        Scanner fileScanner = null;
+        dc = DonorContainer.getInstance();
+
+        try {
+            fileScanner = new Scanner(new FileInputStream("./src/files/donated-data.csv"));
+
+            while (fileScanner.hasNextLine()) {
+                String      line  = fileScanner.nextLine();
+                String[]    split = line.split(",");
+
+                username        = split[0];
+                itemName        = split[1];
+                itemCategory    = split[2];
+                itemQuantity    = Integer.parseInt(split[3]);
+                itemPrice       = Double.parseDouble(split[4]);
+
+                Donor donor = dc.getDonorByLogin(username);
+                donor.addDonatedItem(new Item(itemName, itemCategory, itemQuantity, itemPrice));
+
+
+                //System.out.println(username);
+                //System.out.println(itemName);
+                //System.out.println(itemCategory);
+                //System.out.println(itemQuantity);
+                //System.out.println(itemPrice);
+                //System.out.println("-------------------");
 
             }
         }
