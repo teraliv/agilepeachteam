@@ -48,8 +48,9 @@ public class Pickup extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Donor d = new Donor("a","a","a","a","a","a","a","a","a","a","a","a","a");
-					Pickup frame = new Pickup(d);
+					//Donor d = new Donor("a","a","a","a","a","a","a","a","a","a","a", "a","a","a");
+					//Pickup frame = new Pickup(d);
+                    Pickup frame = new Pickup();
 					frame.setVisible(true);
 					//screen center
 					final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -64,8 +65,11 @@ public class Pickup extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Pickup(Donor d) {
-		myDonor = d;
+	//public Pickup(Donor d) {
+    public Pickup() {
+		//myDonor = d;
+
+
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
@@ -106,7 +110,8 @@ public class Pickup extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							DonorHomePage frame = new DonorHomePage(myDonor);
+							//DonorHomePage frame = new DonorHomePage(myDonor);
+                            DonorHomePage frame = new DonorHomePage();
 							frame.setVisible(true);
 							//screen center
 							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -298,8 +303,10 @@ public class Pickup extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							DonorHomePage frame = new DonorHomePage(myDonor);
-							frame.setVisible(true);
+							//DonorHomePage frame = new DonorHomePage(myDonor);
+                            DonorHomePage frame = new DonorHomePage();
+
+                            frame.setVisible(true);
 							//screen center
 							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 							frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);

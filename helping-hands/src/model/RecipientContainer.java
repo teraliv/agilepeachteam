@@ -17,7 +17,7 @@ public class RecipientContainer {
     }
 
 
-    static public RecipientContainer GetInstance() {
+    static public RecipientContainer getInstance() {
     	if(instance == null) {
             instance = new RecipientContainer();
          }

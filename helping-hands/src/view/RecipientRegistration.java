@@ -323,7 +323,7 @@ public class RecipientRegistration extends JFrame {
                 recipient.activeUser = true;
 
                 // add recipient to the list of all recipients
-                RecipientContainer recInstance = RecipientContainer.GetInstance();
+                RecipientContainer recInstance = RecipientContainer.getInstance();
 
                 if(recInstance.isRecipient(username)){
                 	// TODO: navigate to a user already exists page.

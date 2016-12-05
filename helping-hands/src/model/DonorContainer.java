@@ -9,7 +9,7 @@ public class DonorContainer {
     public final    Map<String, Donor> donors;
     public int      totalDonors;
 
-    static public DonorContainer GetInstance()
+    static public DonorContainer getInstance()
     {
     	if(instance == null) {
             instance = new DonorContainer();
@@ -33,5 +33,14 @@ public class DonorContainer {
 
     public boolean isDonor(String username) {
         return donors.containsKey(username);
+    }
+
+
+    public Donor getActiveDonor() {
+
+        for (Donor current : donors.values())
+            if (current.activeUser) return current;
+
+        return null;
     }
 }

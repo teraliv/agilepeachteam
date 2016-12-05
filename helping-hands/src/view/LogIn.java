@@ -27,7 +27,7 @@ import model.Recipient;
 public class LogIn extends JFrame {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -45,7 +45,7 @@ public class LogIn extends JFrame {
 					//frame.pack();
 				    //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					//frame.setLocationRelativeTo(null);
-					frame.setVisible(true);		
+					frame.setVisible(true);
 					//screen center
 					final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 					frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
@@ -70,60 +70,67 @@ public class LogIn extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JButton continueButton = new JButton("Continue");
-		
+
 		continueButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		continueButton.setBounds(177, 263, 132, 23);
 		contentPane.add(continueButton);
-		
+
 		JLabel enterAccountText = new JLabel("Please Enter Your Account Information");
 		enterAccountText.setBackground(Color.WHITE);
 		enterAccountText.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		enterAccountText.setHorizontalAlignment(SwingConstants.CENTER);
 		enterAccountText.setBounds(10, 37, 464, 37);
 		contentPane.add(enterAccountText);
-		
+
 		JLabel userNameText = new JLabel("User Name:");
 		userNameText.setBackground(Color.WHITE);
 		userNameText.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		userNameText.setHorizontalAlignment(SwingConstants.RIGHT);
 		userNameText.setBounds(49, 130, 105, 37);
 		contentPane.add(userNameText);
-		
+
 		JLabel passwordText = new JLabel("Password:");
 		passwordText.setHorizontalAlignment(SwingConstants.RIGHT);
 		passwordText.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		passwordText.setBackground(Color.WHITE);
 		passwordText.setBounds(49, 190, 105, 37);
 		contentPane.add(passwordText);
-		
+
 		userNameField = new JTextField();
 		userNameField.setBounds(164, 142, 157, 20);
 		contentPane.add(userNameField);
 		//
 		userNameField.setColumns(10);
-		
+
 		passwordField = new JPasswordField();
 		passwordField.setBounds(164, 202, 157, 20);
 		contentPane.add(passwordField);
-		
-		RecipientContainer rc = RecipientContainer.GetInstance();
-        DonorContainer dc = DonorContainer.GetInstance();
-        
+
+		RecipientContainer  rc = RecipientContainer.getInstance();
+        DonorContainer      dc = DonorContainer.getInstance();
+
 		continueButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {//continue button code here
+			public void actionPerformed(ActionEvent e) {
+			    //continue button code here
+
 				//TODO if account valid use account type to load the appropriate home page
 				String userNameText1 = userNameField.getText();
 				String passwordText = String.valueOf(passwordField.getPassword());
-				
+
+                System.out.println(userNameText1);
+                System.out.println(passwordText);
+
 				//creating new window based upon log-in account type
-				if(rc.isRecipient(userNameText1))
-				{
+				if(rc.isRecipient(userNameText1)) {
+
 					Recipient r = rc.getRecipient(userNameText1);
-					
-					if(!r.password.equals(passwordText))
-					{
+                    System.out.println(r.firstName);
+                    System.out.println(r.lastName);
+
+					if(!r.password.equals(passwordText)) {
+
 						// TODO: Navigate to password mismatch error page.
 						EventQueue.invokeLater(new Runnable() {
 							public void run() {
@@ -154,14 +161,14 @@ public class LogIn extends JFrame {
 								}
 							}
 						});
-					}					
+					}
 				}
-				else if(dc.isDonor(userNameText1))
-				{
+				else if(dc.isDonor(userNameText1)) {
+
 					Donor d = dc.getDonor(userNameText1);
 
-					if(!d.password.equals(passwordText))
-					{
+					if(!d.password.equals(passwordText)) {
+
 						// TODO: Navigate to password mismatch error page.
 						EventQueue.invokeLater(new Runnable() {
 							public void run() {
@@ -182,8 +189,9 @@ public class LogIn extends JFrame {
 						EventQueue.invokeLater(new Runnable() {
 							public void run() {
 								try {
-									DonorHomePage frame = new DonorHomePage(d);
-									frame.setVisible(true);
+									//DonorHomePage frame = new DonorHomePage(d);
+                                    DonorHomePage frame = new DonorHomePage();
+                                    frame.setVisible(true);
 									//screen center
 									final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 									frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
@@ -192,20 +200,20 @@ public class LogIn extends JFrame {
 								}
 							}
 						});
-					}					
+					}
 				}
 				//deleting current window
 				LogIn.this.dispose();
 			}
 		});
-		
+
 		/**back button hides the login screen and makes visible the welcome screen*/
 		JButton backButton = new JButton("Back");
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {//back button code
-				
+
 				LogIn.this.dispose(); //deleting current login frame
-				
+
 				//launching new welcome (to go back)
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
@@ -219,18 +227,18 @@ public class LogIn extends JFrame {
 							e.printStackTrace();
 						}
 					}
-				});	
+				});
 			}
 		});
 		backButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		backButton.setBounds(385, 427, 89, 23);
 		contentPane.add(backButton);
-		
+
 		JButton forgotPasswordButton = new JButton("Forgot Password?");
 		forgotPasswordButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//forgot password button code here
-				
+
 				//creating new window (forgot password)
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
@@ -245,7 +253,7 @@ public class LogIn extends JFrame {
 						}
 					}
 				});
-				
+
 				//deleting current window
 				LogIn.this.dispose();
 			}
@@ -253,14 +261,14 @@ public class LogIn extends JFrame {
 		forgotPasswordButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		forgotPasswordButton.setBounds(10, 427, 175, 23);
 		contentPane.add(forgotPasswordButton);
-		
+
 		forgotPasswordButton.setVisible(false); //starting forgot-password button to invisible
-		
+
 		JButton forgotUserNameButton = new JButton("Forgot User Name?");
 		forgotUserNameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//forgot password button code here
-				
+
 				//creating new window (forgot user name)
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
@@ -275,7 +283,7 @@ public class LogIn extends JFrame {
 						}
 					}
 				});
-				
+
 				//deleting current window
 				LogIn.this.dispose();
 			}
@@ -283,9 +291,9 @@ public class LogIn extends JFrame {
 		forgotUserNameButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		forgotUserNameButton.setBounds(10, 393, 175, 23);
 		contentPane.add(forgotUserNameButton);
-		
+
 		forgotUserNameButton.setVisible(false); //starting forgot-user-name button to invisible
-		
+
 		JButton helpButton = new JButton("HELP");
 		helpButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -298,6 +306,6 @@ public class LogIn extends JFrame {
 		helpButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		helpButton.setBounds(10, 427, 77, 23);
 		contentPane.add(helpButton);
-		
+
 	}
 }

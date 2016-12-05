@@ -1,5 +1,7 @@
 /**
- * Author: Sean O'Donnell, Ahana Ghosh
+ * @author Sean O'Donnell
+ * @author Ahana Ghosh
+ * @author Alex Terikov (teraliv@uw.edu)
  */
 
 package view;
@@ -10,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import model.Donor;
+import model.DonorContainer;
 import model.Item;
 
 import java.awt.Color;
@@ -53,8 +56,9 @@ public class DonorHomePage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Donor d = new Donor("a","a","a","a","a","a","a","a","a","a","a","a","a");
-					DonorHomePage frame = new DonorHomePage(d);
+					//Donor d = new Donor("a","a","a","a","a","a","a","a","a","a","a", "a","a","a");
+					//DonorHomePage frame = new DonorHomePage(d);
+                    DonorHomePage frame = new DonorHomePage();
 					frame.setVisible(true);
 					//screen center
 					final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -69,10 +73,17 @@ public class DonorHomePage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public DonorHomePage(Donor d) {
-		myDonor = d;
-		
-		setResizable(false);
+	//public DonorHomePage(Donor d) {
+    public DonorHomePage() {
+
+        DonorContainer dc = DonorContainer.getInstance();
+
+        myDonor = dc.getActiveDonor();
+        Item item = new Item("pants", "clothes", 5, 10.99);
+        myDonor.donate(item);
+
+
+        setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
 		contentPane = new JPanel();
@@ -104,7 +115,9 @@ public class DonorHomePage extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Pickup frame = new Pickup(myDonor);
+							//Pickup frame = new Pickup(myDonor);
+                            Pickup frame = new Pickup();
+
 							frame.setVisible(true);
 							//screen center
 							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -132,8 +145,10 @@ public class DonorHomePage extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							TaxForms frame = new TaxForms(myDonor);
-							frame.setVisible(true);
+							//TaxForms frame = new TaxForms(myDonor);
+                            TaxForms frame = new TaxForms();
+
+                            frame.setVisible(true);
 							//screen center
 							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 							frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);

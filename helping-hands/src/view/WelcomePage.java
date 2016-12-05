@@ -1,8 +1,12 @@
 /**
- * Author: Sean O'Donnell, Ahana Ghosh
+ * @author Sean O'Donnell
+ * @author Ahana Gnosh
+ * @author Alex Terikov (teraliv@uw.edu)
  */
 
 package view;
+
+import model.FileReader;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -23,9 +27,6 @@ import java.awt.Toolkit;
 
 public class WelcomePage extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
@@ -55,6 +56,13 @@ public class WelcomePage extends JFrame {
 	 * Create the frame.
 	 */
 	public WelcomePage() {
+
+        // @teraliv
+	    FileReader fr = new FileReader();   // File reader to read data files
+        fr.readDonorsFile();                // Read donors from a file
+        fr.readRecipientsFile();            // Read recipients from a file
+
+
 		setResizable(true);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("\\\\itfiles3.insttech.washington.edu\\_profile\\sean3740\\Desktop\\TCSS 360\\peach.jpg"));
 		setBackground(Color.WHITE);

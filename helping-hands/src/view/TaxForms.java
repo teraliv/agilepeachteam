@@ -41,8 +41,10 @@ public class TaxForms extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Donor d = new Donor("a","a","a","a","a","a","a","a","a","a","a","a","a");
-					TaxForms frame = new TaxForms(d);
+					//Donor d = new Donor("a","a","a","a","a","a","a","a","a","a","a", "a","a","a");
+					//TaxForms frame = new TaxForms(d);
+                    TaxForms frame = new TaxForms();
+
 					frame.setVisible(true);	
 					//screen center
 					final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -57,8 +59,11 @@ public class TaxForms extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TaxForms(Donor d) {
-		d = myDonor;
+	//public TaxForms(Donor d) {
+    public TaxForms() {
+		//d = myDonor;
+
+
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
@@ -173,7 +178,9 @@ public class TaxForms extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							DonorHomePage frame = new DonorHomePage(myDonor);
+							//DonorHomePage frame = new DonorHomePage(myDonor);
+                            DonorHomePage frame = new DonorHomePage();
+
 							frame.setVisible(true);
 							//screen center
 							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();

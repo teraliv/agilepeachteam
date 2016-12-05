@@ -1,5 +1,7 @@
 /**
- * Author: Sean O'Donnell, Ahana Ghosh
+ * @author Sean O'Donnell
+ * @author Ahana Ghosh
+ * @author Alex Terikov (teraliv@uw.edu)
  */
 
 package view;
@@ -11,8 +13,6 @@ import javax.swing.border.EmptyBorder;
 
 import model.Donor;
 import model.DonorContainer;
-import model.Recipient;
-import model.RecipientContainer;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -49,7 +49,7 @@ public class DonorRegistration extends JFrame {
 	private JTextField businessNameField;
 	private final ButtonGroup yesOrNo = new ButtonGroup();
 	
-	 private String    firstName;
+    private String     firstName;
     private String     lastName;
     private String     DOBMonth;
     private String     DOBDay;
@@ -60,6 +60,7 @@ public class DonorRegistration extends JFrame {
     private String     state;
     private String     zip;
     private String     email;
+    private String     business;
     private String     username;
     private String     password;
 
@@ -278,14 +279,15 @@ public class DonorRegistration extends JFrame {
                 state       = statePullDown.getSelectedItem().toString();
                 zip         = zipField.getText();
                 email       = emailField.getText();
+                business    = businessNameField.getText();
                 username    = userNameField.getText();
                 password    = String.valueOf(passwordField.getPassword());
                 
                 Donor donor = new Donor(
                         firstName, lastName, DOBMonth, DOBDay, DOBYear, gender, street,
-                        city, state, zip, email, username, password);
+                        city, state, zip, email, business, username, password);
                 
-                DonorContainer donorInstance = DonorContainer.GetInstance();
+                DonorContainer donorInstance = DonorContainer.getInstance();
                 if(donorInstance.isDonor(username)){
                 	// TODO: navigate to a user already exists page.
                 	return;
@@ -297,7 +299,8 @@ public class DonorRegistration extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							DonorHomePage frame = new DonorHomePage(donor);
+							//DonorHomePage frame = new DonorHomePage(donor);
+                            DonorHomePage frame = new DonorHomePage();
 							frame.setVisible(true);
 							//screen center
 							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();

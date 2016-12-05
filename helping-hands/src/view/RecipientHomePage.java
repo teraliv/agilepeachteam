@@ -74,7 +74,7 @@ public class RecipientHomePage extends JFrame {
 	 */
 	public RecipientHomePage() {
 
-        rc          = RecipientContainer.GetInstance();
+        rc          = RecipientContainer.getInstance();
         recipient   = rc.getActiveRecipient();
         inventory   = Inventory.getInstance();
 

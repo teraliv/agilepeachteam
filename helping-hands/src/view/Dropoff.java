@@ -45,7 +45,7 @@ public class Dropoff extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Donor d = new Donor("a","a","a","a","a","a","a","a","a","a","a","a","a");
+					Donor d = new Donor("a","a","a","a","a","a","a","a","a","a","a", "a","a","a");
 					Dropoff frame = new Dropoff(d);
 					frame.setVisible(true);
 					//screen center
@@ -180,7 +180,8 @@ public class Dropoff extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							DonorHomePage frame = new DonorHomePage(myDonor);
+							//DonorHomePage frame = new DonorHomePage(myDonor);
+                            DonorHomePage frame = new DonorHomePage();
 							frame.setVisible(true);
 							//screen center
 							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
