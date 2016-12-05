@@ -1,5 +1,5 @@
 /**
- * @author Alex Terikov (teraliv@uw.edu)
+ * @author Aygun Avazova
  */
 
 package model;
