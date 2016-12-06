@@ -206,15 +206,14 @@ public class DonorHomePage extends JFrame {
 		item1QuantityField.setColumns(10);
 		item1QuantityField.setBounds(138, 36, 86, 20);
 		pastDonationsPanel.add(item1QuantityField);
-		
 
-		Item i = myDonor.getDonatedItem(0);
+        Item localItem = null;
 
-        List<Item> donated = myDonor.donatedItems;
+		if (myDonor != null) localItem = myDonor.getDonatedItem(0);
 
-		if(i != null) {
-			item1NameField.setText(i.name);
-			item1QuantityField.setText(String.valueOf(i.quantity));
+		if(localItem != null) {
+			item1NameField.setText(localItem.name);
+			item1QuantityField.setText(String.valueOf(localItem.quantity));
 		}
 		
 		item2NameField = new JTextField(); //TODO item 2 firstName field
@@ -229,10 +228,11 @@ public class DonorHomePage extends JFrame {
 		item2QuantityField.setBounds(138, 64, 86, 20);
 		pastDonationsPanel.add(item2QuantityField);
 
-		i = myDonor.getDonatedItem(1);
-		if(i != null) {
-			item2NameField.setText(i.name);
-			item2QuantityField.setText(String.valueOf(i.quantity));
+        if (myDonor != null) localItem = myDonor.getDonatedItem(1);
+
+		if(localItem != null) {
+			item2NameField.setText(localItem.name);
+			item2QuantityField.setText(String.valueOf(localItem.quantity));
 		}
 		
 		item3NameField = new JTextField(); //TODO item 3 firstName field
@@ -246,11 +246,13 @@ public class DonorHomePage extends JFrame {
 		item3QuantityField.setColumns(10);
 		item3QuantityField.setBounds(138, 95, 86, 20);
 		pastDonationsPanel.add(item3QuantityField);
-		i = myDonor.getDonatedItem(2);
-		if(i != null)
+
+		if (myDonor != null) localItem = myDonor.getDonatedItem(2);
+
+		if(localItem != null)
 		{
-			item3NameField.setText(i.name);
-			item3QuantityField.setText(String.valueOf(i.quantity));
+			item3NameField.setText(localItem.name);
+			item3QuantityField.setText(String.valueOf(localItem.quantity));
 		}
 		
 		item4NameField = new JTextField(); //TODO item 4 firstName field
@@ -264,11 +266,12 @@ public class DonorHomePage extends JFrame {
 		item4QuantityField.setColumns(10);
 		item4QuantityField.setBounds(138, 126, 86, 20);
 		pastDonationsPanel.add(item4QuantityField);
-		i = myDonor.getDonatedItem(3);
-		if(i != null)
-		{
-			item3NameField.setText(i.name);
-			item3QuantityField.setText(String.valueOf(i.quantity));
+
+        if (myDonor != null) localItem = myDonor.getDonatedItem(3);
+
+        if(localItem != null) {
+			item3NameField.setText(localItem.name);
+			item3QuantityField.setText(String.valueOf(localItem.quantity));
 		}
 		
 		item5NameField = new JTextField(); //TODO item 5 firstName field
@@ -282,11 +285,12 @@ public class DonorHomePage extends JFrame {
 		item5QuantityField.setColumns(10);
 		item5QuantityField.setBounds(138, 157, 86, 20);
 		pastDonationsPanel.add(item5QuantityField);
-		i = myDonor.getDonatedItem(4);
-		if(i != null)
-		{
-			item4NameField.setText(i.name);
-			item4QuantityField.setText(String.valueOf(i.quantity));
+
+        if (myDonor != null) localItem = myDonor.getDonatedItem(4);
+
+        if(localItem != null) {
+			item4NameField.setText(localItem.name);
+			item4QuantityField.setText(String.valueOf(localItem.quantity));
 		}
 		
 		item6NameField = new JTextField(); //TODO item 6 firstName field
@@ -300,11 +304,12 @@ public class DonorHomePage extends JFrame {
 		item6QuantityField.setColumns(10);
 		item6QuantityField.setBounds(138, 188, 86, 20);
 		pastDonationsPanel.add(item6QuantityField);
-		i = myDonor.getDonatedItem(5);
-		if(i != null)
-		{
-			item5NameField.setText(i.name);
-			item5QuantityField.setText(String.valueOf(i.quantity));
+
+        if (myDonor != null) localItem = myDonor.getDonatedItem(5);
+
+		if(localItem != null) {
+			item5NameField.setText(localItem.name);
+			item5QuantityField.setText(String.valueOf(localItem.quantity));
 		}
 		
 		txtpnThankYouFor = new JTextPane();
@@ -350,7 +355,7 @@ public class DonorHomePage extends JFrame {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Dropoff frame = new Dropoff(myDonor);
+							Dropoff frame = new Dropoff();
 							frame.setVisible(true);
 							//screen center
 							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();

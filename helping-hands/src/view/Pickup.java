@@ -1,5 +1,7 @@
 /**
- * Author: Sean O'Donnell, Ahana Ghosh
+ * @author Sean O'Donnell
+ * @author Ahana Ghosh
+ * @author Alex Terikov
  */
 
 package view;
@@ -23,9 +25,7 @@ import java.time.Month;
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
 
-import model.Donor;
-import model.Inventory;
-import model.Item;
+import model.*;
 
 import javax.swing.JTextPane;
 
@@ -39,7 +39,12 @@ public class Pickup extends JFrame {
 	private JTextField quantityField;
 	private JTextField costField;
 	private JTextField itemNameField;
-	private Donor myDonor;
+
+	private Donor   myDonor;
+	private String  itemName;
+	private String  itemCategory;
+	private int     itemQuantity;
+	private double  itemPrice;
 
 	/**
 	 * Launch the application.
@@ -67,10 +72,8 @@ public class Pickup extends JFrame {
 	 */
 	//public Pickup(Donor d) {
     public Pickup() {
-		//myDonor = d;
 
-
-		setResizable(false);
+        setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
 		contentPane = new JPanel();
@@ -88,23 +91,25 @@ public class Pickup extends JFrame {
 		
 		confirmationPanel.setVisible(false); //starting the confirmation panel hidden
 		// Early declaration
-		JComboBox<Object> categoryPullDown = new JComboBox<Object>();					//TODO fill this pull down with the categories of the inventory
+        //TODO fill this pull down with the categories of the inventory
+		JComboBox<Object> categoryPullDown = new JComboBox<Object>();
 		
 		JButton verificationContinue = new JButton("Continue");
 		verificationContinue.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//verification continue button code here
-				String itemName = itemNameField.getText();
-				String categoryName = categoryPullDown.getSelectedItem().toString();
-				int quantity = Integer.parseInt(quantityField.getText());
-				double cost = Double.parseDouble(costField.getText());
+
+			    //verification continue button code here
+                //String itemName = itemNameField.getText();
+                //String categoryName = categoryPullDown.getSelectedItem().toString();
+                //int quantity = Integer.parseInt(quantityField.getText());
+                //double cost = Double.parseDouble(costField.getText());
 				
-				Item localItem = new Item(itemName, categoryName, quantity, cost);
+				//Item localItem = new Item(itemName, categoryName, quantity, cost);
 				
-				Inventory inv = Inventory.getInstance();
-				inv.addItem(localItem);
+				//Inventory inv = Inventory.getInstance();
+				//inv.addItem(localItem);
 				
-				if(myDonor != null) myDonor.addDonatedItem(localItem);
+				//if(myDonor != null) myDonor.addDonatedItem(localItem);
 				
 				//creating previous window (donor home page)
 				EventQueue.invokeLater(new Runnable() {
@@ -132,7 +137,7 @@ public class Pickup extends JFrame {
 		
 		JTextPane txtpnYourPickupHas = new JTextPane();
 		txtpnYourPickupHas.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		txtpnYourPickupHas.setText("      Your pickup has been \r\n               scheduled\r\n\r\n\r\n\r\n Thank you for you donation!");
+		txtpnYourPickupHas.setText("      Your pickup has been \r\n               scheduled\r\n\r\n\r\n\r\n  Thank you for you donation!");
 		txtpnYourPickupHas.setBounds(10, 11, 273, 273);
 		confirmationPanel.add(txtpnYourPickupHas);
 		
@@ -162,7 +167,9 @@ public class Pickup extends JFrame {
 		
 		JComboBox dayPullDown = new JComboBox();										//TODO day pull down
 		dayPullDown.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		dayPullDown.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
+		dayPullDown.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "5", "6", "7", "8", "9",
+                "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26",
+                "27", "28", "29", "30", "31"}));
 		dayPullDown.setBounds(225, 86, 46, 20);
 		contentPane.add(dayPullDown);
 		
@@ -179,14 +186,18 @@ public class Pickup extends JFrame {
 		contentPane.add(lblTime);
 		
 		JComboBox hourPullDown = new JComboBox();										//TODO hour pull down
-		hourPullDown.setModel(new DefaultComboBoxModel(new String[] {"Hour", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"}));
+		hourPullDown.setModel(new DefaultComboBoxModel(new String[] {"Hour", "1", "2", "3", "4", "5", "6", "7", "8",
+                "9", "10", "11", "12"}));
 		hourPullDown.setToolTipText("Hour");
 		hourPullDown.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		hourPullDown.setBounds(114, 110, 58, 20);
 		contentPane.add(hourPullDown);
 		
 		JComboBox minPullDown = new JComboBox();										//TODO min pull down
-		minPullDown.setModel(new DefaultComboBoxModel(new String[] {"Min", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"}));
+		minPullDown.setModel(new DefaultComboBoxModel(new String[] {"Min", "01", "02", "03", "04", "05", "06", "07",
+                "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24",
+                "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41",
+                "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"}));
 		minPullDown.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		minPullDown.setBounds(182, 110, 58, 20);
 		contentPane.add(minPullDown);
@@ -234,7 +245,10 @@ public class Pickup extends JFrame {
 		contentPane.add(label_2);
 		
 		JComboBox statePullDown = new JComboBox();										//TODO state pull down
-		statePullDown.setModel(new DefaultComboBoxModel(new String[] {"AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"}));
+		statePullDown.setModel(new DefaultComboBoxModel(new String[] {"AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE",
+                "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO",
+                "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN",
+                "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"}));
 		statePullDown.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		statePullDown.setBounds(267, 210, 46, 20);
 		contentPane.add(statePullDown);
@@ -257,7 +271,7 @@ public class Pickup extends JFrame {
 		lblWhatAreYou.setBounds(97, 241, 249, 28);
 		contentPane.add(lblWhatAreYou);
 		
-		categoryPullDown.setModel(new DefaultComboBoxModel(new String[] {"Inventory categories here", "<category>", "<category>"}));
+		categoryPullDown.setModel(new DefaultComboBoxModel(new String[] {"Inventory categories here", "Food", "Clothes", "Toiletries"}));
 		categoryPullDown.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		categoryPullDown.setBounds(113, 280, 208, 20);
 		contentPane.add(categoryPullDown);
@@ -323,12 +337,33 @@ public class Pickup extends JFrame {
 		backButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		backButton.setBounds(395, 437, 89, 23);
 		contentPane.add(backButton);
-		
-		JButton continueButton = new JButton("Continue");								//TODO create a new item (in the future?) and add to inventory when continue is pressed
+
+        //TODO create a new item (in the future?) and add to inventory when continue is pressed
+		JButton continueButton = new JButton("Continue");
 		continueButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//continue button code here
-				confirmationPanel.setVisible(true);
+
+                // @teraliv
+                FileWriter      fw = new FileWriter();
+                DonorContainer  dc = DonorContainer.getInstance();
+
+                myDonor = dc.getActiveDonor();
+
+                itemName        = itemNameField.getText();
+                itemCategory    = categoryPullDown.getSelectedItem().toString();
+                itemQuantity    = Integer.parseInt(quantityField.getText());
+                itemPrice       = Double.parseDouble(costField.getText());
+
+                if (myDonor != null) {
+                    Item item = new Item(itemName, itemCategory, itemQuantity, itemPrice);
+
+                    myDonor.donate(item);
+                    fw.writeNewDonation(myDonor, item);
+                }
+
+
+                confirmationPanel.setVisible(true);
 				continueButton.setVisible(false); //hiding the first continue button so it doesn't bleed through the confirmation panel
 				backButton.setEnabled(false); //you can't press back, you have to press continue
 			}

@@ -1,5 +1,7 @@
 /**
- * Author: Sean O'Donnell, Ahana Ghosh
+ * @author Sean O'Donnell
+ * @author Ahana Ghosh
+ * @author Alex Terikov (teraliv@uw.edu)
  */
 
 package view;
@@ -25,9 +27,7 @@ import java.awt.Toolkit;
 
 import javax.swing.border.MatteBorder;
 
-import model.Donor;
-import model.Inventory;
-import model.Item;
+import model.*;
 
 public class Dropoff extends JFrame {
 
@@ -36,6 +36,7 @@ public class Dropoff extends JFrame {
 	private JTextField quantityField;
 	private JTextField costField;
 	private JTextField itemNameField;
+
 	private Donor myDonor;
 
 	/**
@@ -45,8 +46,8 @@ public class Dropoff extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Donor d = new Donor("a","a","a","a","a","a","a","a","a","a","a", "a","a","a");
-					Dropoff frame = new Dropoff(d);
+					//Donor d = new Donor("a","a","a","a","a","a","a","a","a","a","a", "a","a","a");
+					Dropoff frame = new Dropoff();
 					frame.setVisible(true);
 					//screen center
 					final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -61,8 +62,9 @@ public class Dropoff extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Dropoff(Donor d) {
-		myDonor = d;
+	//public Dropoff(Donor d) {
+    public Dropoff() {
+
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
@@ -98,18 +100,27 @@ public class Dropoff extends JFrame {
 		JButton thankYouContinueButton = new JButton("Continue");
 		thankYouContinueButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//thank you continue button code here 
-				String itemName = itemNameField.getText();
-				String categoryName = categoryPullDown.getSelectedItem().toString();
-				int quantity = Integer.parseInt(quantityField.getText());
-				double cost = Double.parseDouble(costField.getText());
+				//thank you continue button code here
+
+                FileWriter      fw = new FileWriter();
+                DonorContainer  dc = DonorContainer.getInstance();
+
+				String itemName         = itemNameField.getText();
+				String categoryName     = categoryPullDown.getSelectedItem().toString();
+				int quantity            = Integer.parseInt(quantityField.getText());
+				double cost             = Double.parseDouble(costField.getText());
 				
 				Item localItem = new Item(itemName, categoryName, quantity, cost);
+
+				myDonor = dc.getActiveDonor();
+
+				//Inventory inv = Inventory.getInstance();
+				//inv.addItem(localItem);
 				
-				Inventory inv = Inventory.getInstance();
-				inv.addItem(localItem);
-				
-				if(myDonor != null) myDonor.addDonatedItem(localItem);
+				if(myDonor != null) {
+				    myDonor.addDonatedItem(localItem);
+				    fw.writeNewDonation(myDonor, localItem);
+                }
 				
 				// Set the thankYou Panel to false.
 				thankYouPanel.setVisible(false);
@@ -130,7 +141,7 @@ public class Dropoff extends JFrame {
 		contentPane.add(lblDonationDropoff);
 		
 		categoryPullDown.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		categoryPullDown.setModel(new DefaultComboBoxModel<Object>(new String[] {"Insert categories here", "<inventory category types>"}));
+		categoryPullDown.setModel(new DefaultComboBoxModel<Object>(new String[] {"Insert categories here", "Food", "Clothes", "Toiletries"}));
 		categoryPullDown.setBounds(131, 159, 208, 29);
 		contentPane.add(categoryPullDown);
 		

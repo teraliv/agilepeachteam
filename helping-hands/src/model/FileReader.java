@@ -12,6 +12,7 @@ public class FileReader {
 
     private DonorContainer      dc;
     private RecipientContainer  rc;
+    private Inventory           inventory;
 
     private String firstName;
     private String lastName;
@@ -133,7 +134,8 @@ public class FileReader {
 
     public void readDonatedItemsFile() {
         Scanner fileScanner = null;
-        dc = DonorContainer.getInstance();
+        dc          = DonorContainer.getInstance();
+        inventory   = Inventory.getInstance();
 
         try {
             fileScanner = new Scanner(new FileInputStream("./src/files/donated-data.csv"));
@@ -148,17 +150,11 @@ public class FileReader {
                 itemQuantity    = Integer.parseInt(split[3]);
                 itemPrice       = Double.parseDouble(split[4]);
 
-                Donor donor = dc.getDonorByLogin(username);
-                donor.addDonatedItem(new Item(itemName, itemCategory, itemQuantity, itemPrice));
+                Item    item = new Item(itemName, itemCategory, itemQuantity, itemPrice);
+                Donor   donor = dc.getDonorByLogin(username);
 
-
-                //System.out.println(username);
-                //System.out.println(itemName);
-                //System.out.println(itemCategory);
-                //System.out.println(itemQuantity);
-                //System.out.println(itemPrice);
-                //System.out.println("-------------------");
-
+                donor.addDonatedItem(item);
+                inventory.addItem(item);
             }
         }
         catch (FileNotFoundException e) {

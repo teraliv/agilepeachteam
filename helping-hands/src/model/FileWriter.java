@@ -1,5 +1,5 @@
 /**
- * @author Alex Terikov (teraliv@uw.edu)
+ * @author Aygun Avazova
  */
 
 package model;
@@ -15,6 +15,11 @@ public class FileWriter {
     }
 
 
+    /**
+     * A method to write a new Donor to the CSV file. The next time the program runs this Donor will be available
+     * to use its username and password to login to the system.
+     * @param donor
+     */
     public void writeNewDonor(Donor donor) {
 
         PrintWriter writer = null;
@@ -53,17 +58,23 @@ public class FileWriter {
     }
 
 
+    /**
+     * A method to write donated items to the CSV file. The first field in the file is username. Usernames are
+     * unique across all users, so it works as identifier for a donation.
+     * @param donor
+     * @param item
+     */
     public void writeNewDonation(Donor donor, Item item) {
 
         PrintWriter writer = null;
         boolean     append = true;
 
         try {
-            writer = new PrintWriter(new FileOutputStream("./src/files/donated-data1.csv", append));
+            writer = new PrintWriter(new FileOutputStream("./src/files/donated-data.csv", append));
 
             StringBuilder sb = new StringBuilder();
 
-            sb.append(donor.username + ",");
+            sb.append(donor.username + ",");    // Username is the identifier of the donated item.
             sb.append(item.name + ",");
             sb.append(item.category + ",");
             sb.append(item.quantity + ",");
