@@ -61,7 +61,8 @@ public class LogIn extends JFrame {
 	 */
 	public LogIn() {
 		setResizable(true);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("\\\\itfiles3.insttech.washington.edu\\_profile\\sean3740\\Desktop\\TCSS 360\\peach.jpg"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("\\\\itfiles3.insttech.washington.edu\\_profile\\" +
+                "sean3740\\Desktop\\TCSS 360\\peach.jpg"));
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
@@ -121,7 +122,9 @@ public class LogIn extends JFrame {
 
 
 				//creating new window based upon log-in account type
-				if(rc.isRecipient(userNameText1)) {
+
+                // RECIPIENT LOGIN
+                if(rc.isRecipient(userNameText1)) {
 
 					Recipient r = rc.getRecipient(userNameText1);
 					r.activeUser = true;
@@ -136,7 +139,8 @@ public class LogIn extends JFrame {
 									frame.setVisible(true);
 									//screen center
 									final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-									frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
+									frame.setLocation(dim.width/2 - frame.getSize().width/2 ,
+                                            dim.height/2 - frame.getSize().height/2);
 								} catch (Exception e) {
 									e.printStackTrace();
 								}
@@ -152,7 +156,8 @@ public class LogIn extends JFrame {
 									frame.setVisible(true);
 									//screen center
 									final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-									frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
+									frame.setLocation(dim.width/2 - frame.getSize().width/2 ,
+                                            dim.height/2 - frame.getSize().height/2);
 								} catch (Exception e) {
 									e.printStackTrace();
 								}
@@ -160,6 +165,7 @@ public class LogIn extends JFrame {
 						});
 					}
 				}
+				// DONOR LOGIN
 				else if(dc.isDonor(userNameText1)) {
 
 					Donor d = dc.getDonor(userNameText1);
@@ -175,7 +181,8 @@ public class LogIn extends JFrame {
 									frame.setVisible(true);
 									//screen center
 									final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-									frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
+									frame.setLocation(dim.width/2 - frame.getSize().width/2 ,
+                                            dim.height/2 - frame.getSize().height/2);
 								} catch (Exception e) {
 									e.printStackTrace();
 								}
@@ -192,7 +199,8 @@ public class LogIn extends JFrame {
                                     frame.setVisible(true);
 									//screen center
 									final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-									frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
+									frame.setLocation(dim.width/2 - frame.getSize().width/2 ,
+                                            dim.height/2 - frame.getSize().height/2);
 								} catch (Exception e) {
 									e.printStackTrace();
 								}
@@ -200,6 +208,23 @@ public class LogIn extends JFrame {
 						});
 					}
 				}
+				// ADMIN LOGIN
+				else if (userNameText1.equals("root") && passwordText.equals("root")) {
+                    EventQueue.invokeLater(new Runnable() {
+                        public void run() {
+                            try {
+                                Administrator frame = new Administrator();
+                                frame.setVisible(true);
+                                //screen center
+                                final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+                                frame.setLocation(dim.width/2 - frame.getSize().width/2 ,
+                                        dim.height/2 - frame.getSize().height/2);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }
 				//deleting current window
 				LogIn.this.dispose();
 			}
@@ -220,7 +245,8 @@ public class LogIn extends JFrame {
 							frame.setVisible(true);
 							//screen center
 							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-							frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
+							frame.setLocation(dim.width/2 - frame.getSize().width/2 ,
+                                    dim.height/2 - frame.getSize().height/2);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
