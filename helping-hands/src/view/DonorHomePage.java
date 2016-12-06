@@ -97,8 +97,15 @@ public class DonorHomePage extends JFrame {
 		welcomeLabel.setBackground(Color.WHITE);
 		welcomeLabel.setBounds(113, 11, 137, 37);
 		contentPane.add(welcomeLabel);
-		
-		JLabel donorNameLabel = new JLabel("Donor"); //TODO this label needs to be dynamically filled with the donor's firstName
+
+		String donorsName = null;
+		if (myDonor != null)
+		    donorsName = myDonor.firstName + " " + myDonor.lastName;
+		else
+		    donorsName = "Donor";
+
+
+		JLabel donorNameLabel = new JLabel(donorsName); //TODO this label needs to be dynamically filled with the donor's firstName
 		donorNameLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		donorNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		donorNameLabel.setBackground(Color.WHITE);
