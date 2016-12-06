@@ -207,15 +207,12 @@ public class DonorHomePage extends JFrame {
 		item1QuantityField.setBounds(138, 36, 86, 20);
 		pastDonationsPanel.add(item1QuantityField);
 		
+
 		Item i = myDonor.getDonatedItem(0);
 
         List<Item> donated = myDonor.donatedItems;
 
-        System.out.println(donated.size());
-        //if (donated.size() )
-
-		if(i != null)
-		{
+		if(i != null) {
 			item1NameField.setText(i.name);
 			item1QuantityField.setText(String.valueOf(i.quantity));
 		}
@@ -231,10 +228,9 @@ public class DonorHomePage extends JFrame {
 		item2QuantityField.setColumns(10);
 		item2QuantityField.setBounds(138, 64, 86, 20);
 		pastDonationsPanel.add(item2QuantityField);
-		
+
 		i = myDonor.getDonatedItem(1);
-		if(i != null)
-		{
+		if(i != null) {
 			item2NameField.setText(i.name);
 			item2QuantityField.setText(String.valueOf(i.quantity));
 		}

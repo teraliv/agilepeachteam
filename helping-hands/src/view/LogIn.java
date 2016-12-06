@@ -101,7 +101,7 @@ public class LogIn extends JFrame {
 		userNameField = new JTextField();
 		userNameField.setBounds(164, 142, 157, 20);
 		contentPane.add(userNameField);
-		//
+
 		userNameField.setColumns(10);
 
 		passwordField = new JPasswordField();
@@ -116,11 +116,9 @@ public class LogIn extends JFrame {
 			    //continue button code here
 
 				//TODO if account valid use account type to load the appropriate home page
-				String userNameText1 = userNameField.getText();
-				String passwordText = String.valueOf(passwordField.getPassword());
+				String userNameText1 = userNameField.getText();                         // login
+				String passwordText = String.valueOf(passwordField.getPassword());      // password
 
-                System.out.println(userNameText1);
-                System.out.println(passwordText);
 
 				//creating new window based upon log-in account type
 				if(rc.isRecipient(userNameText1)) {
@@ -128,7 +126,6 @@ public class LogIn extends JFrame {
 					Recipient r = rc.getRecipient(userNameText1);
 					r.activeUser = true;
 
-                    //if (r.username.equals(userNameText1) && r.password.equals(passwordText)) {
 					if(!r.password.equals(passwordText)) {
 
 						// TODO: Navigate to password mismatch error page.

@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 
 import model.Donor;
 import model.DonorContainer;
+import model.FileWriter;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -159,6 +160,13 @@ public class DonorRegistration extends JFrame {
 		
 		JRadioButton maleButton = new JRadioButton("Male");				//TODO male button
 		maleOrFemale.add(maleButton);
+
+		// MALE is selected
+		if (maleButton.isSelected()) {
+		    gender = "M";
+            System.out.println("male");
+        }
+
 		maleButton.setHorizontalAlignment(SwingConstants.LEFT);
 		maleButton.setBackground(Color.WHITE);
 		maleButton.setBounds(114, 134, 53, 23);
@@ -170,6 +178,12 @@ public class DonorRegistration extends JFrame {
 		femaleButton.setBackground(Color.WHITE);
 		femaleButton.setBounds(169, 134, 66, 23);
 		contentPane.add(femaleButton);
+
+		// FEMALE is selected
+		if (femaleButton.isSelected()) {
+		    gender = "F";
+            System.out.println("Female");
+        }
 		
 		streetField = new JTextField();									//TODO street field
 		streetField.setColumns(10);
@@ -267,13 +281,16 @@ public class DonorRegistration extends JFrame {
 		JButton continueButton = new JButton("Continue");				//TODO continue button location, should grab all fields and create a new donor at this point
 		continueButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//continue button code her
+				//continue button code here
+                DonorContainer  dc = DonorContainer.getInstance();
+                FileWriter      fw = new FileWriter();
+
 				firstName   = firstNameField.getText();
                 lastName    = lastNameField.getText();
                 DOBMonth    = monthPullDown.getSelectedItem().toString();
                 DOBDay      = dayPullDown.getSelectedItem().toString();
                 DOBYear     = yearPullDown.getSelectedItem().toString();
-                gender      = "U";
+                gender      = "Unisex";
                 street      = streetField.getText();
                 city        = cityField.getText();
                 state       = statePullDown.getSelectedItem().toString();
@@ -286,14 +303,16 @@ public class DonorRegistration extends JFrame {
                 Donor donor = new Donor(
                         firstName, lastName, DOBMonth, DOBDay, DOBYear, gender, street,
                         city, state, zip, email, business, username, password);
-                
-                DonorContainer donorInstance = DonorContainer.getInstance();
-                if(donorInstance.isDonor(username)){
+
+                donor.activeUser = true;
+
+                if(dc.isDonor(username)) {
                 	// TODO: navigate to a user already exists page.
                 	return;
                 }
                 
-                donorInstance.addDonor(donor);
+                dc.addDonor(donor);
+                fw.writeNewDonor(donor);
 
 				//creating next window (donor home page)
 				EventQueue.invokeLater(new Runnable() {
