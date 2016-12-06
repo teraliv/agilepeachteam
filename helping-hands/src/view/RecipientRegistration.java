@@ -6,6 +6,7 @@
 
 package view;
 
+import model.FileWriter;
 import model.Recipient;
 import model.RecipientContainer;
 
@@ -323,15 +324,19 @@ public class RecipientRegistration extends JFrame {
                 recipient.activeUser = true;
 
                 // add recipient to the list of all recipients
-                RecipientContainer recInstance = RecipientContainer.getInstance();
+                RecipientContainer rc = RecipientContainer.getInstance();
 
-                if(recInstance.isRecipient(username)){
+                if(rc.isRecipient(username)){
                 	// TODO: navigate to a user already exists page.
                 	return;
                 }
                 
-                recInstance.addRecipient(recipient);
-                
+                rc.addRecipient(recipient);
+
+                FileWriter fw = new FileWriter();
+                fw.writeNewRecipient(recipient);
+
+
                 // If we are here, then it's guaranteed that this user does not exist.
 				//creating new window (recipient home page)
 				EventQueue.invokeLater(new Runnable() {

@@ -62,6 +62,7 @@ public class WelcomePage extends JFrame {
         fr.readDonorsFile();                // Read donors from a file
         fr.readRecipientsFile();            // Read recipients from a file
         fr.readDonatedItemsFile();          // Read donated items file
+        fr.readInvetoryFile();              // Read inventory data file
 
 
 		setResizable(true);

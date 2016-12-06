@@ -154,6 +154,37 @@ public class FileReader {
                 Donor   donor = dc.getDonorByLogin(username);
 
                 donor.addDonatedItem(item);
+            }
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("Error reading file: " + e.getMessage());
+        }
+        finally {
+            if (fileScanner != null) {
+                fileScanner.close();
+            }
+        }
+    }
+
+
+    public void readInvetoryFile() {
+        Scanner fileScanner = null;
+        inventory   = Inventory.getInstance();
+
+        try {
+            fileScanner = new Scanner(new FileInputStream("./src/files/inventory-data.csv"));
+
+            while (fileScanner.hasNextLine()) {
+                String      line  = fileScanner.nextLine();
+                String[]    split = line.split(",");
+
+                itemName        = split[0];
+                itemCategory    = split[1];
+                itemQuantity    = Integer.parseInt(split[2]);
+                itemPrice       = Double.parseDouble(split[3]);
+
+                Item item = new Item(itemName, itemCategory, itemQuantity, itemPrice);
+
                 inventory.addItem(item);
             }
         }

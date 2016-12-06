@@ -6,10 +6,7 @@
 
 package view;
 
-import model.Inventory;
-import model.Item;
-import model.Recipient;
-import model.RecipientContainer;
+import model.*;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -47,8 +44,6 @@ public class RecipientHomePage extends JFrame {
     private RecipientContainer  rc;
     private Recipient           recipient;
     private Inventory           inventory;
-    private List<Item>          donations;
-
 
 	/**
 	 * Launch the application.
@@ -272,8 +267,8 @@ public class RecipientHomePage extends JFrame {
 
                 // get donation from current category
 				receivedItemFromInventory("Food");
-				
-				regularCheckBox.setEnabled(selected);
+
+                regularCheckBox.setEnabled(selected);
 				vegetarianCheckBox.setEnabled(selected);
 				babyCheckBox.setEnabled(selected);
 				foodRequestPullDown.setEnabled(selected);
@@ -403,8 +398,14 @@ public class RecipientHomePage extends JFrame {
 				//continue button code here
 
 
-                // update latest donations to active recipient
-                recipient.lastRecieved = donations;
+                // @teraliv
+                // UPDATE INVENTORY FILE
+                writeUpdateInventoryToFile();
+
+                // deactivate current recipient
+                recipient.activeUser = false;
+
+
 
                 //creating next window (ticket)
 				EventQueue.invokeLater(new Runnable() {
@@ -477,20 +478,28 @@ public class RecipientHomePage extends JFrame {
 
 	}
 
-	private void receivedItemFromInventory(String cathegory) {
+
+	private void receivedItemFromInventory(String category) {
 
 	    // add one instance of every available item from current category
         // add it to active recipient
         // update inventory
         for (Item current : inventory.availableItems) {
-            if (current.category == "Toiletries") {
+            if (current.category.equals(category)) {
 
-                Item newItem = new Item(current.name, "Toiletries", 1, current.price);
+                Item newItem = new Item(current.name, category, 1, current.price);
 
-                recipient.getDonation(newItem);
-                donations.add(newItem);
-                inventory.updateInventory(current.name, 1);
+                if (recipient != null) {
+                    recipient.getDonation(newItem);
+                    inventory.updateInventory(current.name, 1);
+                }
             }
         }
+    }
+
+
+    private void writeUpdateInventoryToFile() {
+        FileWriter fw = new FileWriter();
+        fw.writeInventoryData();
     }
 }

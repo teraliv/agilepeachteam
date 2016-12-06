@@ -59,6 +59,48 @@ public class FileWriter {
 
 
     /**
+     * A method to write a new Recipient to the CSV file. The next time the program runs this Recipient will be available
+     * to use its username and password to login to the system.
+     * @param recipient
+     */
+    public void writeNewRecipient(Recipient recipient) {
+
+        PrintWriter writer = null;
+        boolean     append = true;
+
+        try {
+            writer = new PrintWriter(new FileOutputStream("./src/files/recipients-data.csv", append));
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.append(recipient.firstName + ",");
+            sb.append(recipient.lastName + ",");
+            sb.append(recipient.DOBMonth + ",");
+            sb.append(recipient.DOBDay + ",");
+            sb.append(recipient.DOBYear + ",");
+            sb.append(recipient.gender + ",");
+            sb.append(recipient.street + ",");
+            sb.append(recipient.city + ",");
+            sb.append(recipient.state + ",");
+            sb.append(recipient.zip + ",");
+            sb.append(recipient.email + ",");
+            sb.append(recipient.username + ",");
+            sb.append(recipient.password);
+
+            writer.println(sb.toString());
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("There was a problem writing to the file: " + e.getMessage());
+        }
+        finally {
+            if (writer != null) {
+                writer.close();
+            }
+        }
+    }
+
+
+    /**
      * A method to write donated items to the CSV file. The first field in the file is username. Usernames are
      * unique across all users, so it works as identifier for a donation.
      * @param donor
@@ -81,6 +123,32 @@ public class FileWriter {
             sb.append(item.price);
 
             writer.println(sb.toString());
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("There was a problem writing to the file: " + e.getMessage());
+        }
+        finally {
+            if (writer != null) {
+                writer.close();
+            }
+        }
+    }
+
+    public void writeInventoryData() {
+
+        Inventory inventory = Inventory.getInstance();
+
+        PrintWriter writer = null;
+
+        try {
+            writer = new PrintWriter(new FileOutputStream("./src/files/inventory-data.csv"));
+
+            String line = null;
+
+            for (Item current : inventory.availableItems) {
+                line = (current.name + "," + current.category + "," + current.quantity + "," +current.price);
+                writer.println(line);
+            }
         }
         catch (FileNotFoundException e) {
             System.out.println("There was a problem writing to the file: " + e.getMessage());
