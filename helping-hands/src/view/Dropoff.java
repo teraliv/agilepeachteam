@@ -114,9 +114,6 @@ public class Dropoff extends JFrame {
 
 				myDonor = dc.getActiveDonor();
 
-				//Inventory inv = Inventory.getInstance();
-				//inv.addItem(localItem);
-				
 				if(myDonor != null) {
 				    myDonor.addDonatedItem(localItem);
 				    fw.writeNewDonation(myDonor, localItem);

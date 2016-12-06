@@ -28,6 +28,7 @@ import javax.swing.JTextPane;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DonorHomePage extends JFrame {
@@ -78,10 +79,7 @@ public class DonorHomePage extends JFrame {
     public DonorHomePage() {
 
         DonorContainer dc = DonorContainer.getInstance();
-
         myDonor = dc.getActiveDonor();
-        //Item item = new Item("pants", "clothes", 5, 10.99);
-        //myDonor.donate(item);
 
 
         setResizable(false);
@@ -207,9 +205,10 @@ public class DonorHomePage extends JFrame {
 		item1QuantityField.setBounds(138, 36, 86, 20);
 		pastDonationsPanel.add(item1QuantityField);
 
+
         Item localItem = null;
 
-		if (myDonor != null) localItem = myDonor.getDonatedItem(0);
+        if (myDonor != null) localItem = myDonor.getDonatedItem(0);
 
 		if(localItem != null) {
 			item1NameField.setText(localItem.name);
@@ -228,13 +227,14 @@ public class DonorHomePage extends JFrame {
 		item2QuantityField.setBounds(138, 64, 86, 20);
 		pastDonationsPanel.add(item2QuantityField);
 
+
         if (myDonor != null) localItem = myDonor.getDonatedItem(1);
 
 		if(localItem != null) {
 			item2NameField.setText(localItem.name);
 			item2QuantityField.setText(String.valueOf(localItem.quantity));
 		}
-		
+
 		item3NameField = new JTextField(); //TODO item 3 firstName field
 		item3NameField.setEditable(false);
 		item3NameField.setColumns(10);
@@ -267,11 +267,11 @@ public class DonorHomePage extends JFrame {
 		item4QuantityField.setBounds(138, 126, 86, 20);
 		pastDonationsPanel.add(item4QuantityField);
 
-        if (myDonor != null) localItem = myDonor.getDonatedItem(3);
+		if (myDonor != null) localItem = myDonor.getDonatedItem(3);
 
         if(localItem != null) {
-			item3NameField.setText(localItem.name);
-			item3QuantityField.setText(String.valueOf(localItem.quantity));
+			item4NameField.setText(localItem.name);
+			item4QuantityField.setText(String.valueOf(localItem.quantity));
 		}
 		
 		item5NameField = new JTextField(); //TODO item 5 firstName field
@@ -286,11 +286,12 @@ public class DonorHomePage extends JFrame {
 		item5QuantityField.setBounds(138, 157, 86, 20);
 		pastDonationsPanel.add(item5QuantityField);
 
-        if (myDonor != null) localItem = myDonor.getDonatedItem(4);
+
+		if (myDonor != null) localItem = myDonor.getDonatedItem(4);
 
         if(localItem != null) {
-			item4NameField.setText(localItem.name);
-			item4QuantityField.setText(String.valueOf(localItem.quantity));
+			item5NameField.setText(localItem.name);
+			item5QuantityField.setText(String.valueOf(localItem.quantity));
 		}
 		
 		item6NameField = new JTextField(); //TODO item 6 firstName field
@@ -305,13 +306,14 @@ public class DonorHomePage extends JFrame {
 		item6QuantityField.setBounds(138, 188, 86, 20);
 		pastDonationsPanel.add(item6QuantityField);
 
-        if (myDonor != null) localItem = myDonor.getDonatedItem(5);
+		if (myDonor != null) localItem = myDonor.getDonatedItem(5);
 
 		if(localItem != null) {
-			item5NameField.setText(localItem.name);
-			item5QuantityField.setText(String.valueOf(localItem.quantity));
+			item6NameField.setText(localItem.name);
+			item6QuantityField.setText(String.valueOf(localItem.quantity));
 		}
-		
+
+
 		txtpnThankYouFor = new JTextPane();
 		txtpnThankYouFor.setText(" Thank You For\r\nYour Donations!");
 		txtpnThankYouFor.setFont(new Font("Tahoma", Font.PLAIN, 20));

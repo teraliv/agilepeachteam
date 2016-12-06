@@ -55,11 +55,11 @@ public class Donor {
     public void donate(Item item) {
         Inventory inventory = Inventory.getInstance();
         inventory.addItem(item);
-        donatedItems.add(item);
+        donatedItems.add(0, item);
     }
 
     public void addDonatedItem(Item item) {
-    	donatedItems.add(item);
+    	donatedItems.add(0, item);
     }
     
     public Item getDonatedItem(int pos) {

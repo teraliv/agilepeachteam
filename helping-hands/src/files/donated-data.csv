@@ -1,5 +1,4 @@
 jevans0,Pants,Clothes,5,5.50
-jevans0,Used Socks,Clothes,7,0.99
 jevans0,Cowboy Shirt,Clothes,10,3.99
 rhenry1,Tomatoes,Food,50,0.49
 rhenry1,Bananas,Food,25,0.19
@@ -9,3 +8,6 @@ teraliv,Cereal,Food,10,3.25
 teraliv,Antique Sofa,Toiletries,1,1000.0
 teraliv,beef meat,Food,4,10.99
 teraliv,gloves,Clothes,5,12.99
+teraliv,Uniform,Clothes,15,9.55
+jevans0,Used Socks,Clothes,7,1.99
+jevans0,watermelon,Food,30,3.45
