@@ -76,7 +76,8 @@ public class RecipientHomePage extends JFrame {
 
 
 		setResizable(true);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("\\\\itfiles3.insttech.washington.edu\\_profile\\sean3740\\Desktop\\TCSS 360\\peach.jpg"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("\\\\itfiles3.insttech.washington.edu\\_profile\\" +
+                "sean3740\\Desktop\\TCSS 360\\peach.jpg"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
 		contentPane = new JPanel();
@@ -91,8 +92,9 @@ public class RecipientHomePage extends JFrame {
 		lblWelcome.setBackground(Color.WHITE);
 		lblWelcome.setBounds(90, 11, 137, 37);
 		contentPane.add(lblWelcome);
-		
-		final JLabel recipientNameLabel = new JLabel("Recipient");	//TODO this field needs to be dynamically populated with the recipients firstName
+
+        //TODO this field needs to be dynamically populated with the recipients firstName
+		final JLabel recipientNameLabel = new JLabel("Recipient");
 		
 		recipientNameLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		recipientNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -251,7 +253,8 @@ public class RecipientHomePage extends JFrame {
 		
 		final JComboBox foodRequestPullDown = new JComboBox();
 		foodRequestPullDown.setEnabled(false);
-		foodRequestPullDown.setFont(new Font("Tahoma", Font.PLAIN, 16)); //TODO connect the pull-down to the appropriate inventory
+        //TODO connect the pull-down to the appropriate inventory
+		foodRequestPullDown.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		foodRequestPullDown.setModel(new DefaultComboBoxModel(new String[] {"Special Request", "<display food inventory>"}));
 		foodRequestPullDown.setBounds(10, 203, 137, 23);
 		contentPane.add(foodRequestPullDown);
@@ -403,7 +406,7 @@ public class RecipientHomePage extends JFrame {
                 writeUpdateInventoryToFile();
 
                 // deactivate current recipient
-                recipient.activeUser = false;
+                //recipient.activeUser = false;
 
 
 

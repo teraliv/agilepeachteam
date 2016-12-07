@@ -1,8 +1,13 @@
 /**
  * @author Sean O'Donnell
+ * @author Alex Terikov
  */
 
 package view;
+
+import model.Item;
+import model.Recipient;
+import model.RecipientContainer;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -48,8 +53,14 @@ public class Ticket extends JFrame {
 	 * Create the frame.
 	 */
 	public Ticket() {
-		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("\\\\itfiles3.insttech.washington.edu\\_profile\\sean3740\\Desktop\\TCSS 360\\peach.jpg"));
+
+        RecipientContainer rc = RecipientContainer.getInstance();
+        Recipient recipient = rc.getActiveRecipient();
+
+
+        setResizable(false);
+		setIconImage(Toolkit.getDefaultToolkit().getImage("\\\\itfiles3.insttech.washington.edu\\_profile" +
+                "\\sean3740\\Desktop\\TCSS 360\\peach.jpg"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
 		contentPane = new JPanel();
@@ -92,6 +103,8 @@ public class Ticket extends JFrame {
 		continueButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			//continue button code here
+
+                recipient.deactivateCurrentRecipient();
 				
 				//creating previous window
 				EventQueue.invokeLater(new Runnable() {
@@ -119,16 +132,31 @@ public class Ticket extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(43, 116, 389, 244);
 		contentPane.add(scrollPane);
-		
-		JTextPane itemListTextPane = new JTextPane(); 						//TODO this text pane needs to be populated with the list of items that the recipient is receiving.
+
+        //TODO this text pane needs to be populated with the list of items that the recipient is receiving.
+
+		JTextPane itemListTextPane = new JTextPane();
 		itemListTextPane.setEditable(false);
 		itemListTextPane.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		scrollPane.setViewportView(itemListTextPane);
-		
+
+
+		StringBuilder sb = new StringBuilder();
+
+        if (recipient != null) {
+            for (Item current : recipient.received) {
+                sb.append(current.name + ", "  + current.category + ", " + current.quantity + "\n");
+            }
+        }
+
+		itemListTextPane.setText(sb.toString());
+
+
 		JLabel lblYourListIncludes = new JLabel("Your List Includes the Following Items:");
 		lblYourListIncludes.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblYourListIncludes.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblYourListIncludes.setBounds(43, 90, 389, 22);
 		contentPane.add(lblYourListIncludes);
 	}
+
 }

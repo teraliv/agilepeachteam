@@ -53,6 +53,15 @@ public class Recipient {
         received.add(donation);
     }
 
+
+    public void activateCurrentRecipient() {
+        this.activeUser = true;
+    }
+
+    public void deactivateCurrentRecipient() {
+        this.activeUser = false;
+    }
+
     //public boolean getDonation(String yourNeed, int desiredQuantity, Inventory inventory) {
     //    if (inventory.isItemExist(yourNeed) && inventory.getQuantity(yourNeed) >= desiredQuantity) {
     //
