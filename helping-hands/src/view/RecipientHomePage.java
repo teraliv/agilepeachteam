@@ -30,6 +30,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextPane;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecipientHomePage extends JFrame {
@@ -255,13 +256,11 @@ public class RecipientHomePage extends JFrame {
 		foodRequestPullDown.setEnabled(false);
         //TODO connect the pull-down to the appropriate inventory
 		foodRequestPullDown.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		foodRequestPullDown.setModel(new DefaultComboBoxModel(new String[] {"Special Request", "<display food inventory>"}));
+		foodRequestPullDown.setModel(new DefaultComboBoxModel(getSpecialRequests("Food")));
 		foodRequestPullDown.setBounds(10, 203, 137, 23);
 		contentPane.add(foodRequestPullDown);
 		
 
-		
-		
 		final JToggleButton foodButton = new JToggleButton("Food");
 		foodButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -315,9 +314,12 @@ public class RecipientHomePage extends JFrame {
 		shoesCheckBox.setEnabled(false);
 		shoesCheckBox.setBounds(10, 326, 137, 23);
 		contentPane.add(shoesCheckBox);
-		
-		final JComboBox clothesRequestPullDown = new JComboBox(); //TODO connect the pull-down to the appropriate inventory
-		clothesRequestPullDown.setModel(new DefaultComboBoxModel(new String[] {"Special Request", "<Display Clothes Inventory>"}));
+
+        //TODO connect the pull-down to the appropriate inventory
+
+		final JComboBox clothesRequestPullDown = new JComboBox();
+		//clothesRequestPullDown.setModel(new DefaultComboBoxModel(new String[] {"Special Request", "<Display Clothes Inventory>"}));
+        clothesRequestPullDown.setModel(new DefaultComboBoxModel(getSpecialRequests("Clothes")));
 		clothesRequestPullDown.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		clothesRequestPullDown.setEnabled(false);
 		clothesRequestPullDown.setBounds(10, 351, 137, 23);
@@ -367,9 +369,12 @@ public class RecipientHomePage extends JFrame {
 		shavingCheckBox.setEnabled(false);
 		shavingCheckBox.setBounds(325, 203, 137, 23);
 		contentPane.add(shavingCheckBox);
-		
-		final JComboBox toiletriesRequestPullDown = new JComboBox(); //TODO connect the pull-down to the appropriate inventory
-		toiletriesRequestPullDown.setModel(new DefaultComboBoxModel(new String[] {"Special Request", "<Toiletries Inventory>"}));
+
+        //TODO connect the pull-down to the appropriate inventory
+		final JComboBox toiletriesRequestPullDown = new JComboBox();
+		//toiletriesRequestPullDown.setModel(new DefaultComboBoxModel(new String[] {"Special Request", "<Toiletries Inventory>"}));
+
+        toiletriesRequestPullDown.setModel(new DefaultComboBoxModel(getSpecialRequests("Toiletries")));
 		toiletriesRequestPullDown.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		toiletriesRequestPullDown.setEnabled(false);
 		toiletriesRequestPullDown.setBounds(325, 229, 137, 23);
@@ -405,8 +410,6 @@ public class RecipientHomePage extends JFrame {
                 // UPDATE INVENTORY FILE
                 writeUpdateInventoryToFile();
 
-                // deactivate current recipient
-                //recipient.activeUser = false;
 
 
 
@@ -436,6 +439,8 @@ public class RecipientHomePage extends JFrame {
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//code for back button here
+
+                recipient.deactivateCurrentRecipient();
 				
 				//creating previous window
 				EventQueue.invokeLater(new Runnable() {
@@ -504,5 +509,20 @@ public class RecipientHomePage extends JFrame {
     private void writeUpdateInventoryToFile() {
         FileWriter fw = new FileWriter();
         fw.writeInventoryData();
+    }
+
+
+    private String[] getSpecialRequests(String category) {
+
+	    List<String> clothes = new ArrayList<>();
+        clothes.add("Special Request");
+
+        for (Item current : inventory.availableItems) {
+            if (current.category.equals(category)) {
+                clothes.add(current.name);
+            }
+        }
+
+        return clothes.toArray(new String[0]);
     }
 }
