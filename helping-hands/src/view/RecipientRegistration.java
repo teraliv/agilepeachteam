@@ -22,6 +22,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.ListSelectionModel;
 import javax.swing.JComboBox;
@@ -31,6 +32,8 @@ import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
+import java.text.ParsePosition;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 
@@ -64,6 +67,7 @@ public class RecipientRegistration extends JFrame {
     private String     email;
     private String     username;
     private String     password;
+    private String     rePassword;
 
 
 
@@ -171,7 +175,7 @@ public class RecipientRegistration extends JFrame {
 		lblGender.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblGender.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		contentPane.add(lblGender);
-
+		
 		// GENDER
 		JRadioButton maleButton = new JRadioButton("Male");	//TODO male button
 		maleButton.setBounds(104, 163, 53, 23);
@@ -301,6 +305,7 @@ public class RecipientRegistration extends JFrame {
 		continueButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { 
 				//continue button code here
+				
                 firstName   = firstNameField.getText();
                 lastName    = lastNameField.getText();
                 DOBMonth    = monthPullDown.getSelectedItem().toString();
@@ -314,47 +319,72 @@ public class RecipientRegistration extends JFrame {
                 email       = emailField.getText();
                 username    = userNameField.getText();
                 password    = String.valueOf(passwordField.getPassword());
-
-                // create new recipient
-                Recipient recipient = new Recipient(
-                        firstName, lastName, DOBMonth, DOBDay, DOBYear, gender, street,
-                        city, state, zip, email, username, password);
-
-                // make recipient active
-                recipient.activeUser = true;
-
-                // add recipient to the list of all recipients
-                RecipientContainer rc = RecipientContainer.getInstance();
-
-                if(rc.isRecipient(username)){
-                	// TODO: navigate to a user already exists page.
-                	return;
-                }
+                rePassword  = String.valueOf(repeatPasswordField.getPassword());
                 
-                rc.addRecipient(recipient);
+                //confirming no fields are empty before continuing
+                if(!firstName.isEmpty() && !lastName.isEmpty() && !street.isEmpty() && !zip.isEmpty() && !email.isEmpty() && !username.isEmpty() && !password.isEmpty() && !rePassword.isEmpty())
+                {
+                	//confirming zip-code is of numeric and of size five
+                	if(isNumeric(zip) && zip.length()==5)
+                	{
+                		//TOP OF CODE
+                		// create new recipient
+                        Recipient recipient = new Recipient(
+                                firstName, lastName, DOBMonth, DOBDay, DOBYear, gender, street,
+                                city, state, zip, email, username, password);
 
-                FileWriter fw = new FileWriter();
-                fw.writeNewRecipient(recipient);
+                        // make recipient active
+                        recipient.activeUser = true;
+
+                        // add recipient to the list of all recipients
+                        RecipientContainer rc = RecipientContainer.getInstance();
+                        
+                        //checking duplicate user
+                        if(rc.isRecipient(username)){
+        					JOptionPane.showMessageDialog(contentPane,"Please enter a different user name.",
+        					"User Exists",JOptionPane.WARNING_MESSAGE);
+                        	return;
+                        }
+                        
+                        rc.addRecipient(recipient);
+
+                        FileWriter fw = new FileWriter();
+                        fw.writeNewRecipient(recipient);
 
 
-                // If we are here, then it's guaranteed that this user does not exist.
-				//creating new window (recipient home page)
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							RecipientHomePage frame = new RecipientHomePage();
-							frame.setVisible(true);
-							//screen center
-							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-							frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-				
-				//deleting current window
-				RecipientRegistration.this.dispose();
+                        // If we are here, then it's guaranteed that this user does not exist.
+        				//creating new window (recipient home page)
+        				EventQueue.invokeLater(new Runnable() {
+        					public void run() {
+        						try {
+        							RecipientHomePage frame = new RecipientHomePage();
+        							frame.setVisible(true);
+        							//screen center
+        							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        							frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
+        						} catch (Exception e) {
+        							e.printStackTrace();
+        						}
+        					}
+        				});
+        				
+        				//deleting current window
+        				RecipientRegistration.this.dispose();
+        				//BOTTOM OF CODE
+                	}
+                	else //prompt to enter valid zip-code
+                	{
+                		JOptionPane.showMessageDialog(contentPane,"Please enter a valid zip code. EG)12345.",
+                    	"Invalid ZipCode",JOptionPane.WARNING_MESSAGE);
+                	}
+                    
+                }
+                else //empty field prompt
+                {
+                	JOptionPane.showMessageDialog(contentPane,"Please fill in all fields.",
+        			"Empty Fields",JOptionPane.WARNING_MESSAGE);
+                }
+
 			}
 		});
 		continueButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -388,5 +418,17 @@ public class RecipientRegistration extends JFrame {
 		backButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		backButton.setBounds(385, 427, 89, 23);
 		contentPane.add(backButton);
+		
+	
 	}
+    //Takes in a string and returns a boolean if it is numeric or not.
+    //Used to validate input of numeric fields.
+    //http://stackoverflow.com/questions/1102891/how-to-check-if-a-string-is-numeric-in-java#1102916
+    public static boolean isNumeric(String str)
+    {
+      NumberFormat formatter = NumberFormat.getInstance();
+      ParsePosition pos = new ParsePosition(0);
+      formatter.parse(str, pos);
+      return str.length() == pos.getIndex();
+    }
 }
