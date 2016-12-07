@@ -217,18 +217,27 @@ public class Dropoff extends JFrame {
 				String quantity=quantityField.getText();
 				String cost=costField.getText();
 				boolean isNumeric = isNumeric(quantity) && isNumeric(cost);
-				boolean positiveInput = Double.parseDouble(cost)>=0 && Double.parseDouble(quantity)>=0;
 				
-				if(isNumeric && positiveInput)	//input validation (numeric and positive)
+				if(isNumeric) //numeric input validation
 				{
-					thankYouPanel.setVisible(true);
-					submitButton.setVisible(false); //hiding the first continue button because otherwise it bleeds through the overlapping panel which says thank you
+					boolean positiveInput = Double.parseDouble(cost)>=0 && Double.parseDouble(quantity)>=0;
+					if(positiveInput)	//positive input validation
+					{
+						thankYouPanel.setVisible(true);
+						submitButton.setVisible(false); //hiding the first continue button because otherwise it bleeds through the overlapping panel which says thank you
+					}
+					else //prompt for positive values
+					{
+						JOptionPane.showMessageDialog(thankYouPanel,"Please only enter positive values in for cost and quantity.",
+								"Invalid Input",JOptionPane.WARNING_MESSAGE);
+					}
 				}
-				else //invalid input pop-up
+				else //prompt for only numeric values
 				{	
-					JOptionPane.showMessageDialog(thankYouPanel,"Please only enter positive numeric values in for cost and quantity.",
-					"Invalid Input",JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(thankYouPanel,"Please only enter numeric values in for cost and quantity.",
+							"Invalid Input",JOptionPane.WARNING_MESSAGE);
 				}
+				
 			}
 		});
 		submitButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
