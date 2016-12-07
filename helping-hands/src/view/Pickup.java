@@ -13,10 +13,13 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
+import java.text.ParsePosition;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
@@ -343,29 +346,72 @@ public class Pickup extends JFrame {
 		continueButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//continue button code here
+				
+				//input verification @Sean O'Donnell
+				String street = streetField.getText();
+				String city = cityField.getText();
+				String zip = zipField.getText();
+				String name = itemNameField.getText();
+                String quantity = quantityField.getText();
+                String price = costField.getText();
+                //if none of the fields are empty then further code can proceed
+                if(!name.isEmpty() && !quantity.isEmpty() && !price.isEmpty() && !street.isEmpty() && !city.isEmpty() && !zip.isEmpty())
+                {
+                	if(isNumeric(price) && isNumeric(quantity) && isNumeric(zip)) //confirming numeric inputs
+                	{
+                		if((Double.parseDouble(price)*Double.parseDouble(quantity))>=200) // confirming cost*quantity >= 200 (note also confirms quantity is > 0 (clever))
+                		{
+                			if(zip.length()==5) //confirming zip-code is proper length
+                			{
+                				// @teraliv
+                            	FileWriter      fw = new FileWriter();
+                            	DonorContainer  dc = DonorContainer.getInstance();
 
-                // @teraliv
-                FileWriter      fw = new FileWriter();
-                DonorContainer  dc = DonorContainer.getInstance();
+                            	myDonor = dc.getActiveDonor();
 
-                myDonor = dc.getActiveDonor();
+                            	itemName        = itemNameField.getText();
+                            	itemCategory    = categoryPullDown.getSelectedItem().toString();
+                            	itemQuantity    = Integer.parseInt(quantityField.getText());
+                            	itemPrice       = Double.parseDouble(costField.getText());
 
-                itemName        = itemNameField.getText();
-                itemCategory    = categoryPullDown.getSelectedItem().toString();
-                itemQuantity    = Integer.parseInt(quantityField.getText());
-                itemPrice       = Double.parseDouble(costField.getText());
+                            	if (myDonor != null) {
+                            		Item item = new Item(itemName, itemCategory, itemQuantity, itemPrice);
 
-                if (myDonor != null) {
-                    Item item = new Item(itemName, itemCategory, itemQuantity, itemPrice);
+                            		myDonor.donate(item);
+                            		fw.writeNewDonation(myDonor, item);
+                            	}
 
-                    myDonor.donate(item);
-                    fw.writeNewDonation(myDonor, item);
+
+                            	confirmationPanel.setVisible(true);
+                            	continueButton.setVisible(false); //hiding the first continue button so it doesn't bleed through the confirmation panel
+                            	backButton.setEnabled(false); //you can't press back, you have to press continue
+                			}
+                			else //wrong zip-code length prompt
+                			{
+                    			JOptionPane.showMessageDialog(confirmationPanel,"Please enter a zip-code of length five. EG) 12345",
+                                "Incorrect zipcode length",JOptionPane.WARNING_MESSAGE);
+                			}
+                			
+                		}
+                		else //too low of cost value for pickup prompt
+                		{
+                			JOptionPane.showMessageDialog(confirmationPanel,"Sorry, the pick-up feature is only available for items of total cost greater or equal to $200.",
+                        	"Cost To Low",JOptionPane.WARNING_MESSAGE);
+                		}
+                		
+                	}
+                	else //non numeric quantity, cost, or zip-code prompt
+                	{
+                		JOptionPane.showMessageDialog(confirmationPanel,"Please enter only numeric values into quantity, cost, and zip-code.",
+                    	"Numeric Input Required",JOptionPane.WARNING_MESSAGE);
+                	}
+                	
                 }
-
-
-                confirmationPanel.setVisible(true);
-				continueButton.setVisible(false); //hiding the first continue button so it doesn't bleed through the confirmation panel
-				backButton.setEnabled(false); //you can't press back, you have to press continue
+                else //empty fields prompt
+                {
+                	JOptionPane.showMessageDialog(confirmationPanel,"Please fill in all fields.",
+					"Empty Fields",JOptionPane.WARNING_MESSAGE);
+                }
 			}
 		});
 		continueButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -385,5 +431,14 @@ public class Pickup extends JFrame {
 		lblItemName.setBounds(10, 311, 95, 29);
 		contentPane.add(lblItemName);
 	}
-
+    //Takes in a string and returns a boolean if it is numeric or not.
+    //Used to validate input of numeric fields.
+    //http://stackoverflow.com/questions/1102891/how-to-check-if-a-string-is-numeric-in-java#1102916
+    public static boolean isNumeric(String str)
+    {
+      NumberFormat formatter = NumberFormat.getInstance();
+      ParsePosition pos = new ParsePosition(0);
+      formatter.parse(str, pos);
+      return str.length() == pos.getIndex();
+    }
 }
