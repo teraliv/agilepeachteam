@@ -14,6 +14,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JComboBox;
@@ -21,6 +22,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
+import java.text.ParsePosition;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
@@ -138,7 +141,7 @@ public class Dropoff extends JFrame {
 		contentPane.add(lblDonationDropoff);
 		
 		categoryPullDown.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		categoryPullDown.setModel(new DefaultComboBoxModel<Object>(new String[] {"Insert categories here", "Food", "Clothes", "Toiletries"}));
+		categoryPullDown.setModel(new DefaultComboBoxModel(new String[] {"Food", "Clothes", "Toiletries", "Vehicle"}));
 		categoryPullDown.setBounds(131, 159, 208, 29);
 		contentPane.add(categoryPullDown);
 		
@@ -210,9 +213,22 @@ public class Dropoff extends JFrame {
 		
 		submitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//continue button code here
-				thankYouPanel.setVisible(true);
-				submitButton.setVisible(false); //hiding the first continue button because otherwise it bleeds through the overlapping panel which says thank you
+				//submit button code here
+				String quantity=quantityField.getText();
+				String cost=costField.getText();
+				boolean isNumeric = isNumeric(quantity) && isNumeric(cost);
+				boolean positiveInput = Double.parseDouble(cost)>=0 && Double.parseDouble(quantity)>=0;
+				
+				if(isNumeric && positiveInput)	//input validation (numeric and positive)
+				{
+					thankYouPanel.setVisible(true);
+					submitButton.setVisible(false); //hiding the first continue button because otherwise it bleeds through the overlapping panel which says thank you
+				}
+				else //invalid input pop-up
+				{	
+					JOptionPane.showMessageDialog(thankYouPanel,"Please only enter positive numeric values in for cost and quantity.",
+					"Invalid Input",JOptionPane.WARNING_MESSAGE);
+				}
 			}
 		});
 		submitButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -232,4 +248,14 @@ public class Dropoff extends JFrame {
 		itemNameField.setBounds(131, 199, 208, 29);
 		contentPane.add(itemNameField);
 	}
+    //Takes in a string and returns a boolean if it is numeric or not.
+    //Used to validate input of numeric fields.
+    //http://stackoverflow.com/questions/1102891/how-to-check-if-a-string-is-numeric-in-java#1102916
+    public static boolean isNumeric(String str)
+    {
+      NumberFormat formatter = NumberFormat.getInstance();
+      ParsePosition pos = new ParsePosition(0);
+      formatter.parse(str, pos);
+      return str.length() == pos.getIndex();
+    }
 }
