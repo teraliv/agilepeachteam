@@ -46,6 +46,9 @@ public class RecipientHomePage extends JFrame {
     private Recipient           recipient;
     private Inventory           inventory;
 
+    //private String              specialRequest = null;
+    //private List<String>        clothesSelections;
+
 	/**
 	 * Launch the application.
 	 */
@@ -256,7 +259,7 @@ public class RecipientHomePage extends JFrame {
 		foodRequestPullDown.setEnabled(false);
         //TODO connect the pull-down to the appropriate inventory
 		foodRequestPullDown.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		foodRequestPullDown.setModel(new DefaultComboBoxModel(getSpecialRequests("Food")));
+		foodRequestPullDown.setModel(new DefaultComboBoxModel(getSpecialRequestsItemNames("Food")));
 		foodRequestPullDown.setBounds(10, 203, 137, 23);
 		contentPane.add(foodRequestPullDown);
 		
@@ -267,13 +270,52 @@ public class RecipientHomePage extends JFrame {
 				//food toggle button code here
 				boolean selected = foodButton.isSelected();
 
-                // get donation from current category
-				receivedItemFromInventory("Food");
+
+                // SPECIAL REQUEST Action Listener
+                foodRequestPullDown.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent event) {
+                        String specialRequest = String.valueOf(foodRequestPullDown.getSelectedItem());
+                        receivedItemFromInventory(specialRequest.toLowerCase());
+
+                    }
+                });
+
 
                 regularCheckBox.setEnabled(selected);
 				vegetarianCheckBox.setEnabled(selected);
 				babyCheckBox.setEnabled(selected);
 				foodRequestPullDown.setEnabled(selected);
+
+                // REGULAR FOOD
+                regularCheckBox.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (regularCheckBox.isSelected()) {
+                            receivedItemFromInventory("food");
+                        }
+                    }
+                });
+
+                // VEGETARIAN FOOD
+                vegetarianCheckBox.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (vegetarianCheckBox.isSelected()) {
+                            receivedItemFromInventory("vegetarian");
+                        }
+                    }
+                });
+
+                // BABY FOOD
+                babyCheckBox.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (babyCheckBox.isSelected()) {
+                            receivedItemFromInventory("baby");
+                        }
+                    }
+                });
+
 				
 				yesButton.setVisible(selected);
 				noButton.setVisible(selected);
@@ -319,27 +361,77 @@ public class RecipientHomePage extends JFrame {
 
 		final JComboBox clothesRequestPullDown = new JComboBox();
 		//clothesRequestPullDown.setModel(new DefaultComboBoxModel(new String[] {"Special Request", "<Display Clothes Inventory>"}));
-        clothesRequestPullDown.setModel(new DefaultComboBoxModel(getSpecialRequests("Clothes")));
+        clothesRequestPullDown.setModel(new DefaultComboBoxModel(getSpecialRequestsItemNames("Clothes")));
 		clothesRequestPullDown.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		clothesRequestPullDown.setEnabled(false);
 		clothesRequestPullDown.setBounds(10, 351, 137, 23);
 		contentPane.add(clothesRequestPullDown);
-		
+
+
+        //List<String> checkedCategories = new ArrayList<>();
+
+
 		final JToggleButton clothesButton = new JToggleButton("Clothes");
 		clothesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//food toggle button code here
 				boolean selected = clothesButton.isSelected();
 
-                // get donation from current category
-                receivedItemFromInventory("Clothes");
-				
+
+				// SPECIAL REQUEST Action Listener
+				clothesRequestPullDown.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent event) {
+                        String specialRequest = String.valueOf(clothesRequestPullDown.getSelectedItem());
+                        receivedItemFromInventory(specialRequest.toLowerCase());
+
+                    }
+				});
+
+
 				shirtsCheckBox.setEnabled(selected);
 				pantsCheckBox.setEnabled(selected);
 				shoesCheckBox.setEnabled(selected);
 				clothesRequestPullDown.setEnabled(selected);
+
+
+				// SHIRT
+				shirtsCheckBox.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (shirtsCheckBox.isSelected()) {
+                            receivedItemFromInventory("shirt");
+                        }
+                        else {
+                            //System.out.println("deselected");
+                        }
+                    }
+                });
+
+                // PANTS
+                pantsCheckBox.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (pantsCheckBox.isSelected()) {
+                            receivedItemFromInventory("pant");
+                        }
+                    }
+                });
+
+                // SHOES
+                shoesCheckBox.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (shoesCheckBox.isSelected()) {
+                            receivedItemFromInventory("shoe");
+                        }
+                    }
+                });
+
+
+
 			}
 		});
+
 		clothesButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		clothesButton.setBounds(10, 244, 137, 23);
 		contentPane.add(clothesButton);
@@ -374,7 +466,7 @@ public class RecipientHomePage extends JFrame {
 		final JComboBox toiletriesRequestPullDown = new JComboBox();
 		//toiletriesRequestPullDown.setModel(new DefaultComboBoxModel(new String[] {"Special Request", "<Toiletries Inventory>"}));
 
-        toiletriesRequestPullDown.setModel(new DefaultComboBoxModel(getSpecialRequests("Toiletries")));
+        toiletriesRequestPullDown.setModel(new DefaultComboBoxModel(getSpecialRequestsItemNames("Toiletries")));
 		toiletriesRequestPullDown.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		toiletriesRequestPullDown.setEnabled(false);
 		toiletriesRequestPullDown.setBounds(325, 229, 137, 23);
@@ -386,14 +478,65 @@ public class RecipientHomePage extends JFrame {
 				//toiletries toggle button code here
 				boolean selected = toiletriesButton.isSelected();
 
-                // get donation from current category
-				receivedItemFromInventory("Toiletries");
-				
+
+                // SPECIAL REQUEST Action Listener
+                toiletriesRequestPullDown.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent event) {
+                        String specialRequest = String.valueOf(toiletriesRequestPullDown.getSelectedItem());
+                        receivedItemFromInventory(specialRequest.toLowerCase());
+
+                    }
+                });
+
+
 				soapCheckBox.setEnabled(selected);
 				toothCheckBox.setEnabled(selected);
 				shavingCheckBox.setEnabled(selected);
 				deoderantCheckBox.setEnabled(selected);
 				toiletriesRequestPullDown.setEnabled(selected);
+
+
+                // SOAP
+                soapCheckBox.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (soapCheckBox.isSelected()) {
+                            receivedItemFromInventory("soap");
+                            receivedItemFromInventory("shampoo");
+                        }
+                    }
+                });
+
+                // TOOTH
+                toothCheckBox.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (toothCheckBox.isSelected()) {
+                            receivedItemFromInventory("tooth");
+                        }
+                    }
+                });
+
+                // DEODORANT
+                deoderantCheckBox.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (deoderantCheckBox.isSelected()) {
+                            receivedItemFromInventory("deodorant");
+                        }
+                    }
+                });
+
+                // SHAVING
+                shavingCheckBox.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (shavingCheckBox.isSelected()) {
+                            receivedItemFromInventory("shaving");
+                        }
+                    }
+                });
+
 			}
 		});
 		toiletriesButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -487,16 +630,12 @@ public class RecipientHomePage extends JFrame {
 	}
 
 
-	private void receivedItemFromInventory(String category) {
+    private void receivedItemFromInventory(String name) {
 
-	    // add one instance of every available item from current category
-        // add it to active recipient
-        // update inventory
         for (Item current : inventory.availableItems) {
-            if (current.category.equals(category)) {
+            if (current.name.toLowerCase().contains(name)) {
 
-                Item newItem = new Item(current.name, category, 1, current.price);
-
+                Item newItem = new Item(current.name, current.category, 1, current.price);
                 if (recipient != null) {
                     recipient.getDonation(newItem);
                     inventory.updateInventory(current.name, 1);
@@ -505,14 +644,13 @@ public class RecipientHomePage extends JFrame {
         }
     }
 
-
     private void writeUpdateInventoryToFile() {
         FileWriter fw = new FileWriter();
         fw.writeInventoryData();
     }
 
 
-    private String[] getSpecialRequests(String category) {
+    private String[] getSpecialRequestsItemNames(String category) {
 
 	    List<String> clothes = new ArrayList<>();
         clothes.add("Special Request");
@@ -525,4 +663,5 @@ public class RecipientHomePage extends JFrame {
 
         return clothes.toArray(new String[0]);
     }
+
 }
