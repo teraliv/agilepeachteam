@@ -109,8 +109,8 @@ public class LogIn extends JFrame {
 		passwordField.setBounds(164, 202, 157, 20);
 		contentPane.add(passwordField);
 
-		RecipientContainer  rc = RecipientContainer.getInstance();
-        DonorContainer      dc = DonorContainer.getInstance();
+		final RecipientContainer  rc = RecipientContainer.getInstance();
+        final DonorContainer      dc = DonorContainer.getInstance();
 
 		continueButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -258,7 +258,7 @@ public class LogIn extends JFrame {
 		backButton.setBounds(385, 427, 89, 23);
 		contentPane.add(backButton);
 
-		JButton forgotPasswordButton = new JButton("Forgot Password?");
+		final JButton forgotPasswordButton = new JButton("Forgot Password?");
 		forgotPasswordButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//forgot password button code here
@@ -288,7 +288,7 @@ public class LogIn extends JFrame {
 
 		forgotPasswordButton.setVisible(false); //starting forgot-password button to invisible
 
-		JButton forgotUserNameButton = new JButton("Forgot User Name?");
+		final JButton forgotUserNameButton = new JButton("Forgot User Name?");
 		forgotUserNameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//forgot password button code here
@@ -318,7 +318,7 @@ public class LogIn extends JFrame {
 
 		forgotUserNameButton.setVisible(false); //starting forgot-user-name button to invisible
 
-		JButton helpButton = new JButton("HELP");
+		final JButton helpButton = new JButton("HELP");
 		helpButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//help button code here

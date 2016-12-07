@@ -108,7 +108,7 @@ public class ForgotUserName extends JFrame {
 		userNameContinue.setBounds(85, 200, 132, 23);
 		userNamePanel.add(userNameContinue);
 		
-		JPanel errorPanel = new JPanel();
+		final JPanel errorPanel = new JPanel();
 		errorPanel.setBorder(new MatteBorder(1, 1, 3, 3, (Color) new Color(0, 0, 0)));
 		errorPanel.setBackground(Color.WHITE);
 		errorPanel.setBounds(89, 127, 301, 252);
@@ -167,7 +167,7 @@ public class ForgotUserName extends JFrame {
 		addressField.setBounds(116, 203, 264, 25);
 		contentPane.add(addressField);
 		
-		JButton continueButton = new JButton("Continue");			//TODO needs to take from the name field and address field and check database if valid if so display username, else say wrong info
+		final JButton continueButton = new JButton("Continue");			//TODO needs to take from the name field and address field and check database if valid if so display username, else say wrong info
 		continueButton.addActionListener(new ActionListener() {		//TODO code for this is half implemented below
 			public void actionPerformed(ActionEvent e) {
 				//continue button code here

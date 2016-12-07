@@ -97,7 +97,7 @@ public class RecipientOrDonor extends JFrame {
 		backButton.setBounds(385, 427, 89, 23);
 		contentPane.add(backButton);
 		
-		JRadioButton recipientButton = new JRadioButton("Recipient");
+		final JRadioButton recipientButton = new JRadioButton("Recipient");
 		recipientOrDonorButtonGroup.add(recipientButton);
 		recipientButton.setBackground(Color.WHITE);
 		recipientButton.setFont(new Font("Tahoma", Font.PLAIN, 20));

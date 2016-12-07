@@ -134,13 +134,13 @@ public class DonorRegistration extends JFrame {
 		label_3.setBounds(28, 111, 76, 19);
 		contentPane.add(label_3);
 		
-		JComboBox<Object> monthPullDown = new JComboBox<Object>();		//TODO month pull down
+		final JComboBox<Object> monthPullDown = new JComboBox<Object>();		//TODO month pull down
 		monthPullDown.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		monthPullDown.setModel(new DefaultComboBoxModel(Month.values()));
 		monthPullDown.setBounds(114, 110, 95, 20);
 		contentPane.add(monthPullDown);
 		
-		JComboBox dayPullDown = new JComboBox();						//TODO day pull down
+		final JComboBox dayPullDown = new JComboBox();						//TODO day pull down
 		dayPullDown.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		dayPullDown.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "5", "6", "7", "8", "9",
                 "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26",
@@ -148,7 +148,7 @@ public class DonorRegistration extends JFrame {
 		dayPullDown.setBounds(219, 110, 95, 20);
 		contentPane.add(dayPullDown);
 		
-		JComboBox yearPullDown = new JComboBox();						//TODO year pull down
+		final JComboBox yearPullDown = new JComboBox();						//TODO year pull down
 		yearPullDown.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		yearPullDown.setModel(new DefaultComboBoxModel(new String[] {"1900", "1901", "1902", "1903", "1904", "1905",
                 "1906", "1907", "1908", "1909", "1910", "1911", "1912", "1913", "1914", "1915", "1916", "1917", "1918",
@@ -224,7 +224,7 @@ public class DonorRegistration extends JFrame {
 		label_7.setBounds(219, 191, 39, 20);
 		contentPane.add(label_7);
 		
-		JComboBox statePullDown = new JComboBox();						//TODO state pull down
+		final JComboBox statePullDown = new JComboBox();						//TODO state pull down
 		statePullDown.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		statePullDown.setModel(new DefaultComboBoxModel(new String[] {"AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE",
                 "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO",
@@ -395,13 +395,13 @@ public class DonorRegistration extends JFrame {
 		businessNameField.setBounds(114, 385, 309, 20);
 		contentPane.add(businessNameField);
 		
-		JLabel lblBusinessName = new JLabel("Business:");
+		final JLabel lblBusinessName = new JLabel("Business:");
 		lblBusinessName.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblBusinessName.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblBusinessName.setBounds(10, 386, 94, 14);
 		contentPane.add(lblBusinessName);
 		
-		JLabel lblName = new JLabel("Name");
+		final JLabel lblName = new JLabel("Name");
 		lblName.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblName.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblName.setBounds(20, 402, 84, 14);
@@ -413,7 +413,7 @@ public class DonorRegistration extends JFrame {
 		businessNameField.setVisible(false);
 
         //TODO if this is selected add buisness firstName from buisness firstName field above
-		JRadioButton yesButton = new JRadioButton("Yes");
+		final JRadioButton yesButton = new JRadioButton("Yes");
 		yesOrNo.add(yesButton);
 		yesButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -431,7 +431,7 @@ public class DonorRegistration extends JFrame {
 		contentPane.add(yesButton);
 		
 		
-		JRadioButton noButton = new JRadioButton("No");
+		final JRadioButton noButton = new JRadioButton("No");
 		noButton.setSelected(true);
 		yesOrNo.add(noButton);
 		noButton.addActionListener(new ActionListener() {

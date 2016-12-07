@@ -82,7 +82,7 @@ public class Pickup extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel confirmationPanel = new JPanel();
+		final JPanel confirmationPanel = new JPanel();
 		confirmationPanel.setBorder(new MatteBorder(1, 1, 3, 3, (Color) new Color(0, 0, 0)));
 		confirmationPanel.setBackground(Color.WHITE);
 		confirmationPanel.setBounds(69, 110, 293, 350);
@@ -92,7 +92,7 @@ public class Pickup extends JFrame {
 		confirmationPanel.setVisible(false); //starting the confirmation panel hidden
 		// Early declaration
         //TODO fill this pull down with the categories of the inventory
-		JComboBox<Object> categoryPullDown = new JComboBox<Object>();
+		final JComboBox<Object> categoryPullDown = new JComboBox<Object>();
 		
 		JButton verificationContinue = new JButton("Continue");
 		verificationContinue.addActionListener(new ActionListener() {
@@ -308,7 +308,7 @@ public class Pickup extends JFrame {
 		costField.setBounds(113, 385, 208, 20);
 		contentPane.add(costField);
 		
-		JButton backButton = new JButton("Back");
+		final JButton backButton = new JButton("Back");
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//back button code here
@@ -339,7 +339,7 @@ public class Pickup extends JFrame {
 		contentPane.add(backButton);
 
         //TODO create a new item (in the future?) and add to inventory when continue is pressed
-		JButton continueButton = new JButton("Continue");
+		final JButton continueButton = new JButton("Continue");
 		continueButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//continue button code here

@@ -76,7 +76,7 @@ public class WelcomePage extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JRadioButton yesButton = new JRadioButton("Yes");
+		final JRadioButton yesButton = new JRadioButton("Yes");
 		buttonGroup.add(yesButton);
 		yesButton.setHorizontalAlignment(SwingConstants.CENTER);
 		yesButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -84,7 +84,7 @@ public class WelcomePage extends JFrame {
 		yesButton.setBounds(94, 268, 109, 23);
 		contentPane.add(yesButton);
 		
-		JRadioButton noButton = new JRadioButton("No");
+		final JRadioButton noButton = new JRadioButton("No");
 		buttonGroup.add(noButton);
 		noButton.setHorizontalAlignment(SwingConstants.CENTER);
 		noButton.setFont(new Font("Tahoma", Font.PLAIN, 20));

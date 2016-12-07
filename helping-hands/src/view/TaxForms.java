@@ -5,13 +5,16 @@
 package view;
 
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JLabel;
+
 import java.awt.Font;
 import java.awt.Toolkit;
 
@@ -20,10 +23,15 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import model.Donor;
+import model.DonorContainer;
+import model.Item;
 
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+
 import javax.swing.border.BevelBorder;
 import javax.swing.JTextPane;
 
@@ -73,7 +81,7 @@ public class TaxForms extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel printPanel = new JPanel();
+		final JPanel printPanel = new JPanel();
 		printPanel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		printPanel.setBackground(Color.WHITE);
 		printPanel.setBounds(87, 85, 294, 269);
@@ -111,29 +119,45 @@ public class TaxForms extends JFrame {
 		taxTable = new JTable(); 				//TODO this table needs to be populated with the past 18 donations a donor has donated in descending chronological order
 		taxTable.setEnabled(false);				//TODO meaning, most recent at the top, along with the sum of ALL of the values of that donors donations in a year in the
 		taxTable.setFont(new Font("Tahoma", Font.PLAIN, 16));	//TODO bottom right, replace the text "Total Here" with the actual total.
+		
+		Object[][] tableModelData = new Object[20][3];
+		int curLine = 0;
+    	
+    	tableModelData[curLine][0] = "Item";
+    	tableModelData[curLine][1] = "Date";
+    	tableModelData[curLine][2] = "Cost";
+    	curLine++;
+    	
+    	int   count = 0;
+        double totalCost = 0;
+	    
+    	DonorContainer      dc = DonorContainer.getInstance();
+    	Donor cd = dc.getActiveDonor();
+    	if(cd != null) {
+            for (Item current : cd.donatedItems) {
+	        	tableModelData[curLine][0] = current.name;
+	        	tableModelData[curLine][1] = current.quantity;
+	        	tableModelData[curLine][2] = current.price;
+	        	
+	            totalCost += (current.price * current.quantity);
+	            count++;
+	            curLine++;
+	        }
+    	}
+        
+        for(int i = count; i < 18; i++){
+        	tableModelData[curLine][0] = null;
+        	tableModelData[curLine][1] = null;
+        	tableModelData[curLine][2] = null;
+        	curLine++;
+        }
+        
+    	tableModelData[curLine][0] = "Total Donated:";
+    	tableModelData[curLine][1] = null;
+    	tableModelData[curLine][2] = totalCost;
+        
 		taxTable.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"Item", "Date", "Cost"},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{"Total Donated:", null, "Total Here"},
-			},
+			tableModelData,
 			new String[] {
 				"Item", "Date", "Cost"
 			}
@@ -218,4 +242,22 @@ public class TaxForms extends JFrame {
 		lblsTaxDocumentation.setBounds(161, 0, 294, 22);
 		contentPane.add(lblsTaxDocumentation);
 	}
+    
+    /*
+    Object[][] getCurrentDonorDonations()
+    {
+    	ArrayList<Object[]> toRet = new ArrayList<Object[]>();
+    	
+    	DonorContainer      dc = DonorContainer.getInstance();
+    	Donor cd = dc.getActiveDonor();
+    	
+        int                 index = 1;
+
+        double totalCost = 0;
+        for (Item current : cd.donatedItems) {
+            toRet.add(new Object[] {current.name, current.quantity, current.price});
+            totalCost += (current.price * current.quantity;
+        }
+    }
+    */
 }

@@ -104,7 +104,6 @@ public class DonorHomePage extends JFrame {
 		else
 		    donorsName = "Donor";
 
-
 		JLabel donorNameLabel = new JLabel(donorsName); //TODO this label needs to be dynamically filled with the donor's firstName
 		donorNameLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		donorNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -233,7 +232,6 @@ public class DonorHomePage extends JFrame {
 		item2QuantityField.setColumns(10);
 		item2QuantityField.setBounds(138, 64, 86, 20);
 		pastDonationsPanel.add(item2QuantityField);
-
 
         if (myDonor != null) localItem = myDonor.getDonatedItem(1);
 

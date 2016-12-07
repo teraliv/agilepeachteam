@@ -74,7 +74,7 @@ public class Dropoff extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel thankYouPanel = new JPanel();
+		final JPanel thankYouPanel = new JPanel();
 		thankYouPanel.setBorder(new MatteBorder(1, 1, 3, 3, (Color) new Color(0, 0, 0)));
 		thankYouPanel.setBackground(SystemColor.textHighlightText);
 		thankYouPanel.setBounds(81, 102, 300, 290);
@@ -94,8 +94,8 @@ public class Dropoff extends JFrame {
 		thankYouPanel.add(lblYourDonation);
 		
 		// Declare early
-		JComboBox<Object> categoryPullDown = new JComboBox<Object>();							//TODO this pull down needs to be populated with the categories of the inventory
-		JButton submitButton = new JButton("Submit");		//TODO when the continue button is pressed, the item described in the fields should be added to the inventory
+		final JComboBox<Object> categoryPullDown = new JComboBox<Object>();							//TODO this pull down needs to be populated with the categories of the inventory
+		final JButton submitButton = new JButton("Submit");		//TODO when the continue button is pressed, the item described in the fields should be added to the inventory
 		
 		JButton thankYouContinueButton = new JButton("Continue");
 		thankYouContinueButton.addActionListener(new ActionListener() {
