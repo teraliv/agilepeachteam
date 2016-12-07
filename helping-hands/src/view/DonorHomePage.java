@@ -195,7 +195,7 @@ public class DonorHomePage extends JFrame {
 		
 		JLabel lblQuantity = new JLabel("Quantity:");
 		lblQuantity.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblQuantity.setBounds(138, 11, 46, 14);
+		lblQuantity.setBounds(138, 8, 86, 20);
 		pastDonationsPanel.add(lblQuantity);
 		
 		//TODO The 6 most recent donations need to be populated into the 12 fields below, 6 for the names and 6 for the dates
