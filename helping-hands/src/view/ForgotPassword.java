@@ -1,5 +1,5 @@
 /**
- * Author Sean O'Donnell
+ * @author Sean O'Donnell
  */
 package view;
 
