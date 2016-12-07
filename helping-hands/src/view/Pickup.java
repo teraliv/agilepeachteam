@@ -271,7 +271,7 @@ public class Pickup extends JFrame {
 		lblWhatAreYou.setBounds(97, 241, 249, 28);
 		contentPane.add(lblWhatAreYou);
 		
-		categoryPullDown.setModel(new DefaultComboBoxModel(new String[] {"Inventory categories here", "Food", "Clothes", "Toiletries"}));
+		categoryPullDown.setModel(new DefaultComboBoxModel(new String[] {"Food", "Clothes", "Toiletries", "Vehicle"}));
 		categoryPullDown.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		categoryPullDown.setBounds(113, 280, 208, 20);
 		contentPane.add(categoryPullDown);
