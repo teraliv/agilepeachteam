@@ -253,7 +253,7 @@ public class Pickup extends JFrame {
                 "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN",
                 "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"}));
 		statePullDown.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		statePullDown.setBounds(267, 210, 46, 20);
+		statePullDown.setBounds(260, 210, 55, 20);
 		contentPane.add(statePullDown);
 		
 		zipField = new JTextField();													//TODO zip field
@@ -347,7 +347,8 @@ public class Pickup extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				//continue button code here
 				
-				//input verification @Sean O'Donnell
+				
+				//input verification author@Sean O'Donnell
 				String street = streetField.getText();
 				String city = cityField.getText();
 				String zip = zipField.getText();
@@ -359,32 +360,50 @@ public class Pickup extends JFrame {
                 {
                 	if(isNumeric(price) && isNumeric(quantity) && isNumeric(zip)) //confirming numeric inputs
                 	{
-                		if((Double.parseDouble(price)*Double.parseDouble(quantity))>=200) // confirming cost*quantity >= 200 (note also confirms quantity is > 0 (clever))
+                		if(Double.parseDouble(price)>=0) // confirming cost is positive
                 		{
                 			if(zip.length()==5) //confirming zip-code is proper length
                 			{
-                				// @teraliv
-                            	FileWriter      fw = new FileWriter();
-                            	DonorContainer  dc = DonorContainer.getInstance();
+                				if(Double.parseDouble(quantity)>=0) //confirming the quantity is positive
+                				{
+                					if(Double.parseDouble(price)*Double.parseDouble(quantity)>=200) //confirming the total value is greater than $200
+                					{
+                    					// @teraliv
+                                    	FileWriter      fw = new FileWriter();
+                                    	DonorContainer  dc = DonorContainer.getInstance();
 
-                            	myDonor = dc.getActiveDonor();
+                                    	myDonor = dc.getActiveDonor();
 
-                            	itemName        = itemNameField.getText();
-                            	itemCategory    = categoryPullDown.getSelectedItem().toString();
-                            	itemQuantity    = Integer.parseInt(quantityField.getText());
-                            	itemPrice       = Double.parseDouble(costField.getText());
+                                    	itemName        = itemNameField.getText();
+                                    	itemCategory    = categoryPullDown.getSelectedItem().toString();
+                                    	itemQuantity    = Integer.parseInt(quantityField.getText());
+                                    	itemPrice       = Double.parseDouble(costField.getText());
 
-                            	if (myDonor != null) {
-                            		Item item = new Item(itemName, itemCategory, itemQuantity, itemPrice);
+                                    	if (myDonor != null) 
+                                    	{
+                                    		Item item = new Item(itemName, itemCategory, itemQuantity, itemPrice);
+                                    		myDonor.donate(item);
+                                    		fw.writeNewDonation(myDonor, item);
+                                    	}
 
-                            		myDonor.donate(item);
-                            		fw.writeNewDonation(myDonor, item);
-                            	}
+                                    	confirmationPanel.setVisible(true);
+                                    	continueButton.setVisible(false); //hiding the first continue button so it doesn't bleed through the confirmation panel
+                                    	backButton.setEnabled(false); //you can't press back, you have to press continue
+                                    	
+                					}
+                					else //prompt for values only greater than 200
+                					{
+                                		JOptionPane.showMessageDialog(confirmationPanel,"Sorry, the pick-up feature is only available for items of total cost greater or equal to $200.",
+                                        "Cost To Low",JOptionPane.WARNING_MESSAGE);
+                					}
 
-
-                            	confirmationPanel.setVisible(true);
-                            	continueButton.setVisible(false); //hiding the first continue button so it doesn't bleed through the confirmation panel
-                            	backButton.setEnabled(false); //you can't press back, you have to press continue
+                				}
+                				else //prompt for positive quantity
+                				{
+                        			JOptionPane.showMessageDialog(confirmationPanel,"Please enter a positive quantity.",
+                                    "Negative Quantity",JOptionPane.WARNING_MESSAGE);
+                				}
+                				
                 			}
                 			else //wrong zip-code length prompt
                 			{
@@ -393,10 +412,10 @@ public class Pickup extends JFrame {
                 			}
                 			
                 		}
-                		else //too low of cost value for pickup prompt
+                		else //prompt for positive cost value
                 		{
-                			JOptionPane.showMessageDialog(confirmationPanel,"Sorry, the pick-up feature is only available for items of total cost greater or equal to $200.",
-                        	"Cost To Low",JOptionPane.WARNING_MESSAGE);
+                			JOptionPane.showMessageDialog(confirmationPanel,"Please enter a positive cost.",
+                        	"Negative Cost",JOptionPane.WARNING_MESSAGE);
                 		}
                 		
                 	}
