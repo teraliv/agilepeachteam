@@ -28,6 +28,9 @@ import javax.swing.ListSelectionModel;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.time.Month;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JPasswordField;
@@ -227,7 +230,7 @@ public class RecipientRegistration extends JFrame {
         // STATE
 		final JComboBox statePullDown = new JComboBox();			//TODO state pull down
 		statePullDown.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		statePullDown.setBounds(258, 220, 46, 20);
+		statePullDown.setBounds(251, 220, 53, 20);
 		statePullDown.setModel(new DefaultComboBoxModel(new String[] {"AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"}));
 		contentPane.add(statePullDown);
 
@@ -327,50 +330,78 @@ public class RecipientRegistration extends JFrame {
                 	//confirming zip-code is of numeric and of size five
                 	if(isNumeric(zip) && zip.length()==5)
                 	{
-                		//TOP OF CODE
-                		// create new recipient
-                        Recipient recipient = new Recipient(
-                                firstName, lastName, DOBMonth, DOBDay, DOBYear, gender, street,
-                                city, state, zip, email, username, password);
+                		//confirming gender is selected
+                		if(maleButton.isSelected() || femaleButton.isSelected())
+                		{
+                			if(validEmail(email)) //valid email
+                			{
+                				if(password.equals(rePassword)) //confirming passwords match
+                				{
+                					//TOP OF CODE
+                            		// create new recipient
+                                    Recipient recipient = new Recipient(
+                                            firstName, lastName, DOBMonth, DOBDay, DOBYear, gender, street,
+                                            city, state, zip, email, username, password);
 
-                        // make recipient active
-                        recipient.activeUser = true;
+                                    // make recipient active
+                                    recipient.activeUser = true;
 
-                        // add recipient to the list of all recipients
-                        RecipientContainer rc = RecipientContainer.getInstance();
-                        
-                        //checking duplicate user
-                        if(rc.isRecipient(username)){
-        					JOptionPane.showMessageDialog(contentPane,"Please enter a different user name.",
-        					"User Exists",JOptionPane.WARNING_MESSAGE);
-                        	return;
-                        }
-                        
-                        rc.addRecipient(recipient);
+                                    // add recipient to the list of all recipients
+                                    RecipientContainer rc = RecipientContainer.getInstance();
+                                    
+                                    //checking duplicate user
+                                    if(rc.isRecipient(username)){
+                    					JOptionPane.showMessageDialog(contentPane,"Please enter a different user name.",
+                    					"User Exists",JOptionPane.WARNING_MESSAGE);
+                                    	return;
+                                    }
+                                    
+                                    rc.addRecipient(recipient);
 
-                        FileWriter fw = new FileWriter();
-                        fw.writeNewRecipient(recipient);
+                                    FileWriter fw = new FileWriter();
+                                    fw.writeNewRecipient(recipient);
 
 
-                        // If we are here, then it's guaranteed that this user does not exist.
-        				//creating new window (recipient home page)
-        				EventQueue.invokeLater(new Runnable() {
-        					public void run() {
-        						try {
-        							RecipientHomePage frame = new RecipientHomePage();
-        							frame.setVisible(true);
-        							//screen center
-        							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        							frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
-        						} catch (Exception e) {
-        							e.printStackTrace();
-        						}
-        					}
-        				});
-        				
-        				//deleting current window
-        				RecipientRegistration.this.dispose();
-        				//BOTTOM OF CODE
+                                    // If we are here, then it's guaranteed that this user does not exist.
+                    				//creating new window (recipient home page)
+                    				EventQueue.invokeLater(new Runnable() {
+                    					public void run() {
+                    						try {
+                    							RecipientHomePage frame = new RecipientHomePage();
+                    							frame.setVisible(true);
+                    							//screen center
+                    							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+                    							frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
+                    						} catch (Exception e) {
+                    							e.printStackTrace();
+                    						}
+                    					}
+                    				});
+                    				
+                    				//deleting current window
+                    				RecipientRegistration.this.dispose();
+                    				//BOTTOM OF CODE
+                				}
+                				else //prompt passwords don't match
+                				{
+                					JOptionPane.showMessageDialog(contentPane,"Please enter matching passwords.",
+                                    "Passwords Don't Match",JOptionPane.WARNING_MESSAGE);
+                				}
+                				
+                			}
+                			else //prompt to enter a valid e-mail
+                			{
+                				JOptionPane.showMessageDialog(contentPane,"Please enter a valid e-mail. EG)example@website.com",
+                                "Invalid E-mail",JOptionPane.WARNING_MESSAGE);
+                			}
+                			
+                		}
+                		else //prompt to select gender
+                		{
+                    		JOptionPane.showMessageDialog(contentPane,"Please select a gender.",
+                            "Select Gender",JOptionPane.WARNING_MESSAGE);
+                		}
+                		
                 	}
                 	else //prompt to enter valid zip-code
                 	{
@@ -431,4 +462,15 @@ public class RecipientRegistration extends JFrame {
       formatter.parse(str, pos);
       return str.length() == pos.getIndex();
     }
+    
+    /** @author SeanO'Donnell*/
+    //takes in a string and returns a boolean value if it is a valid e-mail address or not
+    public static boolean validEmail(String str)
+    {
+        Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
+        Matcher mat = pattern.matcher(str);
+        if(mat.matches()) return true;
+        else return false;     
+    }
+   
 }
