@@ -10,6 +10,8 @@ public class Inventory {
     public List<Item>   donatedItems;   // List of all items that have been donated.
     public int          totalItems;     // Total number of all available availableItems
     public double       totalCost;      // Total cost of all availableItems.
+    public double		totalGivenOut;  // Total cost of all items that were given out.
+    public int			totalGivenOutCount; // Total count of all items that were given out.
 
 
     protected Inventory() {
@@ -71,6 +73,10 @@ public class Inventory {
 
         if (current.quantity == 0)
             availableItems.remove(current);
+        
+        totalCost -= current.price * removed;
+        totalGivenOut = current.price * removed;
+        totalGivenOutCount = removed;
     }
 
 }

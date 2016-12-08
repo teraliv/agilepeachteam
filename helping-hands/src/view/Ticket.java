@@ -55,7 +55,7 @@ public class Ticket extends JFrame {
 	public Ticket() {
 
         RecipientContainer rc = RecipientContainer.getInstance();
-        Recipient recipient = rc.getActiveRecipient();
+        final Recipient recipient = rc.getActiveRecipient();
 
 
         setResizable(false);

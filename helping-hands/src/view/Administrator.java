@@ -132,6 +132,36 @@ public class Administrator extends JFrame {
 		viewStatisticsButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//view statistics code here
+				StringBuilder       sb = new StringBuilder();
+				DonorContainer      dc = DonorContainer.getInstance();
+                int dCount = dc.donors.size();
+                RecipientContainer rc = RecipientContainer.getInstance();
+                int rCount = rc.recipients.size();
+                
+                sb.append("Total Donors: " + dCount + "\n");
+                sb.append("Total Recipients: " + rCount + "\n");
+                
+                Inventory ic = Inventory.getInstance();
+                int igo = ic.totalGivenOutCount;
+                double igoCost = ic.totalGivenOut;
+                
+                int iAvail = ic.totalItems;
+                double iAvailCost = ic.totalCost;
+                
+                sb.append("Total Number of Items given out: " + igo + "\n");
+                sb.append("Total cost of the items given out: $" + igoCost + "\n" );
+                
+                sb.append("Total number of items in inventory: " + iAvail + "\n");
+                sb.append("Worth of current inventory: $" + iAvailCost + "\n");
+                
+                scrollPane = new JScrollPane();
+                scrollPane.setBounds(186, 56, 298, 404);
+                contentPane.add(scrollPane);
+
+                displayPane = new JTextPane();
+                displayPane.setBackground(SystemColor.menu);
+                displayPane.setText(sb.toString());
+                scrollPane.setViewportView(displayPane);  
 			}
 		});
 		viewStatisticsButton.setBounds(10, 158, 166, 34);
