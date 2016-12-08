@@ -108,19 +108,22 @@ public class Dropoff extends JFrame {
                 FileWriter      fw = new FileWriter();
                 DonorContainer  dc = DonorContainer.getInstance();
 
-				String itemName         = itemNameField.getText();
-				String categoryName     = categoryPullDown.getSelectedItem().toString();
-				int quantity            = Integer.parseInt(quantityField.getText());
-				double cost             = Double.parseDouble(costField.getText());
-				
-				Item localItem = new Item(itemName, categoryName, quantity, cost);
+                String itemName         = itemNameField.getText();
+                String categoryName     = categoryPullDown.getSelectedItem().toString();
+                int quantity            = Integer.parseInt(quantityField.getText());
+                double cost             = Double.parseDouble(costField.getText());
 
-				myDonor = dc.getActiveDonor();
 
-				if(myDonor != null) {
-				    myDonor.addDonatedItem(localItem);
-				    fw.writeNewDonation(myDonor, localItem);
+
+                Item localItem = new Item(itemName, categoryName, quantity, cost);
+
+                myDonor = dc.getActiveDonor();
+
+                if (myDonor != null) {
+                    myDonor.addDonatedItem(localItem);
+                    fw.writeNewDonation(myDonor, localItem);
                 }
+
 				
 				// Set the thankYou Panel to false.
 				thankYouPanel.setVisible(false);
@@ -214,29 +217,35 @@ public class Dropoff extends JFrame {
 		submitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//submit button code here
-				String quantity=quantityField.getText();
-				String cost=costField.getText();
-				boolean isNumeric = isNumeric(quantity) && isNumeric(cost);
-				
-				if(isNumeric) //numeric input validation
-				{
-					boolean positiveInput = Double.parseDouble(cost)>=0 && Double.parseDouble(quantity)>=0;
-					if(positiveInput)	//positive input validation
-					{
-						thankYouPanel.setVisible(true);
-						submitButton.setVisible(false); //hiding the first continue button because otherwise it bleeds through the overlapping panel which says thank you
-					}
-					else //prompt for positive values
-					{
-						JOptionPane.showMessageDialog(thankYouPanel,"Please only enter positive values in for cost and quantity.",
-								"Invalid Input",JOptionPane.WARNING_MESSAGE);
-					}
-				}
-				else //prompt for only numeric values
-				{	
-					JOptionPane.showMessageDialog(thankYouPanel,"Please only enter numeric values in for cost and quantity.",
-							"Invalid Input",JOptionPane.WARNING_MESSAGE);
-				}
+
+                if (!itemNameField.getText().isEmpty() && !quantityField.getText().isEmpty() && !costField.getText().isEmpty()) {
+
+                    String quantity=quantityField.getText();
+                    String cost=costField.getText();
+                    boolean isNumeric = isNumeric(quantity) && isNumeric(cost);
+
+                    if (isNumeric) //numeric input validation
+                    {
+                        boolean positiveInput = Double.parseDouble(cost) >= 0 && Double.parseDouble(quantity) >= 0;
+                        if (positiveInput)    //positive input validation
+                        {
+                            thankYouPanel.setVisible(true);
+                            submitButton.setVisible(false); //hiding the first continue button because otherwise it bleeds through the overlapping panel which says thank you
+                        } else //prompt for positive values
+                        {
+                            JOptionPane.showMessageDialog(thankYouPanel, "Please only enter positive values in for cost and quantity.",
+                                    "Invalid Input", JOptionPane.WARNING_MESSAGE);
+                        }
+                    } else //prompt for only numeric values
+                    {
+                        JOptionPane.showMessageDialog(thankYouPanel, "Please only enter numeric values in for cost and quantity.",
+                                "Invalid Input", JOptionPane.WARNING_MESSAGE);
+                    }
+                }
+                else {
+                    JOptionPane.showMessageDialog(contentPane,"Please fill in all fields.",
+                            "Empty Fields", JOptionPane.WARNING_MESSAGE);
+                }
 				
 			}
 		});
