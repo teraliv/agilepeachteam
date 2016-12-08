@@ -1,23 +1,19 @@
 /**
- * Author: Sean O'Donnell, Ahana Ghosh
+ * @author Sean O'Donnell
+ * @author Ahana Ghosh
+ * @author Aygun Avazova
  */
 
 package view;
 
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JPasswordField;
 import java.awt.Toolkit;
 import model.RecipientContainer;
 import model.Donor;
@@ -127,31 +123,21 @@ public class LogIn extends JFrame {
                 if(rc.isRecipient(userNameText1)) {
 
 					Recipient r = rc.getRecipient(userNameText1);
-					r.activeUser = true;
+
 
 					if(!r.password.equals(passwordText)) {
 
 						// TODO: Navigate to password mismatch error page.
-						EventQueue.invokeLater(new Runnable() {
-							public void run() {
-								try {
-									WelcomePage frame = new WelcomePage();
-									frame.setVisible(true);
-									//screen center
-									final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-									frame.setLocation(dim.width/2 - frame.getSize().width/2 ,
-                                            dim.height/2 - frame.getSize().height/2);
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
-							}
-						});
+                        JOptionPane.showMessageDialog(contentPane,"You entered wrong password",
+                                "Wrong Password",JOptionPane.WARNING_MESSAGE);
+                        return;
 					}
 					else
 					{
 						EventQueue.invokeLater(new Runnable() {
 							public void run() {
 								try {
+                                    r.activeUser = true;
 									RecipientHomePage frame = new RecipientHomePage();
 									frame.setVisible(true);
 									//screen center
@@ -169,31 +155,20 @@ public class LogIn extends JFrame {
 				else if(dc.isDonor(userNameText1)) {
 
 					Donor d = dc.getDonor(userNameText1);
-					d.activeUser = true;
 
 					if(!d.password.equals(passwordText)) {
 
-						// TODO: Navigate to password mismatch error page.
-						EventQueue.invokeLater(new Runnable() {
-							public void run() {
-								try {
-									WelcomePage frame = new WelcomePage();
-									frame.setVisible(true);
-									//screen center
-									final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-									frame.setLocation(dim.width/2 - frame.getSize().width/2 ,
-                                            dim.height/2 - frame.getSize().height/2);
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
-							}
-						});
+						// Navigate to password mismatch error page.
+                        JOptionPane.showMessageDialog(contentPane,"You entered wrong password",
+                                "Wrong Password",JOptionPane.WARNING_MESSAGE);
+                        return;
 					}
 					else
 					{
 						EventQueue.invokeLater(new Runnable() {
 							public void run() {
 								try {
+                                    d.activeUser = true;
 									//DonorHomePage frame = new DonorHomePage(d);
                                     DonorHomePage frame = new DonorHomePage();
                                     frame.setVisible(true);
@@ -224,6 +199,18 @@ public class LogIn extends JFrame {
                             }
                         }
                     });
+                }
+                // EMPTY FIELDS
+                else if (userNameText1.isEmpty() || passwordText.isEmpty()) {
+                    JOptionPane.showMessageDialog(contentPane,"Username and Password can not be empty",
+                            "Empty Field",JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+                // NO SUCH USERNAME
+                else if (!rc.isRecipient(userNameText1) || !dc.isDonor(userNameText1)) {
+                    JOptionPane.showMessageDialog(contentPane,"Such username does not exists",
+                            "Wrong User Name",JOptionPane.WARNING_MESSAGE);
+                    return;
                 }
 				//deleting current window
 				LogIn.this.dispose();
@@ -332,4 +319,10 @@ public class LogIn extends JFrame {
 		contentPane.add(helpButton);
 
 	}
+
+	private void validateUsernameAndPassword(String username, String password) {
+
+
+    }
+
 }
