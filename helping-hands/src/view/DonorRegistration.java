@@ -18,10 +18,15 @@ import model.FileWriter;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
+import java.text.ParsePosition;
+
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -30,6 +35,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
 import java.time.Month;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.swing.ButtonGroup;
 
 public class DonorRegistration extends JFrame {
@@ -64,6 +72,7 @@ public class DonorRegistration extends JFrame {
     private String     business;
     private String     username;
     private String     password;
+    private String     rePassword;
 
 
 
@@ -230,7 +239,7 @@ public class DonorRegistration extends JFrame {
                 "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO",
                 "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN",
                 "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"}));
-		statePullDown.setBounds(268, 191, 46, 20);
+		statePullDown.setBounds(261, 191, 53, 20);
 		contentPane.add(statePullDown);
 		
 		zipField = new JTextField();									//TODO zipcode field
@@ -300,7 +309,9 @@ public class DonorRegistration extends JFrame {
 		continueButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//continue button code here
-                DonorContainer  dc = DonorContainer.getInstance();
+                
+				
+				DonorContainer  dc = DonorContainer.getInstance();
                 FileWriter      fw = new FileWriter();
 
 				firstName   = firstNameField.getText();
@@ -317,39 +328,90 @@ public class DonorRegistration extends JFrame {
                 business    = businessNameField.getText();
                 username    = userNameField.getText();
                 password    = String.valueOf(passwordField.getPassword());
+                rePassword  = String.valueOf(repeatPasswordField.getPassword());
                 
-                Donor donor = new Donor(
-                        firstName, lastName, DOBMonth, DOBDay, DOBYear, gender, street,
-                        city, state, zip, email, business, username, password);
+                //confirming no fields are empty before continuing
+                if(!firstName.isEmpty() && !lastName.isEmpty() && !street.isEmpty() && !zip.isEmpty() && !email.isEmpty() && !username.isEmpty() && !password.isEmpty() && !rePassword.isEmpty())
+                {
+                	//confirming zip-code is of numeric and of size five
+                	if(isNumeric(zip) && zip.length()==5)
+                	{
+                		//confirming gender is selected
+                		if(maleButton.isSelected() || femaleButton.isSelected())
+                		{
+                			if(validEmail(email)) //valid email
+                			{
+                				if(password.equals(rePassword)) //confirming passwords match
+                				{
+                					
+                					Donor donor = new Donor(firstName, lastName, DOBMonth, DOBDay, DOBYear, gender, street,
+                		                         city, state, zip, email, business, username, password);
 
-                donor.activeUser = true;
+                		            donor.activeUser = true;
+                		            
+                		            //checking duplicate user
+                		            if(dc.isDonor(username)) 
+                		            {
+                    					JOptionPane.showMessageDialog(contentPane,"Please enter a different user name.",
+                    					"User Exists",JOptionPane.WARNING_MESSAGE);
+                		                return;
+                		            }
+                		                
+                		            dc.addDonor(donor);
+                		            fw.writeNewDonor(donor);
 
-                if(dc.isDonor(username)) {
-                	// TODO: navigate to a user already exists page.
-                	return;
+                					//creating next window (donor home page)
+                					EventQueue.invokeLater(new Runnable() {
+                						public void run() {
+                							try {
+                								//DonorHomePage frame = new DonorHomePage(donor);
+                		                        DonorHomePage frame = new DonorHomePage();
+                		                        frame.setVisible(true);
+                								//screen center
+                								final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+                								frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
+                							} catch (Exception e) {
+                								e.printStackTrace();
+                							}
+                						}
+                					});
+                					//deleting current window
+                					DonorRegistration.this.dispose();
+                    				
+                				}
+                				else //prompt passwords don't match
+                				{
+                					JOptionPane.showMessageDialog(contentPane,"Please enter matching passwords.",
+                                    "Passwords Don't Match",JOptionPane.WARNING_MESSAGE);
+                				}
+                				
+                			}
+                			else //prompt to enter a valid e-mail
+                			{
+                				JOptionPane.showMessageDialog(contentPane,"Please enter a valid e-mail. EG)example@website.com",
+                                "Invalid E-mail",JOptionPane.WARNING_MESSAGE);
+                			}
+                			
+                		}
+                		else //prompt to select gender
+                		{
+                    		JOptionPane.showMessageDialog(contentPane,"Please select a gender.",
+                            "Select Gender",JOptionPane.WARNING_MESSAGE);
+                		}
+                		
+                	}
+                	else //prompt to enter valid zip-code
+                	{
+                		JOptionPane.showMessageDialog(contentPane,"Please enter a valid zip code. EG)12345.",
+                    	"Invalid ZipCode",JOptionPane.WARNING_MESSAGE);
+                	}
+                    
                 }
-                
-                dc.addDonor(donor);
-                fw.writeNewDonor(donor);
-
-				//creating next window (donor home page)
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							//DonorHomePage frame = new DonorHomePage(donor);
-                            DonorHomePage frame = new DonorHomePage();
-							frame.setVisible(true);
-							//screen center
-							final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-							frame.setLocation(dim.width/2 - frame.getSize().width/2 , dim.height/2 - frame.getSize().height/2);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-				
-				//deleting current window
-				DonorRegistration.this.dispose();
+                else //empty field prompt
+                {
+                	JOptionPane.showMessageDialog(contentPane,"Please fill in all fields.",
+        			"Empty Fields",JOptionPane.WARNING_MESSAGE);
+                }
 				
 			}
 		});
@@ -448,7 +510,26 @@ public class DonorRegistration extends JFrame {
 		noButton.setBackground(Color.WHITE);
 		noButton.setBounds(248, 355, 53, 23);
 		contentPane.add(noButton);
-		
-
 	}
+	
+    //Takes in a string and returns a boolean if it is numeric or not.
+    //Used to validate input of numeric fields.
+    //http://stackoverflow.com/questions/1102891/how-to-check-if-a-string-is-numeric-in-java#1102916
+    public static boolean isNumeric(String str)
+    {
+      NumberFormat formatter = NumberFormat.getInstance();
+      ParsePosition pos = new ParsePosition(0);
+      formatter.parse(str, pos);
+      return str.length() == pos.getIndex();
+    }
+    
+    /** @author SeanO'Donnell*/
+    //takes in a string and returns a boolean value if it is a valid e-mail address or not
+    public static boolean validEmail(String str)
+    {
+        Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
+        Matcher mat = pattern.matcher(str);
+        if(mat.matches()) return true;
+        else return false;     
+    }
 }
