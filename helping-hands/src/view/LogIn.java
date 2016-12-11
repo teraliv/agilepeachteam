@@ -137,7 +137,9 @@ public class LogIn extends JFrame {
 						EventQueue.invokeLater(new Runnable() {
 							public void run() {
 								try {
-                                    r.activeUser = true;
+                                    //r.activeUser = true;
+                                    r.activateCurrentRecipient();
+
 									RecipientHomePage frame = new RecipientHomePage();
 									frame.setVisible(true);
 									//screen center
@@ -168,7 +170,9 @@ public class LogIn extends JFrame {
 						EventQueue.invokeLater(new Runnable() {
 							public void run() {
 								try {
-                                    d.activeUser = true;
+                                    //d.activeUser = true;
+                                    d.activateCurrentDonor();
+
 									//DonorHomePage frame = new DonorHomePage(d);
                                     DonorHomePage frame = new DonorHomePage();
                                     frame.setVisible(true);

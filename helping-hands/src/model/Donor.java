@@ -70,4 +70,12 @@ public class Donor {
     	
     	return null;
     }
+
+    public void activateCurrentDonor() {
+        this.activeUser = true;
+    }
+
+    public void deactivateCurrentDonor() {
+        this.activeUser = false;
+    }
 }
