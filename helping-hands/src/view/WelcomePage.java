@@ -56,7 +56,7 @@ public class WelcomePage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public WelcomePage() {
+	public WelcomePage() throws IOException {
 
         // @teraliv
 	    FileReader fr = new FileReader();   // File reader to read data files

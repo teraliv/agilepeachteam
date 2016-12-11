@@ -24,7 +24,7 @@ public class FileWriter {
         boolean     append = true;
 
         try {
-            writer = new PrintWriter(new FileOutputStream("./src/files/donors-data.csv", append));
+            writer = new PrintWriter(new FileOutputStream("donors-data.csv", append));
 
             StringBuilder sb = new StringBuilder();
 
@@ -67,7 +67,7 @@ public class FileWriter {
         boolean     append = true;
 
         try {
-            writer = new PrintWriter(new FileOutputStream("./src/files/recipients-data.csv", append));
+            writer = new PrintWriter(new FileOutputStream("recipients-data.csv", append));
 
             StringBuilder sb = new StringBuilder();
 
@@ -110,7 +110,7 @@ public class FileWriter {
         boolean     append = true;
 
         try {
-            writer = new PrintWriter(new FileOutputStream("./src/files/donated-data.csv", append));
+            writer = new PrintWriter(new FileOutputStream("donated-data.csv", append));
 
             StringBuilder sb = new StringBuilder();
 
@@ -140,7 +140,7 @@ public class FileWriter {
         PrintWriter writer = null;
 
         try {
-            writer = new PrintWriter(new FileOutputStream("./src/files/inventory-data.csv"));
+            writer = new PrintWriter(new FileOutputStream("inventory-data.csv"));
 
             String line = null;
 
