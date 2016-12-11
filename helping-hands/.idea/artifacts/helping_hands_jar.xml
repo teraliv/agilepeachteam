@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="helping-hands:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/helping_hands_jar</output-path>
+    <root id="archive" name="helping-hands.jar">
+      <element id="module-output" name="helping-hands" />
+    </root>
+  </artifact>
+</component>

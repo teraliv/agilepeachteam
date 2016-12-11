@@ -189,6 +189,7 @@ public class Dropoff extends JFrame {
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//back button code here
+                myDonor.activeUser = false;
 				
 				//creating previous window (donor home page)
 				EventQueue.invokeLater(new Runnable() {

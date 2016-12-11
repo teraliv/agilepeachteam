@@ -4,9 +4,7 @@
 
 package model;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
+import java.io.*;
 
 public class FileWriter {
 
@@ -133,6 +131,7 @@ public class FileWriter {
             }
         }
     }
+
 
     public void writeInventoryData() {
 

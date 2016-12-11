@@ -329,6 +329,8 @@ public class DonorHomePage extends JFrame {
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//back button code here
+
+                myDonor.activeUser = false;
 				
 				//creating previous window (login page)
 				EventQueue.invokeLater(new Runnable() {

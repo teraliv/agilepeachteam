@@ -24,6 +24,7 @@ import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
+import java.io.IOException;
 
 public class WelcomePage extends JFrame {
 
@@ -62,7 +63,7 @@ public class WelcomePage extends JFrame {
         fr.readDonorsFile();                // Read donors from a file
         fr.readRecipientsFile();            // Read recipients from a file
         fr.readDonatedItemsFile();          // Read donated items file
-        fr.readInvetoryFile();              // Read inventory data file
+        fr.readInventoryFile();              // Read inventory data file
 
 
 		setResizable(true);

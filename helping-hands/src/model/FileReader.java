@@ -4,8 +4,7 @@
 
 package model;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Scanner;
 
 public class FileReader {
@@ -71,7 +70,7 @@ public class FileReader {
                 password        = split[13];
 
                 Donor donor = new Donor(firstName, lastName, month, day, year, gender, street, city, state, zip,
-                                        email, businessName, username, password);
+                        email, businessName, username, password);
                 dc.addDonor(donor);
             }
         }
@@ -132,6 +131,7 @@ public class FileReader {
     }
 
 
+
     public void readDonatedItemsFile() {
         Scanner fileScanner = null;
         dc          = DonorContainer.getInstance();
@@ -167,7 +167,8 @@ public class FileReader {
     }
 
 
-    public void readInvetoryFile() {
+
+    public void readInventoryFile() {
         Scanner fileScanner = null;
         inventory   = Inventory.getInstance();
 
